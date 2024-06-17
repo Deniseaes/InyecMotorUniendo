@@ -26,7 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ProveedoresFragment extends Fragment {
 
-    private static final String BASE_URL = "http://192.168.0.106:8080"; // Cambia a la URL de tu servidor
+    private static final String BASE_URL = "http://192.168.1.3:8080"; // Cambia a la URL de tu servidor
     private static final String TAG = "ProveedoresFragment"; // Tag para los logs
 
     @Nullable

@@ -38,8 +38,7 @@ public class CrearProductoActivity extends AppCompatActivity {
     private List<Proveedor>proveedores;
 
     private List<Marca> marcas;
-    private List<Modelo> modelos
-            ;
+    private List<Modelo> modelos;
     //son los que se seleccionaron
     private boolean[] selectedTipos;
     private boolean[] selectedProveedores;
@@ -49,7 +48,7 @@ public class CrearProductoActivity extends AppCompatActivity {
     private List<Proveedor> selectedProductProveedores;
     private List<Marca> selectedProductMarcas;
     private List<Modelo> selectedProductModelos;
-    private static final String BASE_URL = "http://192.168.0.106:8080"; // Cambia a la URL de tu servidor
+    private static final String BASE_URL = "http://192.168.1.3:8080"; // Cambia a la URL de tu servidor
     private ApiService apiService;
 
 
@@ -279,7 +278,7 @@ public class CrearProductoActivity extends AppCompatActivity {
     }
 
     private void fetchProductProveedores() {
-        Call<List<ProveedorDTO>> call = apiService.getProveedores();
+        Call<List<ProveedorDTO>> call = apiService.getProveedoresDTO();
         call.enqueue(new Callback<List<ProveedorDTO>>() {
             @Override
             public void onResponse(Call<List<ProveedorDTO>> call, Response<List<ProveedorDTO>> response) {
@@ -345,7 +344,7 @@ public class CrearProductoActivity extends AppCompatActivity {
 
     //Marcas
     private void fetchProductMarcas() {
-        Call<List<MarcaDTO>> call = apiService.getMarcas();
+        Call<List<MarcaDTO>> call = apiService.getMarcasDTO();
         call.enqueue(new Callback<List<MarcaDTO>>() {
             @Override
             public void onResponse(Call<List<MarcaDTO>> call, Response<List<MarcaDTO>> response) {
@@ -410,7 +409,7 @@ public class CrearProductoActivity extends AppCompatActivity {
 
     //Modelos
     private void fetchProductModelos() {
-        Call<List<ModeloDTO>> call = apiService.getModelos();
+        Call<List<ModeloDTO>> call = apiService.getModelosDTO();
         call.enqueue(new Callback<List<ModeloDTO>>() {
             @Override
             public void onResponse(Call<List<ModeloDTO>> call, Response<List<ModeloDTO>> response) {

@@ -31,21 +31,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Precio Venta"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"/>
 
     <EditText
         android:id="@+id/etStockActual"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Stock Actual"
-        android:inputType="number" />
+        android:inputType="number"/>
 
     <EditText
         android:id="@+id/etStockMax"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Stock Máximo"
-        android:inputType="number" />
+        android:inputType="number"/>
 
     <EditText
         android:id="@+id/etStockMin"
@@ -58,37 +58,34 @@
         android:id="@+id/btnSelectTipo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Tipos"/>
 
-        android:text="Tipos"
-        style="@style/MyButtonStyle"/>
 
     <Button
         android:id="@+id/btnSelectProveedor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Proveedores"
-        style="@style/MyButtonStyle"/>
+        android:text="Proveedores"/>
 
     <Button
         android:id="@+id/btnSelectMarcas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Marcas"
-        style="@style/MyButtonStyle"/>
+        android:text="Marcas"/>
+
 
     <Button
         android:id="@+id/btnSelectModelos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Modelos"
-        style="@style/MyButtonStyle"/>
+        android:text="Modelos"/>
 
     <Button
         android:id="@+id/btnCrearProducto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Crear Producto"
-        style="@style/MyButtonCreateStyle"/>
+        />
 
     <Button
         android:id="@+id/btnRegresarCrearProduct"
@@ -98,6 +95,5 @@
         android:layout_gravity="bottom|start"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
-        android:onClick="atrasClick"
-        style="@style/MyButtonAtrasStyle"/>
+        android:onClick="atrasClick"/>
 </LinearLayout>

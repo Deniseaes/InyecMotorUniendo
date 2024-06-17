@@ -82,22 +82,5 @@
                 android:hint="Tipo de Motor"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="8dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Marca ID:"
-                android:layout_marginEnd="8dp"/>
-            <EditText
-                android:id="@+id/etMarcaId"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Marca ID"/>
-        </LinearLayout>
     </LinearLayout>
 </ScrollView>

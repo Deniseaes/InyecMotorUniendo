@@ -2,6 +2,8 @@ package front.inyecmotor;
 
 import java.util.List;
 
+import front.inyecmotor.crearProducto.MarcaDTO;
+import front.inyecmotor.crearProducto.ModeloDTO;
 import front.inyecmotor.crearProducto.ProductoCreate;
 import front.inyecmotor.crearProducto.ProveedorDTO;
 import front.inyecmotor.crearProducto.TipoDTO;
@@ -28,8 +30,13 @@ public interface ApiService {
     @GET("/tipo/all")
     Call<List<TipoDTO>> getTipos(); // Define el nuevo endpoint para obtener las tipos
 
+    /* para ver las marcas*/
     @GET("/marca/all")
     Call<List<Marca>> getMarcas();
+
+    /* para crear producto*/
+    @GET("/marca/all")
+    Call<List<MarcaDTO>> getMarcasDTO();
 
     @PATCH("/marca/editar")
     Call<Marca> editarMarca(@Body Marca marca);
@@ -37,11 +44,17 @@ public interface ApiService {
     @GET("/modelo/all")
     Call<List<Modelo>> getModelos();
 
+    @GET("/modelo/all")
+    Call<List<ModeloDTO>> getModelosDTO();
+
     @PATCH("/modelo/editar")
     Call<Modelo> editarModelo(@Body Modelo modelo);
 
     @GET("/proveedor/all")
-    Call<List<ProveedorDTO>> getProveedores();
+    Call<List<Proveedor>> getProveedores();
+
+    @GET("/proveedor/all")
+    Call<List<ProveedorDTO>> getProveedoresDTO();
 
     @PATCH("/proveedor/editar")
     Call<Proveedor> editarProveedor(@Body Proveedor proveedor);

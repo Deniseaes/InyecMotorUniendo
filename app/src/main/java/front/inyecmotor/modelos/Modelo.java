@@ -5,33 +5,30 @@ import android.os.Parcelable;
 
 public class Modelo implements Parcelable {
     private int id;
-    private int anio;
+    private String nombre;
     private double motorLitros;
     private String motorTipo;
-    private String nombre;
-    private long marcaId;
+    private int anio;
 
     // Constructor vacío
     public Modelo() {
     }
 
     // Constructor con parámetros
-    public Modelo(int id, int anio, double motorLitros, String motorTipo, String nombre, long marcaId) {
+    public Modelo(int id, String nombre, double motorLitros, String motorTipo, int anio) {
         this.id = id;
-        this.anio = anio;
+        this.nombre = nombre;
         this.motorLitros = motorLitros;
         this.motorTipo = motorTipo;
-        this.nombre = nombre;
-        this.marcaId = marcaId;
+        this.anio = anio;
     }
 
     protected Modelo(Parcel in) {
         id = in.readInt();
-        anio = in.readInt();
+        nombre = in.readString();
         motorLitros = in.readDouble();
         motorTipo = in.readString();
-        nombre = in.readString();
-        marcaId = in.readLong();
+        anio = in.readInt();
     }
 
     public static final Creator<Modelo> CREATOR = new Creator<Modelo>() {
@@ -54,12 +51,12 @@ public class Modelo implements Parcelable {
         this.id = id;
     }
 
-    public int getAnio() {
-        return anio;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setAnio(int anio) {
-        this.anio = anio;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public double getMotorLitros() {
@@ -78,31 +75,22 @@ public class Modelo implements Parcelable {
         this.motorTipo = motorTipo;
     }
 
-    public String getNombre() {
-        return nombre;
+    public int getAnio() {
+        return anio;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public long getMarcaId() {
-        return marcaId;
-    }
-
-    public void setMarcaId(long marcaId) {
-        this.marcaId = marcaId;
+    public void setAnio(int anio) {
+        this.anio = anio;
     }
 
     @Override
     public String toString() {
         return "Modelo{" +
                 "id=" + id +
-                ", anio=" + anio +
+                ", nombre='" + nombre + '\'' +
                 ", motorLitros=" + motorLitros +
                 ", motorTipo='" + motorTipo + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", marcaId=" + marcaId +
+                ", anio=" + anio +
                 '}';
     }
 
@@ -113,11 +101,10 @@ public class Modelo implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(id);
-        dest.writeInt(anio);
+        dest.writeInt(id);
+        dest.writeString(nombre);
         dest.writeDouble(motorLitros);
         dest.writeString(motorTipo);
-        dest.writeString(nombre);
-        dest.writeLong(marcaId);
+        dest.writeInt(anio);
     }
 }

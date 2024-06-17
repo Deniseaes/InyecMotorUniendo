@@ -18,6 +18,7 @@ import java.util.List;
 
 import front.inyecmotor.ApiService;
 import front.inyecmotor.R;
+import front.inyecmotor.crearProducto.CrearProductoActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,7 +27,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ProductosFragment extends Fragment {
 
-    private static final String BASE_URL = "http://192.168.0.106:8080"; // Cambia a la URL de tu servidor
+    private static final String BASE_URL = "http://192.168.1.3:8080"; // Cambia a la URL de tu servidor
 
     @Nullable
     @Override
@@ -42,6 +43,19 @@ public class ProductosFragment extends Fragment {
                 }
             });
         }
+
+        Button btnCrearProducto = view.findViewById(R.id.btnCrearProducto);
+        btnCrearProducto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    // Crear el Intent para iniciar el Activity
+                    Intent intent = new Intent(getActivity(), CrearProductoActivity.class);
+                    startActivity(intent);
+                }catch (Exception e){Log.e("Error", "Error: " + e.getMessage());}
+
+            }
+        });
 
         return view;
     }

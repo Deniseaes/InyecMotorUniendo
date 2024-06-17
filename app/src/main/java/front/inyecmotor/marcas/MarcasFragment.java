@@ -2,6 +2,7 @@ package front.inyecmotor.marcas;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,7 @@ public class MarcasFragment extends Fragment {
     private ApiService apiService;
     private Button btnGetMarcas;
 
-    private static final String BASE_URL = "http://192.168.0.106:8080"; // Cambia a la URL de tu servidor
+    private static final String BASE_URL = "http://192.168.1.3:8080"; // Cambia a la URL de tu servidor
 
     @Nullable
     @Override
@@ -80,7 +81,7 @@ public class MarcasFragment extends Fragment {
 
     private void abrirMarcasActivity(List<Marca> marcas) {
         Intent intent = new Intent(getContext(), MarcasActivity.class);
-        intent.putParcelableArrayListExtra("marcas", new ArrayList<>(marcas));
+        intent.putParcelableArrayListExtra("marcas", (ArrayList<? extends Parcelable>) new ArrayList<>(marcas));
         startActivity(intent);
     }
 }

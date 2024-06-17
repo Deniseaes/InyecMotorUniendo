@@ -28,7 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloViewHolder> {
     private List<Modelo> modelos;
     private Context context;
-    private static final String BASE_URL = "http://192.168.0.106:8080"; // Cambia a la URL de tu servidor
+    private static final String BASE_URL = "http://192.168.1.3:8080"; // Cambia a la URL de tu servidor
     private static final String TAG = "ModeloAdapter"; // Tag para los logs
 
     public ModeloAdapter(List<Modelo> modelos, Context context) {
@@ -84,14 +84,12 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
         EditText etAnio = viewInflated.findViewById(R.id.etAnio);
         EditText etMotorLitros = viewInflated.findViewById(R.id.etMotorLitros);
         EditText etMotorTipo = viewInflated.findViewById(R.id.etMotorTipo);
-        EditText etMarcaId = viewInflated.findViewById(R.id.etMarcaId);
 
         // Setear valores iniciales del modelo
         etNombre.setText(modelo.getNombre());
         etAnio.setText(String.valueOf(modelo.getAnio()));
         etMotorLitros.setText(String.valueOf(modelo.getMotorLitros()));
         etMotorTipo.setText(modelo.getMotorTipo());
-        etMarcaId.setText(String.valueOf(modelo.getMarcaId()));
 
         builder.setPositiveButton("Guardar", (dialog, which) -> {
             try {
@@ -100,7 +98,6 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
                 modelo.setAnio(Integer.parseInt(etAnio.getText().toString()));
                 modelo.setMotorLitros(Double.parseDouble(etMotorLitros.getText().toString()));
                 modelo.setMotorTipo(etMotorTipo.getText().toString());
-                modelo.setMarcaId(Long.parseLong(etMarcaId.getText().toString()));
 
                 // Enviar los datos editados al servidor
                 enviarDatosModelo(modelo);
@@ -154,3 +151,4 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
         });
     }
 }
+
