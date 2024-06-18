@@ -25,6 +25,7 @@
         android:id="@+id/btnVerDetalle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ver detalle"/>
+        android:text="Ver detalle"
+        style="@style/MyButtonStyle"/>
 
 </LinearLayout>

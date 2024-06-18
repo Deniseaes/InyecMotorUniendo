@@ -33,7 +33,7 @@ public class MarcasFragment extends Fragment {
     private ApiService apiService;
     private Button btnGetMarcas;
 
-    private static final String BASE_URL = "http://192.168.1.3:8080"; // Cambia a la URL de tu servidor
+    private static final String BASE_URL = "http://192.168.0.106:8080"; // Cambia a la URL de tu servidor
 
     @Nullable
     @Override
