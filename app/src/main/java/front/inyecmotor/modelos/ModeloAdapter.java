@@ -28,7 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloViewHolder> {
     private List<Modelo> modelos;
     private Context context;
-    private static final String BASE_URL = "http://192.168.1.3:8080"; // Cambia a la URL de tu servidor
+    private static final String BASE_URL = "http://192.168.0.106:8080"; // Cambia a la URL de tu servidor
     private static final String TAG = "ModeloAdapter"; // Tag para los logs
 
     public ModeloAdapter(List<Modelo> modelos, Context context) {

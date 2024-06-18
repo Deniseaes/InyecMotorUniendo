@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MyButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/my_button_color</item>
+        <item name="textFillColor">@color/my_button_text_color</item>
+        <item name="shapeAppearance">@style/MyButtonShapeAppearance</item>
+    </style>
+    <style name="MyButtonCreateStyle" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/my_button_create_color</item>
+        <item name="textFillColor">@color/my_button_text_color</item>
+        <item name="shapeAppearance">@style/MyButtonShapeAppearance</item>
+    </style>
+    <style name="MyButtonAtrasStyle" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/my_button_atras_color</item>
+        <item name="textFillColor">@color/my_button_text_color</item>
+        <item name="shapeAppearance">@style/MyButtonAtrasShapeAppearance</item>
+    </style>
+    <style name="MyButtonShapeAppearance">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+    <style name="MyButtonAtrasShapeAppearance">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+        <item name="strokeWidth">50dp</item>
+        <item name="strokeColor">#000000</item>
+    </style>
+
+    <style name="CustomToolbarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@color/white</item> <!-- Color del texto -->
+    </style>
+</resources>

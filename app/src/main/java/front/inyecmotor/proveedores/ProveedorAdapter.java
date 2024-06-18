@@ -28,7 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ProveedorAdapter extends RecyclerView.Adapter<ProveedorAdapter.ProveedorViewHolder> {
     private List<Proveedor> proveedores;
     private Context context;
-    private static final String BASE_URL = "http://192.168.1.3:8080";
+    private static final String BASE_URL = "http://192.168.0.106:8080";
     private static final String TAG = "ProveedorAdapter";
 
     public ProveedorAdapter(List<Proveedor> proveedores, Context context) {
