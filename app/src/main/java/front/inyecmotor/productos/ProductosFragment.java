@@ -19,6 +19,10 @@ import java.util.List;
 import front.inyecmotor.ApiService;
 import front.inyecmotor.R;
 import front.inyecmotor.crearProducto.CrearProductoActivity;
+import front.inyecmotor.login.AuthDTO;
+import front.inyecmotor.login.LoginActivity;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,7 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ProductosFragment extends Fragment {
 
-    private static final String BASE_URL = "http://192.168.0.106:8080"; // Cambia a la URL de tu servidor
+    private static final String BASE_URL = "http://192.168.56.1:8080"; // Cambia a la URL de tu servidor
 
     @Nullable
     @Override
@@ -61,13 +65,26 @@ public class ProductosFragment extends Fragment {
     }
 
     private void fetchProductos() {
+
+        // Obtener la contraseña hasheada desde SharedPreferences
+        String hashedPassword = LoginActivity.PreferenceManager.getHashedPassword(getContext());
+
+        if (hashedPassword == null) {
+            Toast.makeText(getContext(), "Hashed password no encontrada. Inicia sesión nuevamente.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+
+// Configurar Retrofit
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         ApiService apiService = retrofit.create(ApiService.class);
-        Call<List<Producto>> call = apiService.getProductos();
+        String token = "Bearer " + hashedPassword;
+        Call<List<Producto>> call = apiService.getProductos(token); //Pasamos en la peticion el hashedPassword
 
         call.enqueue(new Callback<List<Producto>>() {
             @Override

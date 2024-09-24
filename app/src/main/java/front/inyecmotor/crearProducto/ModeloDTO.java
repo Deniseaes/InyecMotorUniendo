@@ -9,6 +9,7 @@ public class ModeloDTO {
 
     private int id; // Variable id
     private String nombre;
+    private String marca;
     private double motorLitros;
     private String motorTipo;
     private int anio;
@@ -21,9 +22,10 @@ public class ModeloDTO {
     // Constructor con parámetro para inicializar el campo nombre
 
 
-    public ModeloDTO(int id, String nombre, double motorLitros, String motorTipo, int anio, List<Producto> productos) {
+    public ModeloDTO(int id, String nombre, String marca, double motorLitros, String motorTipo, int anio, List<Producto> productos) {
         this.id = id;
         this.nombre = nombre;
+        this.marca = marca;
         this.motorLitros = motorLitros;
         this.motorTipo = motorTipo;
         this.anio = anio;
@@ -70,6 +72,15 @@ public class ModeloDTO {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    // Getter y setter para el campo marca
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.nombre = marca;
     }
 
     public List<Producto> getProductos() {

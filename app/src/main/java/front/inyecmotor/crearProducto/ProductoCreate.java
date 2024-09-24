@@ -24,14 +24,13 @@ public class ProductoCreate {
 
         private ArrayList<Integer> proveedores;
 
-        private ArrayList<Integer>tipos;
+        private ArrayList<Integer> tipos;
 
-        private ArrayList<Integer> marcas;
+
 
         private ArrayList<Integer> modelos;
 
-
-    public ProductoCreate(Long id, String codigo, String nombre, int stockMin, int stockMax, int stockActual, double precioVenta, double precioCosto, ArrayList<Integer> proveedores, ArrayList<Integer> tipos, ArrayList<Integer> marcas, ArrayList<Integer> modelos) {
+    public ProductoCreate(Long id, String codigo, String nombre, int stockMin, int stockMax, int stockActual, double precioVenta, double precioCosto, ArrayList<Integer> proveedores, ArrayList<Integer> tipos, ArrayList<Integer> modelos) {
         this.id = id;
         this.codigo = codigo;
         this.nombre = nombre;
@@ -42,7 +41,6 @@ public class ProductoCreate {
         this.precioCosto = precioCosto;
         this.proveedores = proveedores;
         this.tipos = tipos;
-        this.marcas = marcas;
         this.modelos = modelos;
     }
 
@@ -118,20 +116,13 @@ public class ProductoCreate {
         this.proveedores = proveedores;
     }
 
+
     public ArrayList<Integer> getTipos() {
         return tipos;
     }
 
     public void setTipos(ArrayList<Integer> tipos) {
         this.tipos = tipos;
-    }
-
-    public ArrayList<Integer> getMarcas() {
-        return marcas;
-    }
-
-    public void setMarcas(ArrayList<Integer> marcas) {
-        this.marcas = marcas;
     }
 
     public ArrayList<Integer> getModelos() {

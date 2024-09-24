@@ -1,27 +1,32 @@
 package front.inyecmotor.crearProducto;
 
-import android.content.DialogInterface;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.MultiAutoCompleteTextView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.text.TextWatcher;
 import android.widget.Toast;
+import android.widget.LinearLayout;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import front.inyecmotor.ApiService;
 import front.inyecmotor.R;
-
-import front.inyecmotor.marcas.Marca;
-
+import front.inyecmotor.login.LoginActivity;
 import front.inyecmotor.modelos.Modelo;
-
 import front.inyecmotor.proveedores.Proveedor;
 
 import retrofit2.Call;
@@ -30,33 +35,38 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+
+
 public class CrearProductoActivity extends AppCompatActivity {
     private EditText etCodigo, etNombre, etPrecioCosto, etPrecioVenta, etStockActual, etStockMax, etStockMin;
-    private Button btnCrearProducto,  btnSelectTipo, btnRegresarCrearProduct, btnSelectProveedor, btnSelectMarcas, btnSelectModelos;
-    //son los que nos traemos en la llamada al fetch son todos los all
-    private List<Tipo> tipos;
-    private List<Proveedor>proveedores;
+    private Button btnCrearProducto, btnRegresarCrearProduct;
+    private Button btnIncrementStockActual, btnDecrementStockActual, btnIncrementStockMax, btnDecrementStockMax, btnIncrementStockMin, btnDecrementStockMin;
+    private MultiAutoCompleteTextView actvModelos;
+    private Spinner spinnerTipos, spinnerProveedores;
+    private LinearLayout listaModelos, listaProveedores, listaTipos;
 
-    private List<Marca> marcas;
+    // Listas de datos
+    private List<Tipo> tipos;
+    private List<Proveedor> proveedores;
     private List<Modelo> modelos;
-    //son los que se seleccionaron
-    private boolean[] selectedTipos;
-    private boolean[] selectedProveedores;
-    private boolean[] selectedMarcas;
-    private boolean[] selectedModelos;
+
+    private List<String> selectedProveedores = new ArrayList<>();
+    private List<String> selectedTipos = new ArrayList<>();
+    private List<String> selectedModelos = new ArrayList<>();
     private List<Tipo> selectedProductTipos;
     private List<Proveedor> selectedProductProveedores;
-    private List<Marca> selectedProductMarcas;
     private List<Modelo> selectedProductModelos;
-    private static final String BASE_URL = "http://192.168.0.106:8080"; // Cambia a la URL de tu servidor
+
+    private static final String BASE_URL = "http://192.168.56.1:8080"; // Cambia a la URL de tu servidor
     private ApiService apiService;
 
-
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_producto);
 
+        // Inicialización de elementos de la interfaz
         etCodigo = findViewById(R.id.etCodigo);
         etNombre = findViewById(R.id.etNombre);
         etPrecioCosto = findViewById(R.id.etPrecioCosto);
@@ -64,30 +74,35 @@ public class CrearProductoActivity extends AppCompatActivity {
         etStockActual = findViewById(R.id.etStockActual);
         etStockMax = findViewById(R.id.etStockMax);
         etStockMin = findViewById(R.id.etStockMin);
+
+        // Botones de incrementar y decrementar
+        btnIncrementStockActual = findViewById(R.id.btnIncrementStockActual);
+        btnDecrementStockActual = findViewById(R.id.btnDecrementStockActual);
+        btnIncrementStockMax = findViewById(R.id.btnIncrementStockMax);
+        btnDecrementStockMax = findViewById(R.id.btnDecrementStockMax);
+        btnIncrementStockMin = findViewById(R.id.btnIncrementStockMin);
+        btnDecrementStockMin = findViewById(R.id.btnDecrementStockMin);
+        // Botones de crear y regresar
         btnCrearProducto = findViewById(R.id.btnCrearProducto);
-        btnSelectTipo = findViewById(R.id.btnSelectTipo);
         btnRegresarCrearProduct = findViewById(R.id.btnRegresarCrearProduct);
-        btnSelectProveedor = findViewById(R.id.btnSelectProveedor);
-        btnSelectMarcas = findViewById(R.id.btnSelectMarcas);
-        btnSelectModelos = findViewById(R.id.btnSelectModelos);
 
 
-        tipos = new LinkedList<Tipo>();
-        selectedTipos = new boolean[tipos.size()];
-        selectedProductTipos = new ArrayList<Tipo>();
+        // MultiAutoCompleteTextView y Spinner
+        spinnerProveedores = findViewById(R.id.spinnerProveedores);
+        actvModelos = findViewById(R.id.actvModelos);
+        spinnerTipos = findViewById(R.id.spinnerTipos);
 
-        proveedores = new LinkedList<Proveedor>();
-        selectedProveedores = new boolean[proveedores.size()];
-        selectedProductProveedores = new ArrayList<Proveedor>();
+        tipos = new LinkedList<>();
+        proveedores = new LinkedList<>();
+        modelos = new LinkedList<>();
 
-        marcas = new LinkedList<Marca>();
-        selectedMarcas = new boolean[marcas.size()];
-        selectedProductMarcas = new ArrayList<Marca>();
-
-        modelos = new LinkedList<Modelo>();
-        selectedModelos = new boolean[modelos.size()];
-        selectedProductModelos = new ArrayList<Modelo>();
-
+        listaModelos = findViewById(R.id.listaModelos);
+        listaProveedores = findViewById(R.id.listaProveedores);
+        listaTipos = findViewById(R.id.listaTipos);
+        // Listas para las selecciones
+        selectedProductTipos = new ArrayList<>();
+        selectedProductProveedores = new ArrayList<>();
+        selectedProductModelos = new ArrayList<>();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -95,381 +110,392 @@ public class CrearProductoActivity extends AppCompatActivity {
                 .build();
         apiService = retrofit.create(ApiService.class);
 
-        // Obtener tipos de productos al crear la vista
+        // Obtener datos de la base de datos
         fetchProductTipos();
-        //Obtener los proveedores tambien
         fetchProductProveedores();
-        //Obtener los Marcas tambien
-        fetchProductMarcas();
-        //Obtener los Modelos tambien
-        fetchProductModelos();
+        fetchProductModelos("");
 
+        // Configuración de botones de incremento/decremento
+        setupStockButtons();
 
-        btnSelectTipo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showMultiSelectDialogTipos();
-            }
-        });
-
-        btnSelectProveedor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showMultiSelectDialogProveedores();
-            }
-        });
-
-        btnSelectMarcas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showMultiSelectDialogMarcas();
-            }
-        });
-
-        btnSelectModelos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showMultiSelectDialogModelos();
-            }
-        });
-
-        btnCrearProducto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                crearProducto();
-            }
-        });
-
-        btnRegresarCrearProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                atrasClick(v);
-            }
-        });
+        // Configuración de los adaptadores para los campos desplegables
+        setupMultiAutoCompleteTextView();
+        setupSpinners();
+        btnCrearProducto.setOnClickListener(v -> crearProducto());
+        btnRegresarCrearProduct.setOnClickListener(this::atrasClick);
     }
-
     // Método para manejar el clic del botón de regresar
     public void atrasClick(View view) {
-        // Esto hará que la actividad actual termine y vuelva a la anterior en la pila
         finish();
     }
+
 
     private void crearProducto() {
         String codigo = etCodigo.getText().toString();
         String nombre = etNombre.getText().toString();
+
+        // Verificaciones para asegurar que los campos no estén vacíos
+        if (codigo.isEmpty() || nombre.isEmpty() || etPrecioCosto.getText().toString().isEmpty() ||
+                etPrecioVenta.getText().toString().isEmpty() || etStockActual.getText().toString().isEmpty() ||
+                etStockMax.getText().toString().isEmpty() || etStockMin.getText().toString().isEmpty()) {
+            Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         double precioCosto = Double.parseDouble(etPrecioCosto.getText().toString());
         double precioVenta = Double.parseDouble(etPrecioVenta.getText().toString());
         int stockActual = Integer.parseInt(etStockActual.getText().toString());
         int stockMax = Integer.parseInt(etStockMax.getText().toString());
         int stockMin = Integer.parseInt(etStockMin.getText().toString());
 
-        // Aquí puedes ajustar cómo se envían los modelos seleccionados al backend
-        ArrayList <Integer> modelosIds = new ArrayList<>();
+        // Obtener los IDs de los modelos seleccionados
+        ArrayList<Integer> modelosIds = new ArrayList<>();
         for (Modelo modelo : selectedProductModelos) {
             modelosIds.add(modelo.getId());
         }
-        // Aquí puedes ajustar cómo se envían los marcas seleccionados al backend
-        ArrayList <Integer> marcasIds = new ArrayList<>();
-        for (Marca marca : selectedProductMarcas) {
-            marcasIds.add(marca.getId());
-        }
-        // Aquí puedes ajustar cómo se envían los proveedores seleccionados al backend
-        ArrayList <Integer> proveedoresIds = new ArrayList<>();
+
+        // Obtener los IDs de los proveedores seleccionados
+        ArrayList<Integer> proveedoresIds = new ArrayList<>();
         for (Proveedor proveedor : selectedProductProveedores) {
             proveedoresIds.add(proveedor.getId());
         }
-        // Aquí puedes ajustar cómo se envían los tipos seleccionados al backend
+
         ArrayList<Integer> tipoIds = new ArrayList<>();
         for (Tipo tipo : selectedProductTipos) {
             tipoIds.add(tipo.getId());
         }
 
-
-
         Long id = Long.valueOf(99999);
-        ProductoCreate nuevoProducto = new ProductoCreate(id, codigo, nombre,stockMin, stockMax,stockActual , precioVenta, precioCosto,proveedoresIds,tipoIds,marcasIds,modelosIds);
+        ProductoCreate nuevoProducto = new ProductoCreate(id, codigo, nombre, stockMin, stockMax, stockActual, precioVenta, precioCosto, proveedoresIds, tipoIds, modelosIds);
 
 
-        Call<ProductoCreate> call = apiService.crearProducto(nuevoProducto);
+        String hashedPassword = LoginActivity.PreferenceManager.getHashedPassword(CrearProductoActivity.this);
+        if (hashedPassword == null) {
+            Toast.makeText(CrearProductoActivity.this, "Hashed password no encontrada. Inicia sesión nuevamente.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String token = "Bearer " + hashedPassword;
+
+        Call<ProductoCreate> call = apiService.crearProducto(token, nuevoProducto);
         call.enqueue(new Callback<ProductoCreate>() {
             @Override
             public void onResponse(Call<ProductoCreate> call, Response<ProductoCreate> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(CrearProductoActivity.this, "Producto creado exitosamente", Toast.LENGTH_LONG).show();
-                    Log.i("respuesta", response.toString());
-                    finish();
 
+                    // Limpiar listas y campos
+                    selectedProductModelos.clear();
+                    selectedProductProveedores.clear();
+                    selectedProductTipos.clear();
+
+                    actvModelos.setText("");
+
+
+                    // Opcionalmente también podrías vaciar los campos de texto de los productos
+                    etCodigo.setText("");
+                    etNombre.setText("");
+                    etPrecioCosto.setText("");
+                    etPrecioVenta.setText("");
+                    etStockActual.setText("");
+                    etStockMax.setText("");
+                    etStockMin.setText("");
+
+
+                    finish();
                 } else {
                     Toast.makeText(CrearProductoActivity.this, "Error al crear el producto", Toast.LENGTH_LONG).show();
-                    Log.i("respuesta no", response.toString());
                 }
             }
 
             @Override
             public void onFailure(Call<ProductoCreate> call, Throwable t) {
                 Toast.makeText(CrearProductoActivity.this, "Error de conexión", Toast.LENGTH_SHORT).show();
-                Log.e("Error de la llamada", "Error: " + t);
             }
         });
     }
-
+    // Métodos para obtener datos de tipos, proveedores y modelos
     private void fetchProductTipos() {
-        Call<List<TipoDTO>> call = apiService.getTipos();
+        String hashedPassword = LoginActivity.PreferenceManager.getHashedPassword(CrearProductoActivity.this);
+        if (hashedPassword == null) {
+            Toast.makeText(CrearProductoActivity.this, "Hashed password no encontrada. Inicia sesión nuevamente.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String token = "Bearer " + hashedPassword;
+
+        Call<List<TipoDTO>> call = apiService.getTipos(token);
         call.enqueue(new Callback<List<TipoDTO>>() {
             @Override
             public void onResponse(Call<List<TipoDTO>> call, Response<List<TipoDTO>> response) {
                 if (response.isSuccessful()) {
                     List<TipoDTO> tipoDtoList = response.body();
-                    tipoDtoList.forEach(tipoDto -> {
-                        Tipo newTipo =tipoDto.toTipo();
-                        tipos.add(newTipo);});
+                    tipos.clear();
+                    for (TipoDTO tipoDTO : tipoDtoList) {
+                        tipos.add(tipoDTO.toTipo());
+                    }
 
-                    selectedTipos = new boolean[tipos.size()];
+                    ArrayAdapter<String> tiposAdapter = new ArrayAdapter<>(CrearProductoActivity.this, android.R.layout.simple_spinner_item, getNombresTipos());
+                    tiposAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    tiposAdapter.insert("Seleccione tipo", 0);
+                    spinnerTipos.setAdapter(tiposAdapter);
                 } else {
-                    Toast.makeText(CrearProductoActivity.this, "Failed to fetch product types", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CrearProductoActivity.this, "Error al obtener tipos de producto", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<TipoDTO>> call, Throwable t) {
-                Toast.makeText(CrearProductoActivity.this, "Failed to fetch product types", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CrearProductoActivity.this, "Error de conexión al obtener tipos", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void showMultiSelectDialogTipos() {
-
-        String[] tipoNames = new String[tipos.size()];
-        for (int i = 0; i < tipos.size(); i++) {
-            tipoNames[i] = tipos.get(i).getNombre();
+    private void fetchProductProveedores() {
+        String hashedPassword = LoginActivity.PreferenceManager.getHashedPassword(CrearProductoActivity.this);
+        if (hashedPassword == null) {
+            Toast.makeText(CrearProductoActivity.this, "Hashed password no encontrada. Inicia sesión nuevamente.", Toast.LENGTH_SHORT).show();
+            return;
         }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Selecciona los tipos de producto")
-                .setMultiChoiceItems(tipoNames, selectedTipos, new DialogInterface.OnMultiChoiceClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                        selectedTipos[which] = isChecked;
-                    }
-                })
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Implementa la lógica después de seleccionar los tipos y hacer clic en Aceptar
-                        // Puedes recorrer selectedTipos para obtener los tipos seleccionados
-                        selectedProductTipos.clear(); // Limpiar la lista de tipos seleccionados antes de agregar los nuevos
-                        for (int i = 0; i < selectedTipos.length; i++) {
-                            if (selectedTipos[i]) {
-                                selectedProductTipos.add(tipos.get(i));
-                            }
-                        }
-                        // Actualiza la interfaz de usuario si es necesario
-                    }
-                })
-                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Acción al hacer clic en Cancelar, si es necesario
-                    }
-                });
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        String token = "Bearer " + hashedPassword;
 
-    }
-
-    private void fetchProductProveedores() {
-        Call<List<ProveedorDTO>> call = apiService.getProveedoresDTO();
+        Call<List<ProveedorDTO>> call = apiService.getProveedoresDTO(token);
         call.enqueue(new Callback<List<ProveedorDTO>>() {
             @Override
             public void onResponse(Call<List<ProveedorDTO>> call, Response<List<ProveedorDTO>> response) {
                 if (response.isSuccessful()) {
                     List<ProveedorDTO> proveedoresDtoList = response.body();
-                    proveedoresDtoList.forEach(proveedorDto -> {
-                        Proveedor newProveedor =proveedorDto.toProveedor();
-                        proveedores.add(newProveedor);});
+                    proveedores.clear();
+                    for (ProveedorDTO proveedorDTO : proveedoresDtoList) {
+                        proveedores.add(proveedorDTO.toProveedor());
+                    }
 
-                    selectedProveedores = new boolean[proveedores.size()];
+                    ArrayAdapter<String> proveedoresAdapter = new ArrayAdapter<>(CrearProductoActivity.this, android.R.layout.simple_dropdown_item_1line, getNombresProveedores());
+                    proveedoresAdapter.insert("Seleccione proveedor", 0);
+                    spinnerProveedores.setAdapter(proveedoresAdapter);
+
+
                 } else {
-                    Toast.makeText(CrearProductoActivity.this, "Failed to fetch prodcuts proveedores", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CrearProductoActivity.this, "Error al obtener proveedores", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<ProveedorDTO>> call, Throwable t) {
-                Toast.makeText(CrearProductoActivity.this, "Failed to fetch prodcuts proveedores", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CrearProductoActivity.this, "Error de conexión al obtener proveedores", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    //proveedores
-    private void showMultiSelectDialogProveedores() {
-
-        String[] tipoNames = new String[proveedores.size()];
-        for (int i = 0; i < proveedores.size(); i++) {
-            tipoNames[i] = proveedores.get(i).getNombre();
+    private void fetchProductModelos(String query) {
+        String hashedPassword = LoginActivity.PreferenceManager.getHashedPassword(CrearProductoActivity.this);
+        if (hashedPassword == null) {
+            Toast.makeText(CrearProductoActivity.this, "Hashed password no encontrada. Inicia sesión nuevamente.", Toast.LENGTH_SHORT).show();
+            return;
         }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Selecciona el/los proveedores del producto")
-                .setMultiChoiceItems(tipoNames, selectedProveedores, new DialogInterface.OnMultiChoiceClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                        selectedProveedores[which] = isChecked;
-                    }
-                })
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Implementa la lógica después de seleccionar los tipos y hacer clic en Aceptar
-                        // Puedes recorrer selectedProveedores para obtener los tipos seleccionados
-                        selectedProductProveedores.clear(); // Limpiar la lista de tipos seleccionados antes de agregar los nuevos
-                        for (int i = 0; i < selectedProveedores.length; i++) {
-                            if (selectedProveedores[i]) {
-                                selectedProductProveedores.add(proveedores.get(i));
-                            }
-                        }
-                        // Actualiza la interfaz de usuario si es necesario
-                    }
-                })
-                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Acción al hacer clic en Cancelar, si es necesario
-                    }
-                });
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        String token = "Bearer " + hashedPassword;
 
-    }
-
-    //Marcas
-    private void fetchProductMarcas() {
-        Call<List<MarcaDTO>> call = apiService.getMarcasDTO();
-        call.enqueue(new Callback<List<MarcaDTO>>() {
-            @Override
-            public void onResponse(Call<List<MarcaDTO>> call, Response<List<MarcaDTO>> response) {
-                if (response.isSuccessful()) {
-                    List<MarcaDTO> marcaDtoList = response.body();
-                    marcaDtoList.forEach(marcaDto -> {
-                        Marca newMarca =marcaDto.toMarca();
-                        marcas.add(newMarca);});
-
-                    selectedMarcas = new boolean[marcas.size()];
-                } else {
-                    Toast.makeText(CrearProductoActivity.this, "Failed to fetch product on response", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<MarcaDTO>> call, Throwable t) {
-                Toast.makeText(CrearProductoActivity.this, "Failed to fetch product marcas", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void showMultiSelectDialogMarcas() {
-
-        String[] marcaNames = new String[marcas.size()];
-        for (int i = 0; i < marcas.size(); i++) {
-            marcaNames[i] = marcas.get(i).getNombre();
-        }
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Selecciona los tipos de marcas")
-                .setMultiChoiceItems(marcaNames, selectedMarcas, new DialogInterface.OnMultiChoiceClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                        selectedMarcas[which] = isChecked;
-                    }
-                })
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Implementa la lógica después de seleccionar las marcas y hacer clic en Aceptar
-                        // Puedes recorrer selectedMarcas para obtener las marcas seleccionados
-                        selectedProductMarcas.clear(); // Limpiar la lista de marcas seleccionados antes de agregar los nuevos
-                        for (int i = 0; i < selectedMarcas.length; i++) {
-                            if (selectedMarcas[i]) {
-                                selectedProductMarcas.add(marcas.get(i));
-                            }
-                        }
-                        // Actualiza la interfaz de usuario si es necesario
-                    }
-                })
-                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Acción al hacer clic en Cancelar, si es necesario
-                    }
-                });
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
-    }
-
-    //Modelos
-    private void fetchProductModelos() {
-        Call<List<ModeloDTO>> call = apiService.getModelosDTO();
+        // Llamada a la API para obtener los modelos que coinciden con el query
+        Call<List<ModeloDTO>> call = apiService.getModeloByName(token, query);
         call.enqueue(new Callback<List<ModeloDTO>>() {
             @Override
             public void onResponse(Call<List<ModeloDTO>> call, Response<List<ModeloDTO>> response) {
                 if (response.isSuccessful()) {
                     List<ModeloDTO> modeloDtoList = response.body();
-                    modeloDtoList.forEach(modeloDto -> {
-                        Modelo newModelo =modeloDto.toModelo();
-                        modelos.add(newModelo);});
+                    modelos.clear();  // Limpiar la lista de modelos anteriores
 
-                    selectedModelos = new boolean[modelos.size()];
+                    // Convertir los DTOs en objetos de Modelo y agregarlos a la lista
+                    for (ModeloDTO modeloDTO : modeloDtoList) {
+                        Modelo newModelo = modeloDTO.toModelo();
+                        modelos.add(newModelo);  // Agregar el modelo a la lista
+                    }
+
+                    // Actualizar el adaptador con los nombres de los modelos
+                    ArrayAdapter<String> modelosAdapter = new ArrayAdapter<>(CrearProductoActivity.this, android.R.layout.simple_dropdown_item_1line, getNombresModelos());
+                    actvModelos.setAdapter(modelosAdapter);
+                    actvModelos.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+
+                    // Mostrar el dropdown con las coincidencias
+                    actvModelos.showDropDown();
+
+                    // Agregar modelos seleccionados a la lista visual debajo del campo
+                    actvModelos.setOnItemClickListener((parent, view, position, id) -> {
+                        String modeloSeleccionado = (String) parent.getItemAtPosition(position);
+                        agregarModeloALista(modeloSeleccionado);
+                        actvModelos.setText("");  // Limpiar el campo después de seleccionar
+                    });
                 } else {
-                    Toast.makeText(CrearProductoActivity.this, "Failed to fetch product modelos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CrearProductoActivity.this, "Error al OBTENER modelos", Toast.LENGTH_SHORT).show();
+                    Log.e("ErrorModelo", "Código de error: " + response.code() + " - Mensaje: " + response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<List<ModeloDTO>> call, Throwable t) {
-                Toast.makeText(CrearProductoActivity.this, "Failed to fetch product modelos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CrearProductoActivity.this, "Error de CONEXION al obtener modelos", Toast.LENGTH_SHORT).show();
+                Log.e("ErrorModelo", "Error de conexión: " + t.getMessage(), t);
+
+                if (t instanceof IOException) {
+                    Log.e("ErrorModelo", "Problema de red: " + t.getMessage());
+                } else {
+                    Log.e("ErrorModelo", "Error inesperado: " + t.getMessage());
+                }
             }
         });
     }
 
-    private void showMultiSelectDialogModelos() {
+    private void setupMultiAutoCompleteTextView() {
+        actvModelos.setOnItemClickListener((parent, view, position, id) -> {
+            String modeloSeleccionado = (String) parent.getItemAtPosition(position);
+            agregarModeloALista(modeloSeleccionado);
+            actvModelos.setText("");
+        });
 
-        String[] modeloNames = new String[modelos.size()];
-        for (int i = 0; i < modelos.size(); i++) {
-            modeloNames[i] = modelos.get(i).getNombre();
-        }
+        actvModelos.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Selecciona los modelos de autos")
-                .setMultiChoiceItems(modeloNames, selectedModelos, new DialogInterface.OnMultiChoiceClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                        selectedModelos[which] = isChecked;
-                    }
-                })
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Implementa la lógica después de seleccionar los modelos y hacer clic en Aceptar
-                        // Puedes recorrer selectedModelos para obtener los modelos seleccionados
-                        selectedProductModelos.clear(); // Limpiar la lista de modelos seleccionados antes de agregar los nuevos
-                        for (int i = 0; i < selectedModelos.length; i++) {
-                            if (selectedModelos[i]) {
-                                selectedProductModelos.add(modelos.get(i));
-                            }
-                        }
-                        // Actualiza la interfaz de usuario si es necesario
-                    }
-                })
-                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Acción al hacer clic en Cancelar, si es necesario
-                    }
-                });
-        AlertDialog dialog = builder.create();
-        dialog.show();
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.length() >= 2) {
+                    fetchProductModelos(charSequence.toString());
+                }
+            }
 
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
     }
 
+    private void setupStockButtons() {
+        btnIncrementStockActual.setOnClickListener(v -> updateStock(etStockActual, 1));
+        btnDecrementStockActual.setOnClickListener(v -> updateStock(etStockActual, -1));
+
+        btnIncrementStockMax.setOnClickListener(v -> updateStock(etStockMax, 1));
+        btnDecrementStockMax.setOnClickListener(v -> updateStock(etStockMax, -1));
+
+        btnIncrementStockMin.setOnClickListener(v -> updateStock(etStockMin, 1));
+        btnDecrementStockMin.setOnClickListener(v -> updateStock(etStockMin, -1));
+    }
+
+    private void updateStock(EditText editText, int amount) {
+        try {
+            int stock = Integer.parseInt(editText.getText().toString());
+            stock = Math.max(0, stock + amount); // Evita números negativos
+            editText.setText(String.valueOf(stock));
+        } catch (NumberFormatException e) {
+            editText.setText("0");
+        }
+    }
+
+
+    private List<String> getNombresTipos() {
+        List<String> nombres = new ArrayList<>();
+        for (Tipo tipo : tipos) {
+            nombres.add(tipo.getNombre());
+        }
+        return nombres;
+    }
+
+    private List<String> getNombresProveedores() {
+        List<String> nombres = new ArrayList<>();
+        for (Proveedor proveedor : proveedores) {
+            nombres.add(proveedor.getNombre());
+        }
+        return nombres;
+    }
+
+    private List<String> getNombresModelos() {
+        List<String> nombres = new ArrayList<>();
+        for (Modelo modelo : modelos) {
+            nombres.add(modelo.getNombre());
+        }
+        return nombres;
+    }
+
+    private void setupSpinners() {
+        // Configurar Spinner de Proveedores
+        spinnerProveedores.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // Convertir el item seleccionado a String
+                String proveedorSeleccionado = (String) parent.getItemAtPosition(position);
+                agregarProveedorALista(proveedorSeleccionado);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
+        // Configurar Spinner de Tipos (similar al de proveedores)
+        spinnerTipos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String tipoSeleccionado = (String) parent.getItemAtPosition(position);
+                agregarTipoALista(tipoSeleccionado);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+    }
+
+
+    private void agregarProveedorALista(String proveedor) {
+        // Verifica si el proveedor ya está en la lista antes de agregarlo
+        if (!selectedProveedores.contains(proveedor)) {
+            selectedProveedores.add(proveedor); // Agregar el proveedor a la lista
+
+            // Crear una nueva vista de texto para mostrar el proveedor seleccionado
+            TextView textView = new TextView(this);
+            textView.setText(proveedor);
+
+            // Agregar el TextView al contenedor (lista visual de proveedores)
+            listaProveedores.addView(textView);
+        }
+    }
+
+
+
+    private void agregarTipoALista(String tipo) {
+        if (!selectedTipos.contains(tipo)) {
+            selectedTipos.add(tipo);
+            TextView textView = new TextView(this);
+            textView.setText(tipo);
+            listaTipos.addView(textView);
+        }
+    }
+    private void agregarModeloALista(String modelo) {
+        if (!selectedModelos.contains(modelo)) {
+            selectedModelos.add(modelo);  // Agregar el modelo seleccionado a la lista
+
+            // Crear una nueva vista de texto para mostrar el modelo seleccionado
+            TextView textView = new TextView(this);
+            textView.setText(modelo);
+
+            // Agregar el TextView al contenedor visual de modelos seleccionados
+            listaModelos.addView(textView);
+        }
+    }
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

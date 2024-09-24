@@ -19,6 +19,7 @@ import java.util.List;
 
 import front.inyecmotor.ApiService;
 import front.inyecmotor.R;
+import front.inyecmotor.login.LoginActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder> {
     private List<Producto> productos;
     private Context context;
-    private static final String BASE_URL = "http://192.168.0.106:8080"; // Cambia a la URL de tu servidor
+    private static final String BASE_URL = "http://192.168.56.1:8080"; // Cambia a la URL de tu servidor CON EL PUERTO
     private static final String TAG = "ProductoAdapter"; // Tag para los logs
 
     public ProductoAdapter(List<Producto> productos, Context context) {
@@ -126,13 +127,23 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
     }
 
     private void enviarDatosProducto(Producto producto) {
+        // Obtener el token desde SharedPreferences
+        String hashedPassword = LoginActivity.PreferenceManager.getHashedPassword(context);
+        if (hashedPassword == null) {
+            Toast.makeText(context, "Hashed password no encontrada. Inicia sesión nuevamente.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         ApiService apiService = retrofit.create(ApiService.class);
-        Call<Producto> call = apiService.editarProducto(producto);
+
+        String token = "Bearer " + hashedPassword;
+        Call<Producto> call = apiService.editarProducto(token, producto);
 
         call.enqueue(new Callback<Producto>() {
             @Override
