@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/etNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre" />
+
+    <Spinner
+        android:id="@+id/spinnerMarca"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:textSize="18sp"
+        android:hint="Marca" />
+
+    <Spinner
+        android:id="@+id/spinnerMotorLitros"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:textSize="18sp"
+        android:hint="Motor Litros" />
+
+    <Spinner
+        android:id="@+id/spinnerMotorTipo"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:textSize="18sp"
+        android:hint="Motor Tipo" />
+
+    <EditText
+        android:id="@+id/etAnio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Año" />
+
+    <Button
+        android:id="@+id/btnGuardarModelo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Crear Modelo" />
+
+</LinearLayout>

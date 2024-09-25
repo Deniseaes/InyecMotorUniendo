@@ -19,6 +19,7 @@ import java.util.List;
 
 import front.inyecmotor.ApiService;
 import front.inyecmotor.R;
+import front.inyecmotor.login.LoginActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ProveedorAdapter extends RecyclerView.Adapter<ProveedorAdapter.ProveedorViewHolder> {
     private List<Proveedor> proveedores;
     private Context context;
-    private static final String BASE_URL = "http://192.168.0.106:8080";
+    private static final String BASE_URL = "http://192.168.56.1:8080";
     private static final String TAG = "ProveedorAdapter";
 
     public ProveedorAdapter(List<Proveedor> proveedores, Context context) {
@@ -113,13 +114,23 @@ public class ProveedorAdapter extends RecyclerView.Adapter<ProveedorAdapter.Prov
     }
 
     private void actualizarProveedor(Proveedor proveedor) {
+
+        // Obtener el token desde SharedPreferences
+        String hashedPassword = LoginActivity.PreferenceManager.getHashedPassword(context);
+        if (hashedPassword == null) {
+            Toast.makeText(context, "Hashed password no encontrada. Inicia sesión nuevamente.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         ApiService apiService = retrofit.create(ApiService.class);
-        Call<Proveedor> call = apiService.editarProveedor(proveedor);
+
+        String token = "Bearer " + hashedPassword;
+        Call<Proveedor> call = apiService.editarProveedor(token, proveedor);
 
         call.enqueue(new Callback<Proveedor>() {
             @Override

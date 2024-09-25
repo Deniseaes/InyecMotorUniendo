@@ -1,3 +1,43 @@
 <resources>
     <string name="app_name">InyecMotor</string>
+
+    <string-array name="marcas_array">
+        <item>Seleccione Marca</item>
+        <item>Chevrolet</item>
+        <item>Citroën</item>
+        <item>Fiat</item>
+        <item>Ford</item>
+        <item>Jeep</item>
+        <item>Mercedes-Benz</item>
+        <item>Nissan</item>
+        <item>Peugeot</item>
+        <item>Renault</item>
+        <item>Toyota</item>
+        <item>Volkswagen</item>
+    </string-array>
+
+    <string-array name="motor_litros_array">
+        <item>Seleccione Motor Litros</item>
+        <item>1.0</item>
+        <item>1.2</item>
+        <item>1.4</item>
+        <item>1.6</item>
+        <item>1.8</item>
+        <item>2.0</item>
+        <item>2.2</item>
+        <item>2.4</item>
+        <item>2.8</item>
+        <item>3.0</item>
+        <item>3.2</item>
+        <item>3.5</item>
+        <item>4.0</item>
+    </string-array>
+
+    <string-array name="motor_tipo_array">
+        <item>Seleccione Tipo de Motor</item>
+        <item>Diesel</item>
+        <item>Gasolero</item>
+        <item>Naftero</item>
+    </string-array>
+
 </resources>

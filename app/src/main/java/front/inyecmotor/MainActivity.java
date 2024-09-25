@@ -23,7 +23,7 @@ import front.inyecmotor.expandirBarrita.DrawerAdapter;
 import front.inyecmotor.expandirBarrita.DrawerItem;
 import front.inyecmotor.expandirBarrita.SimpleItem;
 import front.inyecmotor.expandirBarrita.SpaceItem;
-import front.inyecmotor.marcas.MarcasFragment;
+
 import front.inyecmotor.modelos.ModelosFragment;
 import front.inyecmotor.productos.ProductosFragment;
 import front.inyecmotor.proveedores.ProveedoresFragment;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     private static final int POS_PRODUCTOS = 2;
     private static final int POS_PROVEEDORES = 3;
     private static final int POS_MODELOS = 4;
-    private static final int POS_MARCAS = 5;
+
     private static final int POS_LOGOUT = 7;
 
     private String[] screenTitles;
@@ -43,19 +43,25 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     private SlidingRootNav slidingRootNav;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {  //Configura la pantalla principal y el menú desplegable.
         super.onCreate(savedInstanceState);
+
+        //Verificmos el inicio de sesion
+
+
+
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);      // pantalla principal, se configura para interactuar con el menú desplegable.
         setSupportActionBar(toolbar);
 
-        slidingRootNav = new SlidingRootNavBuilder(this)
+        slidingRootNav = new SlidingRootNavBuilder(this) //drawer que maneja el menu desplegable
                 .withDragDistance(180)
                 .withRootViewScale(0.75f)
                 .withRootViewElevation(25)
-                .withToolbarMenuToggle(toolbar)
+                .withToolbarMenuToggle(toolbar) //abrir y cerrar el menu
                 .withMenuOpened(false)
                 .withContentClickableWhenMenuOpened(false)
                 .withSavedState(savedInstanceState)
@@ -65,13 +71,13 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         screenIcons = loadScreenIcons();
         screenTitles = loadScreenTitles();
 
-        DrawerAdapter adapter = new DrawerAdapter(Arrays.asList(
+        DrawerAdapter adapter = new DrawerAdapter(Arrays.asList(   //opciones o botones del menu
                 createItemFor(POS_CLOSE),
                 createItemFor(POS_MENU_PRINCIPAL).setChecked(true),
                 createItemFor(POS_PRODUCTOS),
                 createItemFor(POS_PROVEEDORES),
                 createItemFor(POS_MODELOS),
-                createItemFor(POS_MARCAS),
+
                 new SpaceItem(260),
                 createItemFor(POS_LOGOUT)
         ));
@@ -85,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         adapter.setSelected(POS_MENU_PRINCIPAL);
     }
 
-    private DrawerItem createItemFor(int position) {
+    private DrawerItem createItemFor(int position) {  //Define y personaliza los elementos individuales del menú
         return new SimpleItem(screenIcons[position], screenTitles[position])
                 .withIconTint(color(R.color.red))
                 .withTextTint(color(R.color.black))
@@ -122,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     }
 
     @Override
-    public void onItemSelected(int position) {
+    public void onItemSelected(int position) {      //Maneja la transición y reemplazo de fragmentos en la pantalla principal según la opción seleccionada en el menú desplegable.
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         if (position == POS_MENU_PRINCIPAL) {
@@ -137,11 +143,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         } else if (position == POS_MODELOS) {
             ModelosFragment modelosFragment = new ModelosFragment();
             transaction.replace(R.id.container, modelosFragment);
-        } else if (position == POS_MARCAS) {
-            MarcasFragment marcasFragment = new MarcasFragment();
-            transaction.replace(R.id.container, marcasFragment);
-        } else if (position == POS_LOGOUT) {
-            finish();
+
         }
 
         slidingRootNav.closeMenu();

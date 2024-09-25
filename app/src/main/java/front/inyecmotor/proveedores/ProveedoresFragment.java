@@ -18,6 +18,8 @@ import java.util.List;
 
 import front.inyecmotor.ApiService;
 import front.inyecmotor.R;
+import front.inyecmotor.crearProducto.CrearProductoActivity;
+import front.inyecmotor.login.LoginActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,7 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ProveedoresFragment extends Fragment {
 
-    private static final String BASE_URL = "http://192.168.0.106:8080"; // Cambia a la URL de tu servidor
+    private static final String BASE_URL = "http://192.168.56.1:8080"; // Cambia a la URL de tu servidor
     private static final String TAG = "ProveedoresFragment"; // Tag para los logs
 
     @Nullable
@@ -44,17 +46,39 @@ public class ProveedoresFragment extends Fragment {
             });
         }
 
+        Button btnCrearProveedor = view.findViewById(R.id.btnCrearProveedor);
+        btnCrearProveedor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    // Crear el Intent para iniciar el Activity
+                    Intent intent = new Intent(getActivity(), CrearProveedorActivity.class);
+                    startActivity(intent);
+                }catch (Exception e){Log.e("Error", "Error: " + e.getMessage());}
+
+            }
+        });
+
         return view;
     }
 
     private void fetchProveedores() {
+        // Obtener la contraseña hasheada desde SharedPreferences
+        String hashedPassword = LoginActivity.PreferenceManager.getHashedPassword(getContext());
+
+        if (hashedPassword == null) {
+            Toast.makeText(getContext(), "Hashed password no encontrada. Inicia sesión nuevamente.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         ApiService apiService = retrofit.create(ApiService.class);
-        Call<List<Proveedor>> call = apiService.getProveedores();
+        String token = "Bearer " + hashedPassword;
+        Call<List<Proveedor>> call = apiService.getProveedores(token);
 
         call.enqueue(new Callback<List<Proveedor>>() {
             @Override

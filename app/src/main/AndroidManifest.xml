@@ -21,17 +21,23 @@
         <activity android:name=".crearProducto.CrearProductoActivity"></activity>
         <activity android:name=".marcas.MarcasActivity" />
         <activity android:name=".proveedores.ProveedoresActivity"/>
+        <activity android:name=".proveedores.CrearProveedorActivity"></activity>
         <activity android:name=".modelos.ModelosActivity" />
+        <activity android:name=".modelos.CrearModeloActivity"></activity>
 
+        <!--LoginActivity es launcher activity -->
         <activity
-            android:name=".MainActivity"
+            android:name=".login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- MainActivity es regular activity -->
+        <activity android:name=".MainActivity" />
+
     </application>
 
 </manifest>
