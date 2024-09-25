@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,7 +41,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CrearProductoActivity extends AppCompatActivity {
     private EditText etCodigo, etNombre, etPrecioCosto, etPrecioVenta, etStockActual, etStockMax, etStockMin;
-    private Button btnCrearProducto, btnRegresarCrearProduct;
+    private Button btnCrearProducto;
     private Button btnIncrementStockActual, btnDecrementStockActual, btnIncrementStockMax, btnDecrementStockMax, btnIncrementStockMin, btnDecrementStockMin;
     private MultiAutoCompleteTextView actvModelos;
     private Spinner spinnerTipos, spinnerProveedores;
@@ -82,9 +84,9 @@ public class CrearProductoActivity extends AppCompatActivity {
         btnDecrementStockMax = findViewById(R.id.btnDecrementStockMax);
         btnIncrementStockMin = findViewById(R.id.btnIncrementStockMin);
         btnDecrementStockMin = findViewById(R.id.btnDecrementStockMin);
-        // Botones de crear y regresar
+        // Botones de crear
         btnCrearProducto = findViewById(R.id.btnCrearProducto);
-        btnRegresarCrearProduct = findViewById(R.id.btnRegresarCrearProduct);
+
 
 
         // MultiAutoCompleteTextView y Spinner
@@ -104,6 +106,9 @@ public class CrearProductoActivity extends AppCompatActivity {
         selectedProductProveedores = new ArrayList<>();
         selectedProductModelos = new ArrayList<>();
 
+
+
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -122,12 +127,18 @@ public class CrearProductoActivity extends AppCompatActivity {
         setupMultiAutoCompleteTextView();
         setupSpinners();
         btnCrearProducto.setOnClickListener(v -> crearProducto());
-        btnRegresarCrearProduct.setOnClickListener(this::atrasClick);
+
+
+        // Configura el botón de "Volver" en la Toolbar
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
-    // Método para manejar el clic del botón de regresar
-    public void atrasClick(View view) {
-        finish();
-    }
+
 
 
     private void crearProducto() {
@@ -175,6 +186,7 @@ public class CrearProductoActivity extends AppCompatActivity {
             return;
         }
         String token = "Bearer " + hashedPassword;
+        Log.d("Token", token);
 
         Call<ProductoCreate> call = apiService.crearProducto(token, nuevoProducto);
         call.enqueue(new Callback<ProductoCreate>() {
@@ -204,6 +216,8 @@ public class CrearProductoActivity extends AppCompatActivity {
                     finish();
                 } else {
                     Toast.makeText(CrearProductoActivity.this, "Error al crear el producto", Toast.LENGTH_LONG).show();
+                    Log.d("Error", "Código de error: " + response.code() + " - Mensaje: " + response.message());
+                    Toast.makeText(CrearProductoActivity.this, "Error al crear el producto. Código: " + response.code(), Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -458,14 +472,24 @@ public class CrearProductoActivity extends AppCompatActivity {
 
 
 
-    private void agregarTipoALista(String tipo) {
-        if (!selectedTipos.contains(tipo)) {
-            selectedTipos.add(tipo);
-            TextView textView = new TextView(this);
-            textView.setText(tipo);
-            listaTipos.addView(textView);
+    private void agregarTipoALista(String tipoSeleccionado) {
+        // Buscar el tipo correspondiente en la lista de objetos `Tipo`
+        for (Tipo tipo : tipos) {
+            if (tipo.getNombre().equals(tipoSeleccionado)) {
+                // Verificar si ya está en la lista de tipos seleccionados
+                if (!selectedProductTipos.contains(tipo)) {
+                    selectedProductTipos.add(tipo);
+
+                    // Crear una vista de texto para mostrar el tipo seleccionado
+                    TextView textView = new TextView(this);
+                    textView.setText(tipo.getNombre());
+                    listaTipos.addView(textView); // Agregar a la vista de tipos seleccionados
+                }
+                break;
+            }
         }
     }
+
     private void agregarModeloALista(String modelo) {
         if (!selectedModelos.contains(modelo)) {
             selectedModelos.add(modelo);  // Agregar el modelo seleccionado a la lista
@@ -479,7 +503,11 @@ public class CrearProductoActivity extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
 
 

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -59,6 +60,15 @@ public class CrearProveedorActivity extends AppCompatActivity {
                 crearProveedor();
             }
         });
+
+        // Configura el botón de "Volver" en la Toolbar
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     private boolean validateInputs() {
@@ -118,5 +128,11 @@ public class CrearProveedorActivity extends AppCompatActivity {
             Toast.makeText(this, "CUIT y Teléfono deben ser números válidos", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

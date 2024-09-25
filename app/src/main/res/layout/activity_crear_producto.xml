@@ -1,11 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
+
     <!-- Campo para el código del producto -->
+
+    <!-- Campo para el nombre del producto -->
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/blue_color"
+        android:elevation="4dp"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_back_arrow" />
+
+    <TextView
+        android:id="@+id/hello_world_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Crear Producto"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.185" />
+
     <EditText
         android:id="@+id/etCodigo"
         android:layout_width="match_parent"
@@ -13,7 +42,6 @@
         android:hint="Código"
         android:inputType="text" />
 
-    <!-- Campo para el nombre del producto -->
     <EditText
         android:id="@+id/etNombre"
         android:layout_width="match_parent"
@@ -168,16 +196,6 @@
         android:layout_marginTop="16dp"
         style="@style/MyButtonCreateStyle" />
 
-    <!-- Botón para regresar a la pantalla anterior -->
-    <Button
-        android:id="@+id/btnRegresarCrearProduct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Atrás"
-        android:layout_gravity="bottom|start"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:onClick="atrasClick"
-        style="@style/MyButtonAtrasStyle" />
+
 
 </LinearLayout>

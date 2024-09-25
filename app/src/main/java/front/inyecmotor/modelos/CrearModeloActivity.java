@@ -13,6 +13,7 @@ import front.inyecmotor.R;
 import front.inyecmotor.crearProducto.CrearProductoActivity;
 import front.inyecmotor.crearProducto.ProductoCreate;
 import front.inyecmotor.login.LoginActivity;
+import androidx.appcompat.widget.Toolbar;
 import front.inyecmotor.proveedores.CrearProveedorActivity;
 import front.inyecmotor.proveedores.ProveedorCreate;
 import retrofit2.Call;
@@ -83,7 +84,17 @@ public class CrearModeloActivity extends AppCompatActivity {
             public void onClick(View v) {
                 crearModelo();
             }
+
         });
+
+        // Configura el botón de "Volver" en la Toolbar
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     private boolean validateInputs() {
@@ -174,5 +185,11 @@ public class CrearModeloActivity extends AppCompatActivity {
             Toast.makeText(this, "Año debe ser un número válido", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

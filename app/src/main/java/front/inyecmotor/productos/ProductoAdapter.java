@@ -1,3 +1,4 @@
+
 package front.inyecmotor.productos;
 
 import android.app.AlertDialog;
@@ -26,7 +27,13 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+
+//ProductoAdapter: Controla la lista de productos y gestiona la interacción del usuario con los datos de los productos.
+//ProductoViewHolder: Define las vistas específicas para cada producto (nombre, precio, stock y botón de detalles).
+//mostrarDialogoDetalle: Muestra un diálogo con los detalles del producto para su edición.
+//enviarDatosProducto: Envia los cambios al servidor mediante una API REST.
 public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder> {
+
     private List<Producto> productos;
     private Context context;
     private static final String BASE_URL = "http://192.168.56.1:8080"; // Cambia a la URL de tu servidor CON EL PUERTO
@@ -48,7 +55,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
     public void onBindViewHolder(@NonNull ProductoViewHolder holder, int position) {
         Producto producto = productos.get(position);
         holder.tvProductoNombre.setText(producto.getNombre());
-        holder.tvProductoPrecio.setText("Precio: $" + producto.getPrecioCosto());
+        holder.tvProductoPrecio.setText("Precio: $" + producto.getPrecioVenta());
         holder.tvProductoStock.setText("Stock: " + producto.getStockActual());
 
         holder.btnVerDetalle.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +102,19 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         EditText etStockMax = viewInflated.findViewById(R.id.etStockMax);
         EditText etStockMin = viewInflated.findViewById(R.id.etStockMin);
 
+
+        // Botones de incrementar y decrementar para StockActual
+        Button btnIncrementarStockActual = viewInflated.findViewById(R.id.btnIncrementarStockActual);
+        Button btnDecrementarStockActual = viewInflated.findViewById(R.id.btnDecrementarStockActual);
+
+        // Botones de incrementar y decrementar para StockMax
+        Button btnIncrementarStockMax = viewInflated.findViewById(R.id.btnIncrementarStockMax);
+        Button btnDecrementarStockMax = viewInflated.findViewById(R.id.btnDecrementarStockMax);
+
+        // Botones de incrementar y decrementar para StockMin
+        Button btnIncrementarStockMin = viewInflated.findViewById(R.id.btnIncrementarStockMin);
+        Button btnDecrementarStockMin = viewInflated.findViewById(R.id.btnDecrementarStockMin);
+
         // Setear valores iniciales del producto
         etNombre.setText(producto.getNombre());
         etCodigo.setText(producto.getCodigo());
@@ -103,6 +123,39 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         etStockActual.setText(String.valueOf(producto.getStockActual()));
         etStockMax.setText(String.valueOf(producto.getStockMax()));
         etStockMin.setText(String.valueOf(producto.getStockMin()));
+
+        // Lógica para incrementar/decrementar StockActual
+        btnIncrementarStockActual.setOnClickListener(v -> {
+            int stockActual = Integer.parseInt(etStockActual.getText().toString());
+            etStockActual.setText(String.valueOf(++stockActual));
+        });
+
+        btnDecrementarStockActual.setOnClickListener(v -> {
+            int stockActual = Integer.parseInt(etStockActual.getText().toString());
+            if (stockActual > 0) etStockActual.setText(String.valueOf(--stockActual));
+        });
+
+        // Lógica para incrementar/decrementar StockMax
+        btnIncrementarStockMax.setOnClickListener(v -> {
+            int stockMax = Integer.parseInt(etStockMax.getText().toString());
+            etStockMax.setText(String.valueOf(++stockMax));
+        });
+
+        btnDecrementarStockMax.setOnClickListener(v -> {
+            int stockMax = Integer.parseInt(etStockMax.getText().toString());
+            if (stockMax > 0) etStockMax.setText(String.valueOf(--stockMax));
+        });
+
+        // Lógica para incrementar/decrementar StockMin
+        btnIncrementarStockMin.setOnClickListener(v -> {
+            int stockMin = Integer.parseInt(etStockMin.getText().toString());
+            etStockMin.setText(String.valueOf(++stockMin));
+        });
+
+        btnDecrementarStockMin.setOnClickListener(v -> {
+            int stockMin = Integer.parseInt(etStockMin.getText().toString());
+            if (stockMin > 0) etStockMin.setText(String.valueOf(--stockMin));
+        });
 
         builder.setPositiveButton("Guardar", (dialog, which) -> {
             // Actualizar el objeto producto con los valores del EditText

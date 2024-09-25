@@ -19,6 +19,7 @@ import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Header;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiService {
@@ -30,6 +31,16 @@ public interface ApiService {
 
     @POST("/producto/crear")
     Call<ProductoCreate> crearProducto(@Header("Authorization") String authToken, @Body ProductoCreate nuevoProducto);
+
+
+    @GET("/producto/get-by-modelo/{idModelo}")
+    Call<List<Producto>> getProductosByModelo(@Header("Authorization") String token, @Path("idModelo") String idModelo);
+
+    @GET("/producto/get-by-tipo/{idTipo}")
+    Call<List<Producto>> getProductosByTipo(@Header("Authorization") String token, @Path("idTipo") String tipo);
+
+    @GET("/producto/get-productos-a-reponer")
+    Call<List<Producto>> getProductosAReponer(@Header("Authorization") String authToken);
 
     @GET("/tipo/all")
     Call<List<TipoDTO>> getTipos(@Header("Authorization") String authToken);
@@ -67,5 +78,8 @@ public interface ApiService {
 
     @POST("/auth")
     Call<Boolean> auth(@Body AuthDTO auth);
+
+
+
 }
 

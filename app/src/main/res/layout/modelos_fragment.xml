@@ -6,16 +6,18 @@
     android:background="@color/white">
 
     <!-- Aquí puedes agregar tu "Hola Mundo" -->
+
     <TextView
         android:id="@+id/hello_world_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Modelos"
         android:textSize="24sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.376" />
 
     <Button
         android:id="@+id/getModelos"
