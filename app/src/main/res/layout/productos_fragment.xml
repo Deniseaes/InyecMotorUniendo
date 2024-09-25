@@ -6,16 +6,19 @@
     android:background="@color/white">
 
     <!-- Aquí puedes agregar tu "Hola Mundo" -->
+
     <TextView
         android:id="@+id/hello_world_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Productos"
         android:textSize="24sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.185" />
 
     <Button
         android:id="@+id/getProductos"
@@ -42,6 +45,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         style="@style/MyButtonStyle"/>
+
+    <Button
+        android:id="@+id/btnVerProductosFaltante"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ver productos en faltante"
+        app:layout_constraintTop_toBottomOf="@id/btnCrearProducto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+
+   <!-- <Button
+        android:id="@+id/btnBuscarModelo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buscar Productos por Modelo"
+        app:layout_constraintTop_toBottomOf="@id/btnVerProductosFaltante"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />-->
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
