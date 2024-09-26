@@ -5,30 +5,27 @@ import java.util.ArrayList;
 public class ProductoCreate {
 
 
+    private Long id;
 
-        private Long id;
+    private String codigo;
 
-        private String codigo;
+    private String nombre;
 
-        private String nombre;
+    private int stockMin;
 
-        private int stockMin;
+    private int stockMax;
 
-        private int stockMax;
+    private int stockActual;
 
-        private int stockActual;
+    private double precioVenta;
 
-        private double precioVenta;
+    private double precioCosto;
 
-        private double precioCosto;
+    private ArrayList<Integer> proveedores;
 
-        private ArrayList<Integer> proveedores;
+    private ArrayList<Integer> tipos;
 
-        private ArrayList<Integer> tipos;
-
-
-
-        private ArrayList<Integer> modelos;
+    private ArrayList<Integer> modelos;
 
     public ProductoCreate(Long id, String codigo, String nombre, int stockMin, int stockMax, int stockActual, double precioVenta, double precioCosto, ArrayList<Integer> proveedores, ArrayList<Integer> tipos, ArrayList<Integer> modelos) {
         this.id = id;
@@ -131,6 +128,25 @@ public class ProductoCreate {
 
     public void setModelos(ArrayList<Integer> modelos) {
         this.modelos = modelos;
+    }
+
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "id=" + id +
+                ", codigo='" + codigo + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", stockMin=" + stockMin +
+                ", stockMax=" + stockMax +
+                ", stockActual=" + stockActual +
+                ", precioVenta=" + precioVenta +
+                ", precioCosto=" + precioCosto +
+                ", proveedores=" + proveedores +
+                ", tipos=" + tipos +
+                ", modelos=" + modelos +
+                '}';
+
+
     }
 }
 
