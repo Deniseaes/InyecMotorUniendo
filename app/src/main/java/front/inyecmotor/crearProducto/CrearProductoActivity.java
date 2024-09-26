@@ -52,10 +52,10 @@ public class CrearProductoActivity extends AppCompatActivity {
     private List<Proveedor> proveedores;
     private List<Modelo> modelos;
 
-    private List<String> selectedProveedores = new ArrayList<>();
+    private List<Proveedor> selectedProveedores = new ArrayList<>();
     private List<String> selectedTipos = new ArrayList<>();
     private List<String> selectedModelos = new ArrayList<>();
-    private List<Tipo> selectedProductTipos;
+    private List<Tipo> selectedProductTipos; //este
     private List<Proveedor> selectedProductProveedores;
     private List<Modelo> selectedProductModelos;
 
@@ -118,7 +118,7 @@ public class CrearProductoActivity extends AppCompatActivity {
         // Obtener datos de la base de datos
         fetchProductTipos();
         fetchProductProveedores();
-        fetchProductModelos("");
+
 
         // Configuración de botones de incremento/decremento
         setupStockButtons();
@@ -178,7 +178,7 @@ public class CrearProductoActivity extends AppCompatActivity {
 
         Long id = Long.valueOf(99999);
         ProductoCreate nuevoProducto = new ProductoCreate(id, codigo, nombre, stockMin, stockMax, stockActual, precioVenta, precioCosto, proveedoresIds, tipoIds, modelosIds);
-
+        System.out.println(nuevoProducto);
 
         String hashedPassword = LoginActivity.PreferenceManager.getHashedPassword(CrearProductoActivity.this);
         if (hashedPassword == null) {
@@ -456,17 +456,21 @@ public class CrearProductoActivity extends AppCompatActivity {
     }
 
 
-    private void agregarProveedorALista(String proveedor) {
-        // Verifica si el proveedor ya está en la lista antes de agregarlo
-        if (!selectedProveedores.contains(proveedor)) {
-            selectedProveedores.add(proveedor); // Agregar el proveedor a la lista
+    private void agregarProveedorALista(String proveedorSeleccionado) {
+        // Buscar el proveedor correspondiente en la lista de objetos `Proveedor`
+        for (Proveedor proveedor : proveedores) {
+            if (proveedor.getNombre().equals(proveedorSeleccionado)) {
+                // Verificar si ya está en la lista de proveedores seleccionados
+                if (!selectedProductProveedores.contains(proveedor)) {
+                    selectedProductProveedores.add(proveedor);
 
-            // Crear una nueva vista de texto para mostrar el proveedor seleccionado
-            TextView textView = new TextView(this);
-            textView.setText(proveedor);
-
-            // Agregar el TextView al contenedor (lista visual de proveedores)
-            listaProveedores.addView(textView);
+                    // Crear una vista de texto para mostrar el proveedor seleccionado
+                    TextView textView = new TextView(this);
+                    textView.setText(proveedor.getNombre());
+                    listaProveedores.addView(textView); // Agregar a la vista de proveedores seleccionados
+                }
+                break;
+            }
         }
     }
 
@@ -490,16 +494,19 @@ public class CrearProductoActivity extends AppCompatActivity {
         }
     }
 
-    private void agregarModeloALista(String modelo) {
-        if (!selectedModelos.contains(modelo)) {
-            selectedModelos.add(modelo);  // Agregar el modelo seleccionado a la lista
+    private void agregarModeloALista(String modeloSeleccionado) {
+        for (Modelo modelo : modelos) {
+            if (modelo.getNombre().equals(modeloSeleccionado)) {
+                // Verificar si el modelo ya está en la lista de modelos seleccionados
+                if (!selectedProductModelos.contains(modelo)) {
+                    selectedProductModelos.add(modelo);  // Agregar el modelo seleccionado a la lista
 
-            // Crear una nueva vista de texto para mostrar el modelo seleccionado
-            TextView textView = new TextView(this);
-            textView.setText(modelo);
-
-            // Agregar el TextView al contenedor visual de modelos seleccionados
-            listaModelos.addView(textView);
+                    // Crear una nueva vista de texto para mostrar el modelo seleccionado
+                    TextView textView = new TextView(this);
+                    textView.setText(modelo.getNombre());
+                    listaModelos.addView(textView); // Agregar a la vista de modelos seleccionados
+                }
+            }
         }
     }
 
