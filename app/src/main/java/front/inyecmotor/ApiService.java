@@ -11,6 +11,7 @@ import front.inyecmotor.login.AuthDTO;
 import front.inyecmotor.modelos.Modelo;
 import front.inyecmotor.modelos.ModeloCreate;
 import front.inyecmotor.productos.Producto;
+import front.inyecmotor.productos.TipoProducto;
 import front.inyecmotor.proveedores.Proveedor;
 import front.inyecmotor.proveedores.ProveedorCreate;
 import retrofit2.Call;
@@ -19,6 +20,7 @@ import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Header;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiService {
@@ -67,5 +69,23 @@ public interface ApiService {
 
     @POST("/auth")
     Call<Boolean> auth(@Body AuthDTO auth);
+
+    @GET("/producto/get-by-tipo/{id}")
+    Call<List<Producto>> getProductosByTipo(@Header("Authorization") String authToken, @Path("id") int tipoId);
+
+    @GET("/producto/get-by-modelo/{id}")
+    Call<List<Producto>> getProductosByModelo(@Header("Authorization") String authToken, @Path("id") int modeloId);
+
+    @GET("/producto/get-by-id/{id}")
+    Call<Producto> getProductoById(@Header("Authorization") String authToken, @Path("id") int productoId);
+
+    @GET("/tipo/get-by-id/{id}")
+    Call<TipoDTO> getTipoById(@Header("Authorization") String authToken, @Path("id") int tipoId);
+
+    @GET("/modelo/all")
+    Call<List<ModeloDTO>> getAllModelos(@Header("Authorization") String authToken);
+
+    @GET("/modelo/get-by-id/{id}")
+    Call<ModeloDTO> getModeloById(@Header("Authorization") String authToken, @Path("id") int modeloId);
 }
 

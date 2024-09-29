@@ -57,7 +57,7 @@ public class CrearProductoActivity extends AppCompatActivity {
     private List<Proveedor> selectedProductProveedores;
     private List<Modelo> selectedProductModelos;
 
-    private static final String BASE_URL = "http://192.168.56.1:8080"; // Cambia a la URL de tu servidor
+    private static final String BASE_URL = "http://192.168.0.8:8080"; // Cambia esto según tu configuración
     private ApiService apiService;
 
     @SuppressLint("MissingInflatedId")
@@ -127,6 +127,11 @@ public class CrearProductoActivity extends AppCompatActivity {
     // Método para manejar el clic del botón de regresar
     public void atrasClick(View view) {
         finish();
+    }
+
+    private void cargarTipos() {
+        String token = "Bearer " + LoginActivity.PreferenceManager.getHashedPassword(this);
+        Call<List<TipoDTO>> call = apiService.getTipos(token);
     }
 
 

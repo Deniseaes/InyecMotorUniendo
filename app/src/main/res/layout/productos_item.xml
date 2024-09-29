@@ -36,6 +36,16 @@
         app:layout_constraintTop_toBottomOf="@id/tvProductoPrecio"
         app:layout_constraintEnd_toStartOf="@+id/btnVerDetalle" />
 
+    <View
+    android:id="@+id/stockIndicator"
+    android:layout_width="16dp"
+    android:layout_height="16dp"
+    android:background="@drawable/stock_indicator"
+    app:layout_constraintStart_toEndOf="@id/tvProductoStock"
+    app:layout_constraintTop_toTopOf="@id/tvProductoStock"
+    app:layout_constraintBottom_toBottomOf="@id/tvProductoStock"
+    android:layout_marginStart="8dp"/>
+
     <Button
         android:id="@+id/btnVerDetalle"
         android:layout_width="wrap_content"
