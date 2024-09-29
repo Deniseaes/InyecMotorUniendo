@@ -2,6 +2,7 @@ package front.inyecmotor.productos;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import java.util.List;
 
 import front.inyecmotor.ApiService;
 import front.inyecmotor.R;
+import front.inyecmotor.login.LoginActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,7 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder> {
     private List<Producto> productos;
     private Context context;
-    private static final String BASE_URL = "http://192.168.0.106:8080"; // Cambia a la URL de tu servidor
+    private static final String BASE_URL = "http://192.168.0.8:8080"; // Cambia esto según tu configuración
     private static final String TAG = "ProductoAdapter"; // Tag para los logs
 
     public ProductoAdapter(List<Producto> productos, Context context) {
@@ -49,6 +51,14 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         holder.tvProductoNombre.setText(producto.getNombre());
         holder.tvProductoPrecio.setText("Precio: $" + producto.getPrecioCosto());
         holder.tvProductoStock.setText("Stock: " + producto.getStockActual());
+
+        // Set stock indicator color
+        View stockIndicator = holder.itemView.findViewById(R.id.stockIndicator);
+        if (producto.getStockActual() <= producto.getStockMin()) {
+            stockIndicator.setBackgroundResource(R.color.stock_low);
+        } else {
+            stockIndicator.setBackgroundResource(R.color.stock_normal);
+        }
 
         holder.btnVerDetalle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,8 +113,26 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         etStockMax.setText(String.valueOf(producto.getStockMax()));
         etStockMin.setText(String.valueOf(producto.getStockMin()));
 
-        builder.setPositiveButton("Guardar", (dialog, which) -> {
-            // Actualizar el objeto producto con los valores del EditText
+        Button btnDecrementStock = viewInflated.findViewById(R.id.btnDecrementStock);
+        Button btnIncrementStock = viewInflated.findViewById(R.id.btnIncrementStock);
+        Button btnSaveChanges = viewInflated.findViewById(R.id.btnSaveChanges);
+
+        AlertDialog dialog = builder.create();
+
+        btnDecrementStock.setOnClickListener(v -> {
+            int currentStock = Integer.parseInt(etStockActual.getText().toString());
+            if (currentStock > 0) {
+                etStockActual.setText(String.valueOf(currentStock - 1));
+            }
+        });
+
+        btnIncrementStock.setOnClickListener(v -> {
+            int currentStock = Integer.parseInt(etStockActual.getText().toString());
+            etStockActual.setText(String.valueOf(currentStock + 1));
+        });
+
+        btnSaveChanges.setOnClickListener(v -> {
+            // Update the product object and send to server
             producto.setNombre(etNombre.getText().toString());
             producto.setCodigo(etCodigo.getText().toString());
             producto.setPrecioCosto(Double.parseDouble(etPrecioCosto.getText().toString()));
@@ -113,26 +141,40 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
             producto.setStockMax(Integer.parseInt(etStockMax.getText().toString()));
             producto.setStockMin(Integer.parseInt(etStockMin.getText().toString()));
 
-            // Enviar los datos editados al servidor
             enviarDatosProducto(producto);
-
-            // Notificar al adaptador que los datos han cambiado
             notifyDataSetChanged();
+            dialog.dismiss();
         });
 
-        builder.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancelar", (dialogInterface, which) -> dialog.dismiss());
 
-        builder.show();
+        dialog.show();
     }
 
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+        notifyDataSetChanged();
+    }
+    
+
     private void enviarDatosProducto(Producto producto) {
+        // Obtener el token desde SharedPreferences
+        String hashedPassword = LoginActivity.PreferenceManager.getHashedPassword(context);
+        if (hashedPassword == null) {
+            Toast.makeText(context, "Hashed password no encontrada. Inicia sesión nuevamente.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         ApiService apiService = retrofit.create(ApiService.class);
-        Call<Producto> call = apiService.editarProducto(producto);
+
+        String token = "Bearer " + hashedPassword;
+        Call<Producto> call = apiService.editarProducto(token, producto);
 
         call.enqueue(new Callback<Producto>() {
             @Override

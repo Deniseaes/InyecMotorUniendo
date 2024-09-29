@@ -18,6 +18,8 @@ import java.util.List;
 
 import front.inyecmotor.ApiService;
 import front.inyecmotor.R;
+import front.inyecmotor.login.LoginActivity;
+import front.inyecmotor.proveedores.CrearProveedorActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,8 +28,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ModelosFragment extends Fragment {
 
-    private static final String BASE_URL = "http://192.168.0.106:8080"; // Cambia a la URL de tu servidor
-
+    private static final String BASE_URL = "http://192.168.0.8:8080"; // Cambia esto según tu configuración
+    private static final String TAG = "ModelosFragment"; // Tag para los logs
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,18 +44,41 @@ public class ModelosFragment extends Fragment {
                 }
             });
         }
+        Button btnCrearModelo = view.findViewById(R.id.CrearModelo);
+        btnCrearModelo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    // Crear el Intent para iniciar el Activity
+                    Intent intent = new Intent(getActivity(), CrearModeloActivity.class);
+                    startActivity(intent);
+                }catch (Exception e){Log.e("Error", "Error: " + e.getMessage());}
+
+            }
+        });
 
         return view;
     }
 
     private void fetchModelos() {
+
+        // Obtener la contraseña hasheada desde SharedPreferences
+        String hashedPassword = LoginActivity.PreferenceManager.getHashedPassword(getContext());
+
+        if (hashedPassword == null) {
+            Toast.makeText(getContext(), "Hashed password no encontrada. Inicia sesión nuevamente.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         ApiService apiService = retrofit.create(ApiService.class);
-        Call<List<Modelo>> call = apiService.getModelos();
+        String token = "Bearer " + hashedPassword;
+        Call<List<Modelo>> call = apiService.getModelos(token);
 
         call.enqueue(new Callback<List<Modelo>>() {
             @Override

@@ -6,6 +6,7 @@ import android.os.Parcelable;
 public class Modelo implements Parcelable {
     private int id;
     private String nombre;
+    private String marca;
     private double motorLitros;
     private String motorTipo;
     private int anio;
@@ -15,9 +16,10 @@ public class Modelo implements Parcelable {
     }
 
     // Constructor con parámetros
-    public Modelo(int id, String nombre, double motorLitros, String motorTipo, int anio) {
+    public Modelo(int id, String nombre, String marca, double motorLitros, String motorTipo, int anio) {
         this.id = id;
         this.nombre = nombre;
+        this.marca = marca;
         this.motorLitros = motorLitros;
         this.motorTipo = motorTipo;
         this.anio = anio;
@@ -26,6 +28,7 @@ public class Modelo implements Parcelable {
     protected Modelo(Parcel in) {
         id = in.readInt();
         nombre = in.readString();
+        marca = in.readString();
         motorLitros = in.readDouble();
         motorTipo = in.readString();
         anio = in.readInt();
@@ -59,6 +62,14 @@ public class Modelo implements Parcelable {
         this.nombre = nombre;
     }
 
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
     public double getMotorLitros() {
         return motorLitros;
     }
@@ -88,6 +99,7 @@ public class Modelo implements Parcelable {
         return "Modelo{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
+                ", marca='" + marca + '\'' +
                 ", motorLitros=" + motorLitros +
                 ", motorTipo='" + motorTipo + '\'' +
                 ", anio=" + anio +
@@ -103,6 +115,7 @@ public class Modelo implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
         dest.writeString(nombre);
+        dest.writeString(marca);
         dest.writeDouble(motorLitros);
         dest.writeString(motorTipo);
         dest.writeInt(anio);

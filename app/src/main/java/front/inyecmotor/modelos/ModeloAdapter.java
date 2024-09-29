@@ -19,6 +19,7 @@ import java.util.List;
 
 import front.inyecmotor.ApiService;
 import front.inyecmotor.R;
+import front.inyecmotor.login.LoginActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloViewHolder> {
     private List<Modelo> modelos;
     private Context context;
-    private static final String BASE_URL = "http://192.168.0.106:8080"; // Cambia a la URL de tu servidor
+    private static final String BASE_URL = "http://192.168.0.8:8080"; // Cambia esto según tu configuración
     private static final String TAG = "ModeloAdapter"; // Tag para los logs
 
     public ModeloAdapter(List<Modelo> modelos, Context context) {
@@ -116,13 +117,23 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
     }
 
     private void enviarDatosModelo(Modelo modelo) {
+
+        // Obtener el token desde SharedPreferences
+        String hashedPassword = LoginActivity.PreferenceManager.getHashedPassword(context);
+        if (hashedPassword == null) {
+            Toast.makeText(context, "Hashed password no encontrada. Inicia sesión nuevamente.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         ApiService apiService = retrofit.create(ApiService.class);
-        Call<Modelo> call = apiService.editarModelo(modelo); // Supón que tienes este endpoint
+
+        String token = "Bearer " + hashedPassword;
+        Call<Modelo> call = apiService.editarModelo(token, modelo); // Supón que tienes este endpoint
 
         call.enqueue(new Callback<Modelo>() {
             @Override
