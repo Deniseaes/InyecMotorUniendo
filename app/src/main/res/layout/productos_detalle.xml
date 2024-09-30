@@ -4,11 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
+        <TextView
+            android:id="@+id/hello_world_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detalle: "
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.185"
+            />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -90,34 +106,42 @@
                 android:layout_height="wrap_content"
                 android:text="Stock Actual: "
                 android:layout_gravity="center_vertical"/>
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnDecrementStock"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:text="-"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp"
-                app:cornerRadius="24dp"
-                app:backgroundTint="#D84315"
-                style="@style/Widget.MaterialComponents.Button"/>
+
+            <!-- Botón de decrementar (-) para Stock Actual -->
+            <Button
+                android:id="@+id/btnDecrementarStockActual"
+                style="@style/MyButtonStyle"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:textSize="14sp"
+                android:padding="0dp"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:text="-" />
+
             <EditText
                 android:id="@+id/etStockActual"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:text="5"
-                android:textAlignment="center"/>
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnIncrementStock"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:hint="Stock Actual"
+                android:inputType="number"/>
+
+            <!-- Botón de incrementar (+) para Stock Actual -->
+            <Button
+                android:id="@+id/btnIncrementarStockActual"
+                style="@style/MyButtonStyle"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:textSize="14sp"
+                android:padding="0dp"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
                 android:text="+"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp"
-                app:cornerRadius="24dp"
-                app:backgroundTint="#2E7D32"
-                style="@style/Widget.MaterialComponents.Button"/>
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -130,12 +154,42 @@
                 android:layout_height="wrap_content"
                 android:text="Stock Máximo: "
                 android:layout_gravity="center_vertical"/>
+            <!-- Botón de decrementar (-) para Stock Máximo -->
+            <Button
+                android:id="@+id/btnDecrementarStockMax"
+                style="@style/MyButtonStyle"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:textSize="14sp"
+                android:padding="0dp"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:text="-"
+                />
+
             <EditText
                 android:id="@+id/etStockMax"
-                android:layout_width="match_parent"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:hint="Stock Máximo"
                 android:inputType="number"/>
+
+            <!-- Botón de incrementar (+) para Stock Máximo -->
+            <Button
+                android:id="@+id/btnIncrementarStockMax"
+                style="@style/MyButtonStyle"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:textSize="14sp"
+                android:padding="0dp"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:text="+"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -148,22 +202,60 @@
                 android:layout_height="wrap_content"
                 android:text="Stock Mínimo: "
                 android:layout_gravity="center_vertical"/>
+            <!-- Botón de decrementar (-) para Stock Mínimo -->
+            <Button
+                android:id="@+id/btnDecrementarStockMin"
+                style="@style/MyButtonStyle"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:textSize="14sp"
+                android:padding="0dp"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:text="-"
+                />
             <EditText
                 android:id="@+id/etStockMin"
-                android:layout_width="match_parent"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:hint="Stock Mínimo"
                 android:inputType="number"/>
+            <!-- Botón de incrementar (+) para Stock Mínimo -->
+            <Button
+                android:id="@+id/btnIncrementarStockMin"
+                style="@style/MyButtonStyle"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:textSize="14sp"
+                android:padding="0dp"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:text="+"
+                />
+
         </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSaveChanges"
+
+        <!-- Tachito de Eliminar -->
+
+        <Button
+            android:id="@+id/btnEliminarProducto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Guardar Cambios"
-            app:backgroundTint="#373FF2"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"/>
+            android:layout_gravity="start"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="Eliminar producto"
+            android:drawableLeft="@android:drawable/ic_menu_delete"
+            android:drawablePadding="8dp"
+            android:padding="8dp"
+            android:text="" />
 
     </LinearLayout>
+
+
+
 </ScrollView>

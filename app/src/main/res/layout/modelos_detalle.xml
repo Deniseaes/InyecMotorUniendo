@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -10,16 +11,33 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <TextView
+            android:id="@+id/hello_world_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detalle: "
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.185"
+            />
+
+        <!-- Campo de Nombre -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="25dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nombre:"
-                android:layout_marginEnd="8dp"/>
+                android:layout_marginEnd="8dp"
+                />
             <EditText
                 android:id="@+id/etNombre"
                 android:layout_width="0dp"
@@ -28,11 +46,13 @@
                 android:hint="Nombre"/>
         </LinearLayout>
 
+        <!-- Campo de Año -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="25dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,41 +66,58 @@
                 android:hint="Año"/>
         </LinearLayout>
 
+
+
+        <!-- Campo de Motor Litros (Spinner) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="25dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Motor (L):"
                 android:layout_marginEnd="8dp"/>
-            <EditText
-                android:id="@+id/etMotorLitros"
+            <Spinner
+                android:id="@+id/spinnerMotorLitros"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Motor (L)"/>
+                android:layout_weight="1"/>
         </LinearLayout>
 
+        <!-- Campo de Tipo de Motor (Spinner) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="25dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tipo de Motor:"
                 android:layout_marginEnd="8dp"/>
-            <EditText
-                android:id="@+id/etMotorTipo"
+            <Spinner
+                android:id="@+id/spinnerMotorTipo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Tipo de Motor"/>
+                android:layout_weight="1"/>
         </LinearLayout>
 
+        <!-- Botón de Eliminar Modelo -->
+        <Button
+            android:id="@+id/btnEliminarModelo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="Eliminar modelo"
+            android:drawableLeft="@android:drawable/ic_menu_delete"
+            android:layout_marginTop="25dp"
+            android:drawablePadding="8dp"
+            android:padding="8dp"
+            android:text=""/>
     </LinearLayout>
 </ScrollView>

@@ -28,6 +28,7 @@ import java.util.List;
 
 import front.inyecmotor.ApiService;
 import front.inyecmotor.R;
+import front.inyecmotor.crearProducto.CrearProductoActivity;
 import front.inyecmotor.crearProducto.TipoDTO;
 import front.inyecmotor.login.LoginActivity;
 import front.inyecmotor.modelos.Modelo;
@@ -92,7 +93,7 @@ public class ProductosActivity extends AppCompatActivity {
     }
 
     private void setupRetrofit() {
-        String baseUrl = "http://192.168.0.8:8080"; // Asegúrate de que esta URL sea correcta
+        String baseUrl = "http://192.168.56.1:8080"; // Asegúrate de que esta URL sea correcta
         Log.d(TAG, "URL base: " + baseUrl);
         
         Retrofit retrofit = new Retrofit.Builder()
@@ -127,30 +128,53 @@ public class ProductosActivity extends AppCompatActivity {
             public void onResponse(Call<List<TipoDTO>> call, Response<List<TipoDTO>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<TipoDTO> tipos = response.body();
-                    tipos.add(0, new TipoDTO(-1, "Todos los tipos", null));
-                    TipoSpinnerAdapter adapter = new TipoSpinnerAdapter(ProductosActivity.this, tipos);
-                    spinnerProductType.setAdapter(adapter);
-    
+                    tipos.add(0, new TipoDTO(-1, "Todos los tipos", null)); // Opción para mostrar todos los productos
+
+                    // Adaptador personalizado
+                    ArrayAdapter<TipoDTO> tiposAdapter = new ArrayAdapter<TipoDTO>(ProductosActivity.this, android.R.layout.simple_spinner_item, tipos) {
+                        @Override
+                        public View getView(int position, View convertView, ViewGroup parent) {
+                            TextView label = (TextView) super.getView(position, convertView, parent);
+                            label.setText(getItem(position).getNombre()); // Mostrar nombre del tipo
+                            return label;
+                        }
+
+                        @Override
+                        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                            TextView label = (TextView) super.getDropDownView(position, convertView, parent);
+                            label.setText(getItem(position).getNombre()); // Mostrar nombre en el dropdown
+                            return label;
+                        }
+                    };
+
+                    tiposAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerProductType.setAdapter(tiposAdapter);
+
                     spinnerProductType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                             TipoDTO selectedTipo = (TipoDTO) parent.getItemAtPosition(position);
                             filterProductsByType(selectedTipo.getId());
                         }
-    
+
                         @Override
                         public void onNothingSelected(AdapterView<?> parent) {
+                            // No hacer nada si no se selecciona ningún tipo
                         }
                     });
+                } else {
+                    Toast.makeText(ProductosActivity.this, "Error al cargar tipos de productos", Toast.LENGTH_SHORT).show();
                 }
             }
-    
+
             @Override
             public void onFailure(Call<List<TipoDTO>> call, Throwable t) {
-                Toast.makeText(ProductosActivity.this, "Error al cargar tipos de productos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProductosActivity.this, "Error de conexión al cargar tipos de productos", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
+
 
     private void filterProductsByName(String query) {
         List<Producto> filteredList = new ArrayList<>();
@@ -170,26 +194,31 @@ public class ProductosActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         } else {
             Log.d(TAG, "Filtrando productos por tipo: " + tipoId);
-            apiService.getProductosByTipo(authToken, tipoId).enqueue(new Callback<List<Producto>>() {
+
+            // Convertimos tipoId a Long antes de enviarlo a la API
+            apiService.getProductosByTipo(authToken, (long) tipoId).enqueue(new Callback<List<Producto>>() {
                 @Override
                 public void onResponse(Call<List<Producto>> call, Response<List<Producto>> response) {
                     if (response.isSuccessful() && response.body() != null) {
-                        handleSuccessfulResponse(response.body());
-                    } else if (response.code() == 302 && response.errorBody() != null) {
-                        handleRedirectResponse(response.errorBody());
+                        List<Producto> productosFiltrados = response.body();
+                        Log.d(TAG, "Productos filtrados recibidos: " + productosFiltrados.size());
+                        adapter.setProductos(productosFiltrados);
+                        adapter.notifyDataSetChanged();
                     } else {
-                        handleErrorResponse(response);
+                        Log.e(TAG, "Error al filtrar productos, código: " + response.code());
+                        Toast.makeText(ProductosActivity.this, "Error al filtrar productos", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<List<Producto>> call, Throwable t) {
                     Log.e(TAG, "Error de conexión al filtrar por tipo", t);
-                    Toast.makeText(ProductosActivity.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(ProductosActivity.this, "Error de conexión", Toast.LENGTH_LONG).show();
                 }
             });
         }
     }
+
 
     private void handleSuccessfulResponse(List<Producto> productos) {
         Log.d(TAG, "Productos filtrados recibidos: " + productos.size());

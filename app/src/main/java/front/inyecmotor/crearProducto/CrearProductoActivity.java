@@ -45,7 +45,7 @@ public class CrearProductoActivity extends AppCompatActivity {
     private Button btnIncrementStockActual, btnDecrementStockActual, btnIncrementStockMax, btnDecrementStockMax, btnIncrementStockMin, btnDecrementStockMin;
     private MultiAutoCompleteTextView actvModelos;
     private Spinner spinnerTipos, spinnerProveedores;
-    private LinearLayout listaModelos, listaProveedores, listaTipos;
+    private LinearLayout listaModelos, listaProveedores ; //listaTipos
 
     // Listas de datos
     private List<Tipo> tipos;
@@ -59,7 +59,7 @@ public class CrearProductoActivity extends AppCompatActivity {
     private List<Proveedor> selectedProductProveedores;
     private List<Modelo> selectedProductModelos;
 
-    private static final String BASE_URL = "http://192.168.0.8:8080"; // Cambia esto según tu configuración
+    private static final String BASE_URL = "http://192.168.56.1:8080"; // Cambia esto según tu configuración
     private ApiService apiService;
 
     @SuppressLint("MissingInflatedId")
@@ -100,7 +100,7 @@ public class CrearProductoActivity extends AppCompatActivity {
 
         listaModelos = findViewById(R.id.listaModelos);
         listaProveedores = findViewById(R.id.listaProveedores);
-        listaTipos = findViewById(R.id.listaTipos);
+        //listaTipos = findViewById(R.id.listaTipos);
         // Listas para las selecciones
         selectedProductTipos = new ArrayList<>();
         selectedProductProveedores = new ArrayList<>();
@@ -469,10 +469,37 @@ public class CrearProductoActivity extends AppCompatActivity {
                 if (!selectedProductProveedores.contains(proveedor)) {
                     selectedProductProveedores.add(proveedor);
 
+                    // Crear un LinearLayout horizontal para la x
+                    LinearLayout layout = new LinearLayout(this);
+                    layout.setOrientation(LinearLayout.HORIZONTAL);
+
                     // Crear una vista de texto para mostrar el proveedor seleccionado
                     TextView textView = new TextView(this);
                     textView.setText(proveedor.getNombre());
-                    listaProveedores.addView(textView); // Agregar a la vista de proveedores seleccionados
+                    textView.setLayoutParams(new LinearLayout.LayoutParams(
+                            0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f));
+                    // Crear el botón "X" para eliminar el proveedor
+                    Button removeButton = new Button(this);
+                    removeButton.setText("x");
+                    // Esto es para el tamano del botón "X"
+                    LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(
+                            110, 100);
+                    removeButton.setLayoutParams(buttonParams);
+
+                    //removeButton.setTextSize(30);
+
+
+                    removeButton.setOnClickListener(v -> {
+                        selectedProductProveedores.remove(proveedor);
+                        listaProveedores.removeView(layout); // Eliminar el LinearLayout de la lista visual
+                    });
+
+                    // Añadir el TextView y el botón al LinearLayout
+                    layout.addView(textView);
+                    layout.addView(removeButton);
+
+                    // Añadir el LinearLayout a la vista de listaProveedores
+                    listaProveedores.addView(layout);
                 }
                 break;
             }
@@ -490,9 +517,9 @@ public class CrearProductoActivity extends AppCompatActivity {
                     selectedProductTipos.add(tipo);
 
                     // Crear una vista de texto para mostrar el tipo seleccionado
-                    TextView textView = new TextView(this);
+                   /* TextView textView = new TextView(this);
                     textView.setText(tipo.getNombre());
-                    listaTipos.addView(textView); // Agregar a la vista de tipos seleccionados
+                    listaTipos.addView(textView); // Agregar a la vista de tipos seleccionados*/
                 }
                 break;
             }
@@ -506,14 +533,43 @@ public class CrearProductoActivity extends AppCompatActivity {
                 if (!selectedProductModelos.contains(modelo)) {
                     selectedProductModelos.add(modelo);  // Agregar el modelo seleccionado a la lista
 
+                    // Crear un LinearLayout horizontal para el modelo y el botón "X"
+                    LinearLayout layout = new LinearLayout(this);
+                    layout.setOrientation(LinearLayout.HORIZONTAL);
+
                     // Crear una nueva vista de texto para mostrar el modelo seleccionado
                     TextView textView = new TextView(this);
                     textView.setText(modelo.getNombre());
-                    listaModelos.addView(textView); // Agregar a la vista de modelos seleccionados
+                    textView.setLayoutParams(new LinearLayout.LayoutParams(
+                            0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f));  // Ocupar espacio restante
+
+                    // Crear el botón "X" para eliminar el modelo
+                    Button removeButton = new Button(this);
+                    removeButton.setText("x");
+
+                    // Establecer los parámetros de diseño para el botón "X"
+                    LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(
+                            110, 100);  // Ancho y alto del botón
+                    removeButton.setLayoutParams(buttonParams);
+
+                    // Acción para eliminar el modelo cuando se presiona "X"
+                    removeButton.setOnClickListener(v -> {
+                        selectedProductModelos.remove(modelo);
+                        listaModelos.removeView(layout); // Eliminar el LinearLayout de la lista visual
+                    });
+
+                    // Añadir el TextView y el botón al LinearLayout
+                    layout.addView(textView);
+                    layout.addView(removeButton);
+
+                    // Añadir el LinearLayout a la vista de listaModelos
+                    listaModelos.addView(layout);
                 }
+                break;
             }
         }
     }
+
 
     @Override
     public boolean onSupportNavigateUp() {

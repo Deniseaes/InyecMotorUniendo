@@ -33,7 +33,7 @@ import android.content.SharedPreferences;
 import android.content.Context;
 
 public class LoginActivity extends AppCompatActivity {
-    private static final String BASE_URL = "http://192.168.0.8:8080"; // Cambia a la URL de tu servidor
+    private static final String BASE_URL = "http://192.168.56.1:8080"; // Cambia a la URL de tu servidor
     private EditText etPassword;
     private Button btnLogin;
 
@@ -145,7 +145,7 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
 
                     System.out.println("Respuesta error login: "+ response.body());
-                    Toast.makeText(LoginActivity.this, "Login falló", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Login falló. Contraseña inválida.", Toast.LENGTH_SHORT).show();
 
                 }
             }

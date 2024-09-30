@@ -93,5 +93,21 @@
                 android:layout_height="wrap_content"
                 android:hint="Email"/>
         </LinearLayout>
+
+        <!-- Tachito de Eliminar -->
+
+        <Button
+            android:id="@+id/btnEliminarProveedor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="Eliminar proveedor"
+            android:drawableLeft="@android:drawable/ic_menu_delete"
+            android:drawablePadding="8dp"
+            android:padding="8dp"
+            android:text="" />
+
+
     </LinearLayout>
 </ScrollView>

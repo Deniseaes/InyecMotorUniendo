@@ -1,69 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/blue_color"
+            android:elevation="4dp"
+            android:theme="?attr/actionBarTheme"
+            app:navigationIcon="@drawable/ic_back_arrow" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- ScrollView para contenido desplazable -->
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/blue_color"
-        android:elevation="4dp"
-        android:theme="?attr/actionBarTheme"
-        app:navigationIcon="@drawable/ic_back_arrow"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <TextView
-        android:id="@+id/hello_world_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Crear Proveedor"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.185" />
-
-        <EditText
-            android:id="@+id/etNombre"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre" />
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <EditText
-            android:id="@+id/etDireccion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Dirección" />
+            <TextView
+                android:id="@+id/hello_world_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Crear Proveedor"
+                android:textSize="24sp" />
 
-        <EditText
-            android:id="@+id/etCuit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="CUIT" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre: "
+                android:layout_marginTop="16dp" />
 
-        <EditText
-            android:id="@+id/etTel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Teléfono" />
+            <EditText
+                android:id="@+id/etNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombre" />
 
-        <EditText
-            android:id="@+id/etEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dirección: "
+                android:layout_marginTop="16dp" />
 
-        <Button
-            android:id="@+id/btnGuardarProveedor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Crear Proveedor" />
+            <EditText
+                android:id="@+id/etDireccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Dirección" />
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CUIT: "
+                android:layout_marginTop="16dp" />
+
+            <EditText
+                android:id="@+id/etCuit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="CUIT" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Teléfono: "
+                android:layout_marginTop="16dp" />
+
+            <EditText
+                android:id="@+id/etTel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Teléfono" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email: "
+                android:layout_marginTop="16dp" />
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email" />
+
+            <Button
+                android:id="@+id/btnGuardarProveedor"
+                style="@style/MyButtonCreateStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Crear Proveedor"
+                android:layout_marginTop="25dp" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

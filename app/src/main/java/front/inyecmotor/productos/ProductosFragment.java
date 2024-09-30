@@ -35,7 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 // de productos desde un servidor y crear un nuevo producto. Su layout XML es productos_fragment
 public class ProductosFragment extends Fragment {
 
-    private static final String BASE_URL = "http://192.168.0.8:8080"; // Cambia esto según tu configuración
+    private static final String BASE_URL = "http://192.168.56.1:8080"; // Cambia esto según tu configuración
 
     @Nullable
     @Override

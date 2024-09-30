@@ -27,7 +27,7 @@ import android.widget.Spinner;
 
 public class CrearModeloActivity extends AppCompatActivity {
 
-    private static final String BASE_URL = "http://192.168.0.8:8080"; // Cambia esto según tu configuración
+    private static final String BASE_URL = "http://192.168.56.1:8080"; // Cambia esto según tu configuración
     private ApiService apiService;
 
     private EditText etNombre;
