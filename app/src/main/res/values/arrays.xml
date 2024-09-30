@@ -14,6 +14,7 @@
 
         <item>@drawable/close_icon</item>
         <item>@drawable/box</item>
+        <item>@drawable/my_profile_icon</item>
         <item>@drawable/model_icon</item>
         <item>0</item>
         <item>@drawable/logout_icon</item>
