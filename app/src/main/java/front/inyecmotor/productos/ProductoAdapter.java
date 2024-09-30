@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,20 +53,15 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         holder.tvProductoPrecio.setText("Precio: $" + producto.getPrecioCosto());
         holder.tvProductoStock.setText("Stock: " + producto.getStockActual());
 
-        // Set stock indicator color
-        View stockIndicator = holder.itemView.findViewById(R.id.stockIndicator);
+        // Set stock indicator
+        ImageView stockIndicator = holder.itemView.findViewById(R.id.ivStockStatus);
         if (producto.getStockActual() <= producto.getStockMin()) {
-            stockIndicator.setBackgroundResource(R.color.stock_low);
+            stockIndicator.setImageResource(R.drawable.ic_red_circle);
         } else {
-            stockIndicator.setBackgroundResource(R.color.stock_normal);
+            stockIndicator.setImageResource(R.drawable.ic_green_circle);
         }
 
-        holder.btnVerDetalle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mostrarDialogoDetalle(producto);
-            }
-        });
+        holder.btnVerDetalle.setOnClickListener(v -> mostrarDialogoDetalle(producto));
     }
 
     @Override

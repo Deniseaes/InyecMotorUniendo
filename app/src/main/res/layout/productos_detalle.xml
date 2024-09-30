@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -82,38 +83,42 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingBottom="8dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Stock Actual: "
                 android:layout_gravity="center_vertical"/>
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDecrementStock"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:text="-"/>
+                android:text="-"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                app:cornerRadius="24dp"
+                app:backgroundTint="#D84315"
+                style="@style/Widget.MaterialComponents.Button"/>
             <EditText
                 android:id="@+id/etStockActual"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:inputType="number"
-                android:hint="Stock Actual"/>
-            <Button
+                android:text="5"
+                android:textAlignment="center"/>
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnIncrementStock"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:text="+"/>
+                android:text="+"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                app:cornerRadius="24dp"
+                app:backgroundTint="#2E7D32"
+                style="@style/Widget.MaterialComponents.Button"/>
         </LinearLayout>
-
-        <Button
-            android:id="@+id/btnSaveChanges"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Guardar Cambios"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -150,5 +155,15 @@
                 android:hint="Stock Mínimo"
                 android:inputType="number"/>
         </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSaveChanges"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Guardar Cambios"
+            app:backgroundTint="#373FF2"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"/>
+
     </LinearLayout>
 </ScrollView>

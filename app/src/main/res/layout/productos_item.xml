@@ -14,7 +14,7 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnVerDetalle" />
+        app:layout_constraintEnd_toStartOf="@+id/ivStockStatus" />
 
     <TextView
         android:id="@+id/tvProductoPrecio"
@@ -24,7 +24,7 @@
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvProductoNombre"
-        app:layout_constraintEnd_toStartOf="@+id/btnVerDetalle" />
+        app:layout_constraintEnd_toStartOf="@+id/ivStockStatus" />
 
     <TextView
         android:id="@+id/tvProductoStock"
@@ -34,17 +34,15 @@
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvProductoPrecio"
-        app:layout_constraintEnd_toStartOf="@+id/btnVerDetalle" />
+        app:layout_constraintEnd_toStartOf="@+id/ivStockStatus" />
 
-    <View
-    android:id="@+id/stockIndicator"
-    android:layout_width="16dp"
-    android:layout_height="16dp"
-    android:background="@drawable/stock_indicator"
-    app:layout_constraintStart_toEndOf="@id/tvProductoStock"
-    app:layout_constraintTop_toTopOf="@id/tvProductoStock"
-    app:layout_constraintBottom_toBottomOf="@id/tvProductoStock"
-    android:layout_marginStart="8dp"/>
+    <ImageView
+        android:id="@+id/ivStockStatus"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/btnVerDetalle"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="8dp"/>
 
     <Button
         android:id="@+id/btnVerDetalle"
