@@ -31,12 +31,10 @@ import front.inyecmotor.proveedores.ProveedoresFragment;
 public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnItemSelectedListener {
 
     private static final int POS_CLOSE = 0;
-    private static final int POS_MENU_PRINCIPAL = 1;
-    private static final int POS_PRODUCTOS = 2;
-    private static final int POS_PROVEEDORES = 3;
-    private static final int POS_MODELOS = 4;
-
-    private static final int POS_LOGOUT = 7;
+    private static final int POS_PRODUCTOS = 1;
+    private static final int POS_PROVEEDORES = 2;
+    private static final int POS_MODELOS = 3;
+    private static final int POS_LOGOUT = 4;
 
     private String[] screenTitles;
     private Drawable[] screenIcons;
@@ -73,8 +71,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
 
         DrawerAdapter adapter = new DrawerAdapter(Arrays.asList(   //opciones o botones del menu
                 createItemFor(POS_CLOSE),
-                createItemFor(POS_MENU_PRINCIPAL).setChecked(true),
-                createItemFor(POS_PRODUCTOS),
+                createItemFor(POS_PRODUCTOS).setChecked(true),
                 createItemFor(POS_PROVEEDORES),
                 createItemFor(POS_MODELOS),
 
@@ -88,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         list.setLayoutManager(new LinearLayoutManager(this));
         list.setAdapter(adapter);
 
-        adapter.setSelected(POS_MENU_PRINCIPAL);
+        adapter.setSelected(POS_PRODUCTOS);
     }
 
     private DrawerItem createItemFor(int position) {  //Define y personaliza los elementos individuales del menú
@@ -131,19 +128,26 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     public void onItemSelected(int position) {      //Maneja la transición y reemplazo de fragmentos en la pantalla principal según la opción seleccionada en el menú desplegable.
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-        if (position == POS_MENU_PRINCIPAL) {
-            MenuPrincipalFragment menuPrincipalFragment = new MenuPrincipalFragment();
-            transaction.replace(R.id.container, menuPrincipalFragment);
-        } else if (position == POS_PRODUCTOS) {
-            ProductosFragment productosFragment = new ProductosFragment();
-            transaction.replace(R.id.container, productosFragment);
-        } else if (position == POS_PROVEEDORES) {
-            ProveedoresFragment proveedoresFragment = new ProveedoresFragment();
-            transaction.replace(R.id.container, proveedoresFragment);
-        } else if (position == POS_MODELOS) {
-            ModelosFragment modelosFragment = new ModelosFragment();
-            transaction.replace(R.id.container, modelosFragment);
-
+        switch (position) {
+            case POS_CLOSE:
+                slidingRootNav.closeMenu();
+                return;
+            case POS_PRODUCTOS:
+                ProductosFragment productosFragment = new ProductosFragment();
+                transaction.replace(R.id.container, productosFragment);
+                break;
+            case POS_PROVEEDORES:
+                ProveedoresFragment proveedoresFragment = new ProveedoresFragment();
+                transaction.replace(R.id.container, proveedoresFragment);
+                break;
+            case POS_MODELOS:
+                ModelosFragment modelosFragment = new ModelosFragment();
+                transaction.replace(R.id.container, modelosFragment);
+                break;
+            case POS_LOGOUT:
+                // Implementar lógica de cierre de sesión aquí
+                finish();
+                return;
         }
 
         slidingRootNav.closeMenu();
