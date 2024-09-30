@@ -108,6 +108,24 @@ public class ProveedorAdapter extends RecyclerView.Adapter<ProveedorAdapter.Prov
             notifyDataSetChanged();
         });
 
+        Button btnEliminarProveedor = viewInflated.findViewById(R.id.btnEliminarProveedor);
+        btnEliminarProveedor.setOnClickListener(v -> {
+            // Mostrar un diálogo de confirmación
+            new AlertDialog.Builder(context)
+                    .setTitle("Eliminar Proveedor")
+                    .setMessage("¿Estás seguro de que deseas eliminar este proveedor?")
+                    .setPositiveButton("Sí", (dialogInterface, i) -> {
+                        // Llamada al método eliminarProveedor con el id del proveedor
+                        eliminarProveedor(proveedor.getId());
+                        dialogInterface.dismiss();
+                    })
+                    .setNegativeButton("Cancelar", null)
+                    .show();
+        });
+
+
+
+
         builder.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
 
         builder.show();
@@ -153,4 +171,46 @@ public class ProveedorAdapter extends RecyclerView.Adapter<ProveedorAdapter.Prov
             }
         });
     }
+
+    private void eliminarProveedor(int proveedorId) {
+        // Obtener el token desde SharedPreferences
+        String hashedPassword = LoginActivity.PreferenceManager.getHashedPassword(context);
+        if (hashedPassword == null) {
+            Toast.makeText(context, "Hashed password no encontrada. Inicia sesión nuevamente.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiService apiService = retrofit.create(ApiService.class);
+
+        String token = "Bearer " + hashedPassword;
+        Call<Void> call = apiService.eliminarProveedor(token, proveedorId);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(context, "Proveedor eliminado correctamente", Toast.LENGTH_SHORT).show();
+                    // Eliminar el proveedor de la lista
+                    proveedores.removeIf(proveedor -> proveedor.getId() == proveedorId);
+                    notifyDataSetChanged(); // Actualizar la lista en el RecyclerView
+                } else {
+                    Toast.makeText(context, "Error al eliminar el proveedor", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "Response Code: " + response.code());
+                    Log.d(TAG, "Response Message: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(context, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "onFailure: ", t);
+            }
+        });
+    }
+
 }

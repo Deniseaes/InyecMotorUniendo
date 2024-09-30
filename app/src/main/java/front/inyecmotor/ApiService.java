@@ -18,11 +18,14 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.DELETE;
 import retrofit2.http.Header;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiService {
+
+    //PRODUCTOS
     @GET("/producto/all") // La ruta de tu endpoint en el servidor Spring Boot
     Call<List<Producto>> getProductos(@Header("Authorization") String authToken);
 
@@ -42,8 +45,14 @@ public interface ApiService {
     @GET("/producto/get-productos-a-reponer")
     Call<List<Producto>> getProductosAReponer(@Header("Authorization") String authToken);
 
+    @DELETE("/producto/eliminar/{id}")
+    Call<Void> eliminarProducto(@Header("Authorization") String authorization, @Path("id") int id);
+
+    //TIPOS
     @GET("/tipo/all")
     Call<List<TipoDTO>> getTipos(@Header("Authorization") String authToken);
+
+    //MODELOS
 
     /* para ver las marcas*/
     @GET("/modelo/get-by-name")
@@ -64,6 +73,12 @@ public interface ApiService {
     @PATCH("/modelo/editar")
     Call<Modelo> editarModelo(@Header("Authorization") String authToken, @Body Modelo modelo);
 
+    @DELETE("/modelo/eliminar/{id}")
+    Call<Void>eliminarModelo(@Header("Authorization") String authorization, @Path("id") int id);
+
+
+    //PROVEEDOR
+
     @GET("/proveedor/all")
     Call<List<Proveedor>> getProveedores(@Header("Authorization") String authToken);
 
@@ -75,6 +90,11 @@ public interface ApiService {
 
     @PATCH("/proveedor/editar")
     Call<Proveedor> editarProveedor(@Header("Authorization") String authToken, @Body Proveedor proveedor);
+
+    @DELETE("/proveedor/eliminar/{id}")
+    Call<Void>eliminarProveedor(@Header("Authorization") String authorization, @Path("id") int id);
+
+    //AUTH
 
     @POST("/auth")
     Call<Boolean> auth(@Body AuthDTO auth);

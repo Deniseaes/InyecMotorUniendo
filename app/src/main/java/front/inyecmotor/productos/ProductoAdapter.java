@@ -174,9 +174,26 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
             notifyDataSetChanged();
         });
 
-        builder.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+        Button btnEliminarProducto = viewInflated.findViewById(R.id.btnEliminarProducto);
+        // Declara el AlertDialog
+        AlertDialog dialog = builder.create(); // Crea el diálogo
 
-        builder.show();
+        btnEliminarProducto.setOnClickListener(v -> {
+            // Mostrar un diálogo de confirmación
+            new AlertDialog.Builder(context)
+                    .setTitle("Eliminar Producto")
+                    .setMessage("¿Estás seguro de que deseas eliminar este producto?")
+                    .setPositiveButton("Sí", (dialogInterface, i) -> {
+                        eliminarProducto(producto.getId());
+                        dialog.dismiss(); // Cierra el diálogo de detalles
+                    })
+                    .setNegativeButton("Cancelar", null)
+                    .show();
+        });
+
+        builder.setNegativeButton("Cancelar", (dialogInterface, which) -> dialogInterface.cancel());
+
+        dialog.show(); // Muestra el diálogo y asigna el AlertDialog
     }
 
     private void enviarDatosProducto(Producto producto) {
@@ -219,6 +236,46 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
 
             @Override
             public void onFailure(Call<Producto> call, Throwable t) {
+                Toast.makeText(context, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "onFailure: ", t);
+            }
+        });
+    }
+
+    private void eliminarProducto(int productoId) {
+        // Obtener el token desde SharedPreferences
+        String hashedPassword = LoginActivity.PreferenceManager.getHashedPassword(context);
+        if (hashedPassword == null) {
+            Toast.makeText(context, "Hashed password no encontrada. Inicia sesión nuevamente.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiService apiService = retrofit.create(ApiService.class);
+
+        String token = "Bearer " + hashedPassword;
+        Call<Void> call = apiService.eliminarProducto(token, productoId);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(context, "Producto eliminado correctamente", Toast.LENGTH_SHORT).show();
+                    productos.removeIf(producto -> producto.getId()==productoId);
+                    notifyDataSetChanged(); // Actualizar la lista
+                } else {
+                    Toast.makeText(context, "Error al eliminar el producto", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "Response Code: " + response.code());
+                    Log.d(TAG, "Response Message: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
                 Toast.makeText(context, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.e(TAG, "onFailure: ", t);
             }

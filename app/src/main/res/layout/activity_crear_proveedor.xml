@@ -30,29 +30,55 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.185" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre: "
+            android:layout_gravity="center_vertical"/>
+
         <EditText
             android:id="@+id/etNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nombre" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dirección: "
+            android:layout_gravity="center_vertical"/>
 
         <EditText
             android:id="@+id/etDireccion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Dirección" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CUIT: "
+        android:layout_gravity="center_vertical"/>
 
         <EditText
             android:id="@+id/etCuit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="CUIT" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Teléfono: "
+        android:layout_gravity="center_vertical"/>
 
         <EditText
             android:id="@+id/etTel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Teléfono" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email: "
+        android:layout_gravity="center_vertical"/>
 
         <EditText
             android:id="@+id/etEmail"
@@ -60,10 +86,11 @@
             android:layout_height="wrap_content"
             android:hint="Email" />
 
-        <Button
-            android:id="@+id/btnGuardarProveedor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Crear Proveedor" />
+    <Button
+        android:id="@+id/btnGuardarProveedor"
+        style="@style/MyButtonCreateStyle"
+        android:layout_width="378dp"
+        android:layout_height="wrap_content"
+        android:text="Crear Proveedor" />
 
-    </LinearLayout>
+</LinearLayout>

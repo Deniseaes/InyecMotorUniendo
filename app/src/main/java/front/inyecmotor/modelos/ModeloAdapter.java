@@ -111,6 +111,22 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
             }
         });
 
+        Button btnEliminarModelo = viewInflated.findViewById(R.id.btnEliminarModelo);
+        btnEliminarModelo.setOnClickListener(v -> {
+            // Mostrar un diálogo de confirmación
+            new AlertDialog.Builder(context)
+                    .setTitle("Eliminar Modelo")
+                    .setMessage("¿Estás seguro de que deseas eliminar este modelo?")
+                    .setPositiveButton("Sí", (dialogInterface, i) -> {
+                        // Llamada al método eliminarModelo con el id del modelo
+                        eliminarModelo(modelo.getId());
+                        dialogInterface.dismiss();
+                    })
+                    .setNegativeButton("Cancelar", null)
+                    .show();
+        });
+
+
         builder.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
 
         builder.show();
@@ -161,5 +177,46 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
             }
         });
     }
+
+    private void eliminarModelo(int modeloId) {
+        // Obtener el token desde SharedPreferences
+        String hashedPassword = LoginActivity.PreferenceManager.getHashedPassword(context);
+        if (hashedPassword == null) {
+            Toast.makeText(context, "Hashed password no encontrada. Inicia sesión nuevamente.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiService apiService = retrofit.create(ApiService.class);
+
+        String token = "Bearer " + hashedPassword;
+        Call<Void> call = apiService.eliminarModelo(token, modeloId);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(context, "Modelo eliminado correctamente", Toast.LENGTH_SHORT).show();
+                    modelos.removeIf(modelo -> modelo.getId() == modeloId); // Eliminar el modelo de la lista
+                    notifyDataSetChanged(); // Actualizar la lista en el RecyclerView
+                } else {
+                    Toast.makeText(context, "Error al eliminar el modelo", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "Response Code: " + response.code());
+                    Log.d(TAG, "Response Message: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(context, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "onFailure: ", t);
+            }
+        });
+    }
+
 }
 

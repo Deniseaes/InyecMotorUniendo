@@ -30,11 +30,23 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.185" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre: "
+        android:layout_gravity="center_vertical"/>
+
     <EditText
         android:id="@+id/etNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nombre" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seleccione la Marca: "
+        android:layout_gravity="center_vertical"/>
 
     <Spinner
         android:id="@+id/spinnerMarca"
@@ -43,6 +55,12 @@
         android:textSize="18sp"
         android:hint="Marca" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seleccione Litros de Motor: "
+        android:layout_gravity="center_vertical"/>
+
     <Spinner
         android:id="@+id/spinnerMotorLitros"
         android:layout_width="match_parent"
@@ -50,12 +68,24 @@
         android:textSize="18sp"
         android:hint="Motor Litros" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seleccione Tipo de Motor: "
+        android:layout_gravity="center_vertical"/>
+
     <Spinner
         android:id="@+id/spinnerMotorTipo"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:textSize="18sp"
         android:hint="Motor Tipo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Año del vehículo: "
+        android:layout_gravity="center_vertical"/>
 
     <EditText
         android:id="@+id/etAnio"
@@ -65,8 +95,9 @@
 
     <Button
         android:id="@+id/btnGuardarModelo"
-        android:layout_width="wrap_content"
+        android:layout_width="364dp"
         android:layout_height="wrap_content"
-        android:text="Crear Vehiculo" />
+        style="@style/MyButtonCreateStyle"
+        android:text="Crear Vehículo" />
 
 </LinearLayout>

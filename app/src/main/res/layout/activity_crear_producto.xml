@@ -1,201 +1,308 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-
-    <!-- Campo para el código del producto -->
-
-    <!-- Campo para el nombre del producto -->
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/blue_color"
-        android:elevation="4dp"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_back_arrow" />
-
-    <TextView
-        android:id="@+id/hello_world_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Crear Producto"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.185" />
-
-    <EditText
-        android:id="@+id/etCodigo"
+    <!-- AppBarLayout para la Toolbar fija -->
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Código"
-        android:inputType="text" />
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    <EditText
-        android:id="@+id/etNombre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nombre"
-        android:inputType="text" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/blue_color"
+            android:elevation="4dp"
+            android:theme="?attr/actionBarTheme"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:navigationIcon="@drawable/ic_back_arrow" />
 
-    <!-- Campo para el precio costo -->
-    <EditText
-        android:id="@+id/etPrecioCosto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Precio Costo"
-        android:inputType="numberDecimal" />
-
-    <!-- Campo para el precio venta -->
-    <EditText
-        android:id="@+id/etPrecioVenta"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Precio Venta"
-        android:inputType="numberDecimal" />
-
-    <!-- Spinner de tipos  -->
-   <Spinner
-        android:id="@+id/spinnerTipos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-       android:hint="Seleccione Tipo de Producto"/>
-    <!-- Lista de tipos seleccionados -->
-    <LinearLayout
-        android:id="@+id/listaTipos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"/>
-
-    <!-- Selector múltiple para los proveedores -->
-    <Spinner
-        android:id="@+id/spinnerProveedores"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Seleccione Proveedores" />
-    <!-- Lista de proveedores seleccionados -->
-    <LinearLayout
-        android:id="@+id/listaProveedores"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"/>
-
-
-      <!-- Selector múltiple para los modelos -->
-    <MultiAutoCompleteTextView
-        android:id="@+id/actvModelos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Seleccione Modelos" />
-    <!-- Lista de modelos seleccionados -->
-    <LinearLayout
-        android:id="@+id/listaModelos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"/>
-
-
-    <!-- Campo para el stock actual con botones de incrementar y decrementar -->
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/btnDecrementStockActual"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/hello_world_textview"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="-" />
+            android:padding="16dp"
+            android:text="Crear Producto"
+            android:textSize="24sp"
+            android:gravity="center_vertical"
+            android:background="@color/white"
+            android:textColor="@color/black" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-        <EditText
-            android:id="@+id/etStockActual"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:hint="Stock Actual"
-            android:inputType="number" />
-
-        <Button
-            android:id="@+id/btnIncrementStockActual"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+" />
-    </LinearLayout>
-
-    <!-- Campo para el stock máximo con botones de incrementar y decrementar -->
-    <LinearLayout
-        android:orientation="horizontal"
+    <!-- Contenedor para el contenido desplazable -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <Button
-            android:id="@+id/btnDecrementStockMax"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="-" />
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <EditText
-            android:id="@+id/etStockMax"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:hint="Stock Máximo"
-            android:inputType="number" />
+            <!-- Todo el contenido desplazable se coloca aquí -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Código: "
+                android:layout_gravity="center_vertical"/>
 
-        <Button
-            android:id="@+id/btnIncrementStockMax"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+" />
-    </LinearLayout>
+            <EditText
+                android:id="@+id/etCodigo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Código"
+                android:inputType="text" />
 
-    <!-- Campo para el stock mínimo con botones de incrementar y decrementar -->
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre: "
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="16dp"/>
 
-        <Button
-            android:id="@+id/btnDecrementStockMin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-" />
+            <EditText
+                android:id="@+id/etNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombre"
+                android:inputType="text" />
 
-        <EditText
-            android:id="@+id/etStockMin"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:hint="Stock Mínimo"
-            android:inputType="number" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Precio Costo: "
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="16dp"/>
 
-        <Button
-            android:id="@+id/btnIncrementStockMin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+" />
-    </LinearLayout>
+            <EditText
+                android:id="@+id/etPrecioCosto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Precio Costo"
+                android:inputType="numberDecimal"
+                />
 
-    <!-- Botón para crear producto -->
-    <Button
-        android:id="@+id/btnCrearProducto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Crear Producto"
-        android:layout_marginTop="16dp"
-        style="@style/MyButtonCreateStyle" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Precio Venta: "
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="16dp"/>
 
+            <EditText
+                android:id="@+id/etPrecioVenta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Precio Venta"
+                android:inputType="numberDecimal" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tipo de Producto: "
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="16dp"/>
 
-</LinearLayout>
+            <Spinner
+                android:id="@+id/spinnerTipos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Seleccione Tipo de Producto"/>
+
+           <!-- <LinearLayout
+                android:id="@+id/listaTipos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/> -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seleccione Proveedor: "
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="20dp"/>
+
+            <Spinner
+                android:id="@+id/spinnerProveedores"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Seleccione Proveedores" />
+
+            <LinearLayout
+                android:id="@+id/listaProveedores"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seleccione Modelos: "
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="20dp"/>
+
+            <MultiAutoCompleteTextView
+                android:id="@+id/actvModelos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Escriba el Modelo" />
+
+            <LinearLayout
+                android:id="@+id/listaModelos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Stock Actual: "
+                    android:layout_gravity="center_vertical"
+                    />
+
+                <Button
+                    android:id="@+id/btnDecrementStockActual"
+                    style="@style/MyButtonStyle"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="14sp"
+                    android:padding="0dp"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:text="-" />
+
+                <EditText
+                    android:id="@+id/etStockActual"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Stock Actual"
+                    android:inputType="number" />
+
+                <Button
+                    android:id="@+id/btnIncrementStockActual"
+                    style="@style/MyButtonStyle"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="14sp"
+                    android:padding="0dp"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:text="+" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Stock Máximo: "
+                    android:layout_gravity="center_vertical"/>
+
+                <Button
+                    android:id="@+id/btnDecrementStockMax"
+                    style="@style/MyButtonStyle"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="14sp"
+                    android:padding="0dp"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:text="-" />
+
+                <EditText
+                    android:id="@+id/etStockMax"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Stock Máximo"
+                    android:inputType="number" />
+
+                <Button
+                    android:id="@+id/btnIncrementStockMax"
+                    style="@style/MyButtonStyle"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="14sp"
+                    android:padding="0dp"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:text="+" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Stock Mínimo: "
+                    android:layout_gravity="center_vertical"/>
+
+                <Button
+                    android:id="@+id/btnDecrementStockMin"
+                    style="@style/MyButtonStyle"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="14sp"
+                    android:padding="0dp"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:text="-" />
+
+                <EditText
+                    android:id="@+id/etStockMin"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Stock Mínimo"
+                    android:inputType="number" />
+
+                <Button
+                    android:id="@+id/btnIncrementStockMin"
+                    style="@style/MyButtonStyle"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="14sp"
+                    android:padding="0dp"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:text="+" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnCrearProducto"
+                style="@style/MyButtonCreateStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="Crear Producto"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
