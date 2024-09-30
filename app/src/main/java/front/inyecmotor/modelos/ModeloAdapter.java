@@ -6,8 +6,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -83,22 +85,46 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
 
         EditText etNombre = viewInflated.findViewById(R.id.etNombre);
         EditText etAnio = viewInflated.findViewById(R.id.etAnio);
-        EditText etMotorLitros = viewInflated.findViewById(R.id.etMotorLitros);
-        EditText etMotorTipo = viewInflated.findViewById(R.id.etMotorTipo);
+
+        Spinner spinnerMotorLitros = viewInflated.findViewById(R.id.spinnerMotorLitros);
+        Spinner spinnerMotorTipo = viewInflated.findViewById(R.id.spinnerMotorTipo);
 
         // Setear valores iniciales del modelo
         etNombre.setText(modelo.getNombre());
         etAnio.setText(String.valueOf(modelo.getAnio()));
-        etMotorLitros.setText(String.valueOf(modelo.getMotorLitros()));
-        etMotorTipo.setText(modelo.getMotorTipo());
+
+        // Configurar adaptadores para los spinners
+
+        ArrayAdapter<CharSequence> motorLitrosAdapter = ArrayAdapter.createFromResource(context,
+                R.array.motor_litros_array, android.R.layout.simple_spinner_item);
+        motorLitrosAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerMotorLitros.setAdapter(motorLitrosAdapter);
+
+        ArrayAdapter<CharSequence> motorTipoAdapter = ArrayAdapter.createFromResource(context,
+                R.array.motor_tipo_array, android.R.layout.simple_spinner_item);
+        motorTipoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerMotorTipo.setAdapter(motorTipoAdapter);
+
+        // Seleccionar los valores actuales del modelo en los spinners
+        setSpinnerValue(spinnerMotorLitros, String.valueOf(modelo.getMotorLitros()));
+        setSpinnerValue(spinnerMotorTipo, modelo.getMotorTipo());
 
         builder.setPositiveButton("Guardar", (dialog, which) -> {
             try {
-                // Actualizar el objeto modelo con los valores del EditText
+                // Validar y convertir el año a int
+                String anioString = etAnio.getText().toString();
+                int anio = Integer.parseInt(anioString);
+
+                // Validar y convertir el motor litros a double
+                String motorLitrosString = spinnerMotorLitros.getSelectedItem().toString();
+                double motorLitros = Double.parseDouble(motorLitrosString);
+
+
+                // Actualizar el objeto modelo con los valores seleccionados
                 modelo.setNombre(etNombre.getText().toString());
-                modelo.setAnio(Integer.parseInt(etAnio.getText().toString()));
-                modelo.setMotorLitros(Double.parseDouble(etMotorLitros.getText().toString()));
-                modelo.setMotorTipo(etMotorTipo.getText().toString());
+                modelo.setAnio(anio);
+                modelo.setMotorLitros(motorLitros);
+                modelo.setMotorTipo(spinnerMotorTipo.getSelectedItem().toString());
 
                 // Enviar los datos editados al servidor
                 enviarDatosModelo(modelo);
@@ -110,6 +136,22 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
                 Log.e(TAG, "Error al convertir datos: ", e);
             }
         });
+
+        Button btnEliminarModelo = viewInflated.findViewById(R.id.btnEliminarModelo);
+        btnEliminarModelo.setOnClickListener(v -> {
+            // Mostrar un diálogo de confirmación
+            new AlertDialog.Builder(context)
+                    .setTitle("Eliminar Modelo")
+                    .setMessage("¿Estás seguro de que deseas eliminar este modelo?")
+                    .setPositiveButton("Sí", (dialogInterface, i) -> {
+                        // Llamada al método eliminarModelo con el id del modelo
+                        eliminarModelo(modelo.getId());
+                        dialogInterface.dismiss();
+                    })
+                    .setNegativeButton("Cancelar", null)
+                    .show();
+        });
+
 
         builder.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
 
@@ -133,7 +175,7 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
         ApiService apiService = retrofit.create(ApiService.class);
 
         String token = "Bearer " + hashedPassword;
-        Call<Modelo> call = apiService.editarModelo(token, modelo); // Supón que tienes este endpoint
+        Call<Modelo> call = apiService.editarModelo(token, modelo);
 
         call.enqueue(new Callback<Modelo>() {
             @Override
@@ -161,4 +203,56 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
             }
         });
     }
+
+    private void eliminarModelo(int modeloId) {
+        // Obtener el token desde SharedPreferences
+        String hashedPassword = LoginActivity.PreferenceManager.getHashedPassword(context);
+        if (hashedPassword == null) {
+            Toast.makeText(context, "Hashed password no encontrada. Inicia sesión nuevamente.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiService apiService = retrofit.create(ApiService.class);
+
+        String token = "Bearer " + hashedPassword;
+        Call<Void> call = apiService.eliminarModelo(token, modeloId);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(context, "Modelo eliminado correctamente", Toast.LENGTH_SHORT).show();
+                    modelos.removeIf(modelo -> modelo.getId() == modeloId); // Eliminar el modelo de la lista
+                    notifyDataSetChanged(); // Actualizar la lista en el RecyclerView
+                } else {
+                    Toast.makeText(context, "Error al eliminar el modelo", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "Response Code: " + response.code());
+                    Log.d(TAG, "Response Message: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(context, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "onFailure: ", t);
+            }
+        });
+    }
+
+    private void setSpinnerValue(Spinner spinner, String value) {
+        ArrayAdapter<CharSequence> adapter = (ArrayAdapter<CharSequence>) spinner.getAdapter();
+        for (int i = 0; i < adapter.getCount(); i++) {
+            if (adapter.getItem(i).toString().equals(value)) {
+                spinner.setSelection(i);
+                break;
+            }
+        }
+    }
+
 }
+

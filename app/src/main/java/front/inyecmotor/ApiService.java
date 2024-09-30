@@ -11,6 +11,7 @@ import front.inyecmotor.login.AuthDTO;
 import front.inyecmotor.modelos.Modelo;
 import front.inyecmotor.modelos.ModeloCreate;
 import front.inyecmotor.productos.Producto;
+import front.inyecmotor.productos.TipoProducto;
 import front.inyecmotor.proveedores.Proveedor;
 import front.inyecmotor.proveedores.ProveedorCreate;
 import retrofit2.Call;
@@ -22,6 +23,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.Header;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import okhttp3.ResponseBody;
 
 public interface ApiService {
 
@@ -40,7 +42,7 @@ public interface ApiService {
     Call<List<Producto>> getProductosByModelo(@Header("Authorization") String token, @Path("idModelo") String idModelo);
 
     @GET("/producto/get-by-tipo/{idTipo}")
-    Call<List<Producto>> getProductosByTipo(@Header("Authorization") String token, @Path("idTipo") String tipo);
+    Call<List<Producto>> getProductosByTipo(@Header("Authorization") String token, @Path("idTipo") Long tipo);
 
     @GET("/producto/get-productos-a-reponer")
     Call<List<Producto>> getProductosAReponer(@Header("Authorization") String authToken);
@@ -99,7 +101,29 @@ public interface ApiService {
     @POST("/auth")
     Call<Boolean> auth(@Body AuthDTO auth);
 
+    @GET("/producto/get-by-tipo/{id}")
+    Call<List<Producto>> getProductosByTipo(@Header("Authorization") String authToken, @Path("id") int tipoId);
 
 
+
+    @GET("/producto/get-by-id/{id}")
+    Call<Producto> getProductoById(@Header("Authorization") String authToken, @Path("id") int productoId);
+
+    @GET("/tipo/get-by-id/{id}")
+    Call<TipoDTO> getTipoById(@Header("Authorization") String authToken, @Path("id") int tipoId);
+
+
+    @GET("/modelo/get-by-id/{id}")
+    Call<ModeloDTO> getModeloById(@Header("Authorization") String authToken, @Path("id") int modeloId);
+
+    @GET("modelo/suggestions")
+Call<List<String>> getModeloSuggestions(@Header("Authorization") String authToken, @Query("query") String query);
+
+
+@GET("modelo/all")
+Call<List<Modelo>> getAllModelos(@Header("Authorization") String authToken);
+
+@GET("producto/get-by-modelo/{id}")
+Call<ResponseBody> getProductosByModelo(@Header("Authorization") String authToken, @Path("id") int modeloId);
 }
 

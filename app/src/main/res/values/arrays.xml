@@ -2,25 +2,20 @@
 <resources>
     <string-array name="id_activityScreenTitles">
 
-        <item> </item>
-        <item>Menú Principal</item>
+        <item>Cerrar</item>
         <item>Productos</item>
         <item>Proveedores</item>
         <item>Modelos</item>
-        <item>Marcas</item>
-        <item/>
-        <item> Cerrar sesión </item>
+        <item></item>
 
     </string-array>
 
     <array name="id_activityScreenIcons">
 
         <item>@drawable/close_icon</item>
-        <item>@drawable/home_icon</item>
         <item>@drawable/box</item>
         <item>@drawable/my_profile_icon</item>
         <item>@drawable/model_icon</item>
-        <item>@drawable/chevrolet</item>
         <item>0</item>
         <item>@drawable/logout_icon</item>
 

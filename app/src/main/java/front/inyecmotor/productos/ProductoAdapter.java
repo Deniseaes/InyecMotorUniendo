@@ -1,14 +1,15 @@
-
 package front.inyecmotor.productos;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,16 +28,10 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-
-//ProductoAdapter: Controla la lista de productos y gestiona la interacción del usuario con los datos de los productos.
-//ProductoViewHolder: Define las vistas específicas para cada producto (nombre, precio, stock y botón de detalles).
-//mostrarDialogoDetalle: Muestra un diálogo con los detalles del producto para su edición.
-//enviarDatosProducto: Envia los cambios al servidor mediante una API REST.
 public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder> {
-
     private List<Producto> productos;
     private Context context;
-    private static final String BASE_URL = "http://192.168.56.1:8080"; // Cambia a la URL de tu servidor CON EL PUERTO
+    private static final String BASE_URL = "http://192.168.56.1:8080"; // Cambia esto según tu configuración
     private static final String TAG = "ProductoAdapter"; // Tag para los logs
 
     public ProductoAdapter(List<Producto> productos, Context context) {
@@ -55,15 +50,18 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
     public void onBindViewHolder(@NonNull ProductoViewHolder holder, int position) {
         Producto producto = productos.get(position);
         holder.tvProductoNombre.setText(producto.getNombre());
-        holder.tvProductoPrecio.setText("Precio: $" + producto.getPrecioVenta());
+        holder.tvProductoPrecio.setText("Precio: $" + producto.getPrecioCosto());
         holder.tvProductoStock.setText("Stock: " + producto.getStockActual());
 
-        holder.btnVerDetalle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mostrarDialogoDetalle(producto);
-            }
-        });
+        // Set stock indicator
+        ImageView stockIndicator = holder.itemView.findViewById(R.id.ivStockStatus);
+        if (producto.getStockActual() <= producto.getStockMin()) {
+            stockIndicator.setImageResource(R.drawable.ic_red_circle);
+        } else {
+            stockIndicator.setImageResource(R.drawable.ic_green_circle);
+        }
+
+        holder.btnVerDetalle.setOnClickListener(v -> mostrarDialogoDetalle(producto));
     }
 
     @Override
@@ -88,12 +86,15 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
     }
 
     private void mostrarDialogoDetalle(Producto producto) {
+        // Crear el constructor del diálogo
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Detalles del Producto");
 
+        // Inflar la vista personalizada
         View viewInflated = LayoutInflater.from(context).inflate(R.layout.productos_detalle, null);
         builder.setView(viewInflated);
 
+        // Referencias a los EditTexts y botones
         EditText etNombre = viewInflated.findViewById(R.id.etNombre);
         EditText etCodigo = viewInflated.findViewById(R.id.etCodigo);
         EditText etPrecioCosto = viewInflated.findViewById(R.id.etPrecioCosto);
@@ -102,18 +103,13 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         EditText etStockMax = viewInflated.findViewById(R.id.etStockMax);
         EditText etStockMin = viewInflated.findViewById(R.id.etStockMin);
 
-
-        // Botones de incrementar y decrementar para StockActual
         Button btnIncrementarStockActual = viewInflated.findViewById(R.id.btnIncrementarStockActual);
         Button btnDecrementarStockActual = viewInflated.findViewById(R.id.btnDecrementarStockActual);
-
-        // Botones de incrementar y decrementar para StockMax
         Button btnIncrementarStockMax = viewInflated.findViewById(R.id.btnIncrementarStockMax);
         Button btnDecrementarStockMax = viewInflated.findViewById(R.id.btnDecrementarStockMax);
-
-        // Botones de incrementar y decrementar para StockMin
         Button btnIncrementarStockMin = viewInflated.findViewById(R.id.btnIncrementarStockMin);
         Button btnDecrementarStockMin = viewInflated.findViewById(R.id.btnDecrementarStockMin);
+        Button btnEliminarProducto = viewInflated.findViewById(R.id.btnEliminarProducto);
 
         // Setear valores iniciales del producto
         etNombre.setText(producto.getNombre());
@@ -124,7 +120,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         etStockMax.setText(String.valueOf(producto.getStockMax()));
         etStockMin.setText(String.valueOf(producto.getStockMin()));
 
-        // Lógica para incrementar/decrementar StockActual
+        // Lógica para incrementar y decrementar StockActual
         btnIncrementarStockActual.setOnClickListener(v -> {
             int stockActual = Integer.parseInt(etStockActual.getText().toString());
             etStockActual.setText(String.valueOf(++stockActual));
@@ -135,7 +131,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
             if (stockActual > 0) etStockActual.setText(String.valueOf(--stockActual));
         });
 
-        // Lógica para incrementar/decrementar StockMax
+        // Lógica para incrementar y decrementar StockMax
         btnIncrementarStockMax.setOnClickListener(v -> {
             int stockMax = Integer.parseInt(etStockMax.getText().toString());
             etStockMax.setText(String.valueOf(++stockMax));
@@ -146,7 +142,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
             if (stockMax > 0) etStockMax.setText(String.valueOf(--stockMax));
         });
 
-        // Lógica para incrementar/decrementar StockMin
+        // Lógica para incrementar y decrementar StockMin
         btnIncrementarStockMin.setOnClickListener(v -> {
             int stockMin = Integer.parseInt(etStockMin.getText().toString());
             etStockMin.setText(String.valueOf(++stockMin));
@@ -157,6 +153,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
             if (stockMin > 0) etStockMin.setText(String.valueOf(--stockMin));
         });
 
+        // Botón de guardar cambios
         builder.setPositiveButton("Guardar", (dialog, which) -> {
             // Actualizar el objeto producto con los valores del EditText
             producto.setNombre(etNombre.getText().toString());
@@ -174,10 +171,16 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
             notifyDataSetChanged();
         });
 
-        Button btnEliminarProducto = viewInflated.findViewById(R.id.btnEliminarProducto);
-        // Declara el AlertDialog
-        AlertDialog dialog = builder.create(); // Crea el diálogo
+        // Botón de cancelar
+        builder.setNegativeButton("Cancelar", (dialogInterface, which) -> {
+            dialogInterface.cancel();
+        });
 
+        // Crear y mostrar el diálogo
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        // Botón eliminar producto
         btnEliminarProducto.setOnClickListener(v -> {
             // Mostrar un diálogo de confirmación
             new AlertDialog.Builder(context)
@@ -185,16 +188,19 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
                     .setMessage("¿Estás seguro de que deseas eliminar este producto?")
                     .setPositiveButton("Sí", (dialogInterface, i) -> {
                         eliminarProducto(producto.getId());
-                        dialog.dismiss(); // Cierra el diálogo de detalles
+                        dialog.dismiss(); // Cerrar el diálogo de detalles
                     })
                     .setNegativeButton("Cancelar", null)
                     .show();
         });
-
-        builder.setNegativeButton("Cancelar", (dialogInterface, which) -> dialogInterface.cancel());
-
-        dialog.show(); // Muestra el diálogo y asigna el AlertDialog
     }
+
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+        notifyDataSetChanged();
+    }
+    
 
     private void enviarDatosProducto(Producto producto) {
         // Obtener el token desde SharedPreferences

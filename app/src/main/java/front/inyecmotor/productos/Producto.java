@@ -12,13 +12,14 @@ public class Producto implements Parcelable {
     private int stockActual;
     private int stockMax;
     private int stockMin;
+    private int tipoId; // Nuevo campo para el ID del tipo de producto
 
     // Constructor vacío (puede ser útil para algunas operaciones)
     public Producto() {
     }
 
     // Constructor con parámetros para inicializar todos los campos
-    public Producto(int id, String codigo, String nombre, double precioCosto, double precioVenta, int stockActual, int stockMax, int stockMin) {
+    public Producto(int id, String codigo, String nombre, double precioCosto, double precioVenta, int stockActual, int stockMax, int stockMin, int tipoId) {
         this.id = id;
         this.codigo = codigo;
         this.nombre = nombre;
@@ -27,6 +28,7 @@ public class Producto implements Parcelable {
         this.stockActual = stockActual;
         this.stockMax = stockMax;
         this.stockMin = stockMin;
+        this.tipoId = tipoId;
     }
 
     // Constructor para Parcel
@@ -39,6 +41,7 @@ public class Producto implements Parcelable {
         stockActual = in.readInt();
         stockMax = in.readInt();
         stockMin = in.readInt();
+        tipoId = in.readInt();
     }
 
     // Getters y setters para todos los campos
@@ -106,6 +109,14 @@ public class Producto implements Parcelable {
         this.stockMin = stockMin;
     }
 
+    public int getTipoId() {
+        return tipoId;
+    }
+
+    public void setTipoId(int tipoId) {
+        this.tipoId = tipoId;
+    }
+
     // Otros getters y setters si es necesario para otros campos
 
     @Override
@@ -119,6 +130,7 @@ public class Producto implements Parcelable {
                 ", stockActual=" + stockActual +
                 ", stockMax=" + stockMax +
                 ", stockMin=" + stockMin +
+                ", tipoId=" + tipoId +
                 '}';
     }
 
@@ -138,6 +150,7 @@ public class Producto implements Parcelable {
         parcel.writeInt(stockActual);
         parcel.writeInt(stockMax);
         parcel.writeInt(stockMin);
+        parcel.writeInt(tipoId);
     }
 
     public static final Creator<Producto> CREATOR = new Creator<Producto>() {
