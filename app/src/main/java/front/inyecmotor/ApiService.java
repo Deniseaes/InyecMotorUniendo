@@ -22,6 +22,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Header;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import okhttp3.ResponseBody;
 
 public interface ApiService {
     @GET("/producto/all") // La ruta de tu endpoint en el servidor Spring Boot
@@ -73,8 +74,7 @@ public interface ApiService {
     @GET("/producto/get-by-tipo/{id}")
     Call<List<Producto>> getProductosByTipo(@Header("Authorization") String authToken, @Path("id") int tipoId);
 
-    @GET("/producto/get-by-modelo/{id}")
-    Call<List<Producto>> getProductosByModelo(@Header("Authorization") String authToken, @Path("id") int modeloId);
+
 
     @GET("/producto/get-by-id/{id}")
     Call<Producto> getProductoById(@Header("Authorization") String authToken, @Path("id") int productoId);
@@ -82,10 +82,18 @@ public interface ApiService {
     @GET("/tipo/get-by-id/{id}")
     Call<TipoDTO> getTipoById(@Header("Authorization") String authToken, @Path("id") int tipoId);
 
-    @GET("/modelo/all")
-    Call<List<ModeloDTO>> getAllModelos(@Header("Authorization") String authToken);
 
     @GET("/modelo/get-by-id/{id}")
     Call<ModeloDTO> getModeloById(@Header("Authorization") String authToken, @Path("id") int modeloId);
+
+    @GET("modelo/suggestions")
+Call<List<String>> getModeloSuggestions(@Header("Authorization") String authToken, @Query("query") String query);
+
+
+@GET("modelo/all")
+Call<List<Modelo>> getAllModelos(@Header("Authorization") String authToken);
+
+@GET("producto/get-by-modelo/{id}")
+Call<ResponseBody> getProductosByModelo(@Header("Authorization") String authToken, @Path("id") int modeloId);
 }
 
