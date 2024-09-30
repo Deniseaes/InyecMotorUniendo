@@ -26,14 +26,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
-            <!-- Aquí puedes agregar tu "Hola Mundo" -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Aqui estaria la barrita de busqueda de un producto!"
-                android:textSize="24sp" />
-
         </FrameLayout>
     </LinearLayout>
 
