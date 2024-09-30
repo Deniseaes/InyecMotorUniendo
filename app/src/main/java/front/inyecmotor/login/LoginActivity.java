@@ -145,7 +145,7 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
 
                     System.out.println("Respuesta error login: "+ response.body());
-                    Toast.makeText(LoginActivity.this, "Login falló", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Login falló. Contraseña inválida.", Toast.LENGTH_SHORT).show();
 
                 }
             }
