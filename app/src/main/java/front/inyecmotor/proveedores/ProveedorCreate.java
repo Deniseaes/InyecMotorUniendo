@@ -9,14 +9,14 @@ public class ProveedorCreate {
 
     private String direccion;
 
-    private int cuit;
+    private String cuit;
 
-    private int tel;
+    private String tel;
 
     private String email;
 
 
-    public ProveedorCreate(Long id, String nombre, String direccion, int cuit, int tel, String email) {
+    public ProveedorCreate(Long id, String nombre, String direccion, String cuit, String tel, String email) {
         this.id = id;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -50,21 +50,6 @@ public class ProveedorCreate {
         this.direccion = direccion;
     }
 
-    public int getCuit() {
-        return cuit;
-    }
-
-    public void setCuit(int cuit) {
-        this.cuit = cuit;
-    }
-
-    public int getTel() {
-        return tel;
-    }
-
-    public void setTel(int tel) {
-        this.tel = tel;
-    }
 
     public String getEmail() {
         return email;
@@ -72,5 +57,21 @@ public class ProveedorCreate {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getCuit() {
+        return cuit;
+    }
+
+    public void setCuit(String cuit) {
+        this.cuit = cuit;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
     }
 }

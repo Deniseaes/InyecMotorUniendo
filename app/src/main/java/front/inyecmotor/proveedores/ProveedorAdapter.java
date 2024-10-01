@@ -29,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ProveedorAdapter extends RecyclerView.Adapter<ProveedorAdapter.ProveedorViewHolder> {
     private List<Proveedor> proveedores;
     private Context context;
-    private static final String BASE_URL = "http://192.168.56.1:8080"; // Cambia esto según tu configuración
+    private static final String BASE_URL = "http://192.168.56.1:8080";
     private static final String TAG = "ProveedorAdapter";
 
     public ProveedorAdapter(List<Proveedor> proveedores, Context context) {
@@ -107,6 +107,12 @@ public class ProveedorAdapter extends RecyclerView.Adapter<ProveedorAdapter.Prov
 
             notifyDataSetChanged();
         });
+        builder.setNegativeButton("Cancelar", (dialogInterface, which) -> {
+            dialogInterface.cancel();
+        });
+        // Crear y mostrar el diálogo
+        AlertDialog dialog = builder.create();
+        dialog.show();
 
         Button btnEliminarProveedor = viewInflated.findViewById(R.id.btnEliminarProveedor);
         btnEliminarProveedor.setOnClickListener(v -> {
@@ -117,18 +123,13 @@ public class ProveedorAdapter extends RecyclerView.Adapter<ProveedorAdapter.Prov
                     .setPositiveButton("Sí", (dialogInterface, i) -> {
                         // Llamada al método eliminarProveedor con el id del proveedor
                         eliminarProveedor(proveedor.getId());
-                        dialogInterface.dismiss();
+                        dialog.dismiss();
+
                     })
                     .setNegativeButton("Cancelar", null)
                     .show();
         });
 
-
-
-
-        builder.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
-
-        builder.show();
     }
 
     private void actualizarProveedor(Proveedor proveedor) {

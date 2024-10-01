@@ -92,8 +92,8 @@ public class CrearProveedorActivity extends AppCompatActivity {
         try {
             String nombre = etNombre.getText().toString();
             String direccion = etDireccion.getText().toString();
-            int cuit = Integer.parseInt(etCuit.getText().toString().trim());
-            int tel = Integer.parseInt(etTel.getText().toString().trim());
+            String cuit = etCuit.getText().toString().trim();
+            String tel = etTel.getText().toString().trim();
             String email = etEmail.getText().toString();
 
             Long id = Long.valueOf(99999);
