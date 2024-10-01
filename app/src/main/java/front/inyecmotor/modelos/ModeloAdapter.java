@@ -137,6 +137,15 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
             }
         });
 
+        // Botón de cancelar
+        builder.setNegativeButton("Cancelar", (dialogInterface, which) -> {
+            dialogInterface.cancel();
+        });
+
+        // Crear y mostrar el diálogo
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
         Button btnEliminarModelo = viewInflated.findViewById(R.id.btnEliminarModelo);
         btnEliminarModelo.setOnClickListener(v -> {
             // Mostrar un diálogo de confirmación
@@ -146,16 +155,12 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
                     .setPositiveButton("Sí", (dialogInterface, i) -> {
                         // Llamada al método eliminarModelo con el id del modelo
                         eliminarModelo(modelo.getId());
-                        dialogInterface.dismiss();
+                        dialog.dismiss();
                     })
                     .setNegativeButton("Cancelar", null)
                     .show();
         });
 
-
-        builder.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
-
-        builder.show();
     }
 
     private void enviarDatosModelo(Modelo modelo) {
