@@ -164,4 +164,12 @@ public class Producto implements Parcelable {
             return new Producto[size];
         }
     };
+<<<<<<< HEAD
 }
+=======
+<<<<<<< HEAD
+}
+=======
+}
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)

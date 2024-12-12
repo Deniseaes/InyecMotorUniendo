@@ -6,10 +6,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+import android.widget.Button;
+import android.widget.EditText;
+=======
+>>>>>>> c331e9f (Nuevas features)
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +42,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloViewHolder> {
     private List<Modelo> modelos;
     private Context context;
+<<<<<<< HEAD
     private static final String BASE_URL = "http://192.168.56.1:8080"; // Cambia a la URL de tu servidor
+=======
+<<<<<<< HEAD
+    private static final String BASE_URL = "http://192.168.0.8:8080"; // Cambia esto según tu configuración
+=======
+    private static final String BASE_URL = "http://192.168.0.8:8080"; // Cambia a la URL de tu servidor
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     private static final String TAG = "ModeloAdapter"; // Tag para los logs
 
     public ModeloAdapter(List<Modelo> modelos, Context context) {
@@ -85,13 +104,27 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
 
         EditText etNombre = viewInflated.findViewById(R.id.etNombre);
         EditText etAnio = viewInflated.findViewById(R.id.etAnio);
+<<<<<<< HEAD
 
         Spinner spinnerMotorLitros = viewInflated.findViewById(R.id.spinnerMotorLitros);
         Spinner spinnerMotorTipo = viewInflated.findViewById(R.id.spinnerMotorTipo);
+=======
+<<<<<<< HEAD
+        EditText etMotorLitros = viewInflated.findViewById(R.id.etMotorLitros);
+        EditText etMotorTipo = viewInflated.findViewById(R.id.etMotorTipo);
+=======
+
+        EditText etMotorLitros = viewInflated.findViewById(R.id.etMotorLitros);
+        etMotorLitros.setText(String.valueOf(modelo.getMotorLitros()));
+
+        Spinner spinnerMotorTipo = viewInflated.findViewById(R.id.spinnerMotorTipo);
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 
         // Setear valores iniciales del modelo
         etNombre.setText(modelo.getNombre());
         etAnio.setText(String.valueOf(modelo.getAnio()));
+<<<<<<< HEAD
 
         // Configurar adaptadores para los spinners
 
@@ -100,13 +133,33 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
         motorLitrosAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMotorLitros.setAdapter(motorLitrosAdapter);
 
+=======
+<<<<<<< HEAD
+        etMotorLitros.setText(String.valueOf(modelo.getMotorLitros()));
+        etMotorTipo.setText(modelo.getMotorTipo());
+
+        builder.setPositiveButton("Guardar", (dialog, which) -> {
+            try {
+                // Actualizar el objeto modelo con los valores del EditText
+                modelo.setNombre(etNombre.getText().toString());
+                modelo.setAnio(Integer.parseInt(etAnio.getText().toString()));
+                modelo.setMotorLitros(Double.parseDouble(etMotorLitros.getText().toString()));
+                modelo.setMotorTipo(etMotorTipo.getText().toString());
+=======
+
+        // Configurar adaptadores para los spinners
+
+>>>>>>> c331e9f (Nuevas features)
         ArrayAdapter<CharSequence> motorTipoAdapter = ArrayAdapter.createFromResource(context,
                 R.array.motor_tipo_array, android.R.layout.simple_spinner_item);
         motorTipoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMotorTipo.setAdapter(motorTipoAdapter);
 
         // Seleccionar los valores actuales del modelo en los spinners
+<<<<<<< HEAD
         setSpinnerValue(spinnerMotorLitros, String.valueOf(modelo.getMotorLitros()));
+=======
+>>>>>>> c331e9f (Nuevas features)
         setSpinnerValue(spinnerMotorTipo, modelo.getMotorTipo());
 
         builder.setPositiveButton("Guardar", (dialog, which) -> {
@@ -116,7 +169,11 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
                 int anio = Integer.parseInt(anioString);
 
                 // Validar y convertir el motor litros a double
+<<<<<<< HEAD
                 String motorLitrosString = spinnerMotorLitros.getSelectedItem().toString();
+=======
+                String motorLitrosString = etMotorLitros.getText().toString();
+>>>>>>> c331e9f (Nuevas features)
                 double motorLitros = Double.parseDouble(motorLitrosString);
 
 
@@ -125,6 +182,10 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
                 modelo.setAnio(anio);
                 modelo.setMotorLitros(motorLitros);
                 modelo.setMotorTipo(spinnerMotorTipo.getSelectedItem().toString());
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 
                 // Enviar los datos editados al servidor
                 enviarDatosModelo(modelo);
@@ -137,6 +198,14 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
             }
         });
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        builder.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+
+        builder.show();
+=======
+>>>>>>> c331e9f (Nuevas features)
         // Botón de cancelar
         builder.setNegativeButton("Cancelar", (dialogInterface, which) -> {
             dialogInterface.cancel();
@@ -161,6 +230,10 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
                     .show();
         });
 
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     }
 
     private void enviarDatosModelo(Modelo modelo) {
@@ -180,7 +253,15 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
         ApiService apiService = retrofit.create(ApiService.class);
 
         String token = "Bearer " + hashedPassword;
+<<<<<<< HEAD
         Call<Modelo> call = apiService.editarModelo(token, modelo);
+=======
+<<<<<<< HEAD
+        Call<Modelo> call = apiService.editarModelo(token, modelo); // Supón que tienes este endpoint
+=======
+        Call<Modelo> call = apiService.editarModelo(token, modelo);
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 
         call.enqueue(new Callback<Modelo>() {
             @Override
@@ -208,6 +289,11 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
             }
         });
     }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> c331e9f (Nuevas features)
 
     private void eliminarModelo(int modeloId) {
         // Obtener el token desde SharedPreferences
@@ -259,5 +345,9 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
         }
     }
 
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 }
 

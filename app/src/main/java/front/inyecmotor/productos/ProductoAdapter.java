@@ -17,6 +17,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.IOException;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+import java.util.Collections;
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 import java.util.List;
 
 import front.inyecmotor.ApiService;
@@ -31,7 +38,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder> {
     private List<Producto> productos;
     private Context context;
+<<<<<<< HEAD
     private static final String BASE_URL = "http://192.168.56.1:8080"; // Cambia esto según tu configuración
+=======
+    private static final String BASE_URL = "http://192.168.0.8:8080"; // Cambia esto según tu configuración
+>>>>>>> c331e9f (Nuevas features)
     private static final String TAG = "ProductoAdapter"; // Tag para los logs
 
     public ProductoAdapter(List<Producto> productos, Context context) {
@@ -55,11 +66,21 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
 
         // Set stock indicator
         ImageView stockIndicator = holder.itemView.findViewById(R.id.ivStockStatus);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> c331e9f (Nuevas features)
         if (producto.getStockActual() <= producto.getStockMin()) {
             stockIndicator.setImageResource(R.drawable.ic_red_circle);
         } else {
             stockIndicator.setImageResource(R.drawable.ic_green_circle);
         }
+<<<<<<< HEAD
+=======
+=======
+        actualizarIndicadorStock(stockIndicator, producto);
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 
         holder.btnVerDetalle.setOnClickListener(v -> mostrarDialogoDetalle(producto));
     }
@@ -86,6 +107,17 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
     }
 
     private void mostrarDialogoDetalle(Producto producto) {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Detalles del Producto");
+
+        View viewInflated = LayoutInflater.from(context).inflate(R.layout.productos_detalle, null);
+        builder.setView(viewInflated);
+
+=======
+>>>>>>> c331e9f (Nuevas features)
         // Crear el constructor del diálogo
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Detalles del Producto");
@@ -95,6 +127,10 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         builder.setView(viewInflated);
 
         // Referencias a los EditTexts y botones
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
         EditText etNombre = viewInflated.findViewById(R.id.etNombre);
         EditText etCodigo = viewInflated.findViewById(R.id.etCodigo);
         EditText etPrecioCosto = viewInflated.findViewById(R.id.etPrecioCosto);
@@ -103,6 +139,11 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         EditText etStockMax = viewInflated.findViewById(R.id.etStockMax);
         EditText etStockMin = viewInflated.findViewById(R.id.etStockMin);
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> c331e9f (Nuevas features)
         Button btnIncrementarStockActual = viewInflated.findViewById(R.id.btnIncrementarStockActual);
         Button btnDecrementarStockActual = viewInflated.findViewById(R.id.btnDecrementarStockActual);
         Button btnIncrementarStockMax = viewInflated.findViewById(R.id.btnIncrementarStockMax);
@@ -111,6 +152,10 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         Button btnDecrementarStockMin = viewInflated.findViewById(R.id.btnDecrementarStockMin);
         Button btnEliminarProducto = viewInflated.findViewById(R.id.btnEliminarProducto);
 
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
         // Setear valores iniciales del producto
         etNombre.setText(producto.getNombre());
         etCodigo.setText(producto.getCodigo());
@@ -120,6 +165,31 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         etStockMax.setText(String.valueOf(producto.getStockMax()));
         etStockMin.setText(String.valueOf(producto.getStockMin()));
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        Button btnDecrementStock = viewInflated.findViewById(R.id.btnDecrementStock);
+        Button btnIncrementStock = viewInflated.findViewById(R.id.btnIncrementStock);
+        Button btnSaveChanges = viewInflated.findViewById(R.id.btnSaveChanges);
+
+        AlertDialog dialog = builder.create();
+
+        btnDecrementStock.setOnClickListener(v -> {
+            int currentStock = Integer.parseInt(etStockActual.getText().toString());
+            if (currentStock > 0) {
+                etStockActual.setText(String.valueOf(currentStock - 1));
+            }
+        });
+
+        btnIncrementStock.setOnClickListener(v -> {
+            int currentStock = Integer.parseInt(etStockActual.getText().toString());
+            etStockActual.setText(String.valueOf(currentStock + 1));
+        });
+
+        btnSaveChanges.setOnClickListener(v -> {
+            // Update the product object and send to server
+=======
+>>>>>>> c331e9f (Nuevas features)
         // Lógica para incrementar y decrementar StockActual
         btnIncrementarStockActual.setOnClickListener(v -> {
             int stockActual = Integer.parseInt(etStockActual.getText().toString());
@@ -156,6 +226,10 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         // Botón de guardar cambios
         builder.setPositiveButton("Guardar", (dialog, which) -> {
             // Actualizar el objeto producto con los valores del EditText
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
             producto.setNombre(etNombre.getText().toString());
             producto.setCodigo(etCodigo.getText().toString());
             producto.setPrecioCosto(Double.parseDouble(etPrecioCosto.getText().toString()));
@@ -164,6 +238,22 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
             producto.setStockMax(Integer.parseInt(etStockMax.getText().toString()));
             producto.setStockMin(Integer.parseInt(etStockMin.getText().toString()));
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+            enviarDatosProducto(producto);
+            notifyDataSetChanged();
+            dialog.dismiss();
+        });
+
+        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancelar", (dialogInterface, which) -> dialog.dismiss());
+
+        dialog.show();
+    }
+
+    public void setProductos(List<Producto> productos) {
+=======
+>>>>>>> c331e9f (Nuevas features)
             // Enviar los datos editados al servidor
             enviarDatosProducto(producto);
 
@@ -197,6 +287,11 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
 
 
     public void setProductos(List<Producto> productos) {
+<<<<<<< HEAD
+=======
+        Collections.sort(productos, (p1, p2) -> p1.getNombre().compareToIgnoreCase(p2.getNombre()));
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
         this.productos = productos;
         notifyDataSetChanged();
     }
@@ -248,6 +343,11 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         });
     }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> c331e9f (Nuevas features)
     private void eliminarProducto(int productoId) {
         // Obtener el token desde SharedPreferences
         String hashedPassword = LoginActivity.PreferenceManager.getHashedPassword(context);
@@ -288,5 +388,24 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         });
     }
 
+<<<<<<< HEAD
+=======
+    private void actualizarIndicadorStock(ImageView ivStockStatus, Producto producto) {
+        int stockActual = producto.getStockActual();
+        int stockMin = producto.getStockMin();
+        
+        if (stockActual == 0) {
+            // Rojo para stock en 0
+            ivStockStatus.setImageResource(R.drawable.ic_red_circle);
+        } else if (stockActual > 0 && stockActual <= stockMin) {
+            // Amarillo para stock entre 1 y el mínimo
+            ivStockStatus.setImageResource(R.drawable.ic_yellow_circle);
+        } else {
+            // Verde para stock por encima del mínimo
+            ivStockStatus.setImageResource(R.drawable.ic_green_circle);
+        }
+    }
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 
 }

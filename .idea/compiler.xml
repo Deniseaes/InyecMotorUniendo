@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+<<<<<<< HEAD
     <bytecodeTargetLevel target="17" />
+=======
+<<<<<<< HEAD
+    <bytecodeTargetLevel target="17" />
+=======
+    <bytecodeTargetLevel target="22" />
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
   </component>
 </project>

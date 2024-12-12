@@ -93,6 +93,11 @@
                 android:layout_height="wrap_content"
                 android:hint="Email"/>
         </LinearLayout>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> c331e9f (Nuevas features)
 
         <!-- Tachito de Eliminar -->
 
@@ -109,5 +114,9 @@
             android:text="" />
 
 
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     </LinearLayout>
 </ScrollView>

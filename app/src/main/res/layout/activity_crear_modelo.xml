@@ -1,9 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+=======
+<<<<<<< HEAD
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/etNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre" />
+
+    <Spinner
+        android:id="@+id/spinnerMarca"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:textSize="18sp"
+        android:hint="Marca" />
+
+    <Spinner
+        android:id="@+id/spinnerMotorLitros"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:textSize="18sp"
+        android:hint="Motor Litros" />
+
+    <Spinner
+        android:id="@+id/spinnerMotorTipo"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:textSize="18sp"
+        android:hint="Motor Tipo" />
+
+    <EditText
+        android:id="@+id/etAnio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Año" />
+
+    <Button
+        android:id="@+id/btnGuardarModelo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Crear Modelo" />
+
+</LinearLayout>
+=======
+<androidx.coordinatorlayout.widget.CoordinatorLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+>>>>>>> c331e9f (Nuevas features)
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+<<<<<<< HEAD
+=======
+    <!-- AppBarLayout para la Toolbar fija -->
+>>>>>>> c331e9f (Nuevas features)
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,15 +73,29 @@
             android:background="@color/blue_color"
             android:elevation="4dp"
             android:theme="?attr/actionBarTheme"
+<<<<<<< HEAD
             app:navigationIcon="@drawable/ic_back_arrow" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <!-- ScrollView para contenido desplazable -->
+=======
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:navigationIcon="@drawable/ic_back_arrow" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+        <!-- Contenedor para el contenido desplazable -->
+>>>>>>> c331e9f (Nuevas features)
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> c331e9f (Nuevas features)
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,16 +109,40 @@
                 android:text="Crear Vehiculo"
                 android:textSize="24sp" />
 
+<<<<<<< HEAD
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nombre: "
                 android:layout_marginTop="16dp" />
+=======
+            <!-- Marca -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="* Marca:"
+                android:layout_gravity="center_vertical"/>
+
+            <Spinner
+                android:id="@+id/spinnerMarca"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Modelo -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="* Modelo:"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="16dp"/>
+>>>>>>> c331e9f (Nuevas features)
 
             <EditText
                 android:id="@+id/etNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:hint="Nombre" />
 
             <TextView
@@ -91,12 +186,61 @@
                 android:layout_height="wrap_content"
                 android:text="Año del vehículo: "
                 android:layout_marginTop="16dp" />
+=======
+                android:hint="Ingrese el modelo"
+                android:inputType="text"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Año -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="* Año:"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="16dp"/>
+>>>>>>> c331e9f (Nuevas features)
 
             <EditText
                 android:id="@+id/etAnio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:hint="Año" />
+=======
+                android:hint="Ingrese el año"
+                android:inputType="number"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Motor Litros -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="* Litros del Motor:"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="16dp"/>
+
+            <EditText
+                android:id="@+id/etMotorLitros"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ej: 1.6"
+                android:inputType="numberDecimal"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Tipo Motor -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="* Tipo de Motor:"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="16dp"/>
+
+            <Spinner
+                android:id="@+id/spinnerMotorTipo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"/>
+>>>>>>> c331e9f (Nuevas features)
 
             <Button
                 android:id="@+id/btnGuardarModelo"
@@ -105,6 +249,14 @@
                 style="@style/MyButtonCreateStyle"
                 android:text="Crear Vehículo"
                 android:layout_marginTop="10dp" />
+<<<<<<< HEAD
         </LinearLayout>
     </ScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+=======
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)

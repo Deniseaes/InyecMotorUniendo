@@ -1,16 +1,35 @@
 package front.inyecmotor.modelos;
 
 import android.os.Bundle;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+import android.os.Bundle;
+=======
+>>>>>>> c331e9f (Nuevas features)
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Toast;
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+import java.util.List;
+
+import front.inyecmotor.R;
+=======
+>>>>>>> c331e9f (Nuevas features)
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,16 +42,31 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 
 public class ModelosActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> c331e9f (Nuevas features)
     private ModeloAdapter adapter;
     private List<Modelo> modelos = new ArrayList<>();
     private List<Modelo> modelosFiltrados = new ArrayList<>();
     private MultiAutoCompleteTextView actvModelos;
+<<<<<<< HEAD
     private static final String BASE_URL = "http://192.168.56.1:8080";
 
+=======
+    private static final String BASE_URL = "http://192.168.0.8:8080";
+
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +75,25 @@ public class ModelosActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        // Obtén la lista de modelos pasada por el Intent
+        List<Modelo> modelos = getIntent().getParcelableArrayListExtra("modelos");
+
+        // Configura el adaptador del RecyclerView
+        ModeloAdapter adapter = new ModeloAdapter(modelos, this);
+        recyclerView.setAdapter(adapter);
+        // Configura el botón de "Volver" en la Toolbar
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+=======
+>>>>>>> c331e9f (Nuevas features)
         // Inicializa el MultiAutoCompleteTextView
         actvModelos = findViewById(R.id.actvModelos);
         actvModelos.addTextChangedListener(new TextWatcher() {
@@ -162,6 +215,10 @@ public class ModelosActivity extends AppCompatActivity {
                 Toast.makeText(ModelosActivity.this, "Error al buscar modelos: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     }
 
     @Override

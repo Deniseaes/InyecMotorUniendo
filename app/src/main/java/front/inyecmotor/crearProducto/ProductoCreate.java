@@ -5,6 +5,35 @@ import java.util.ArrayList;
 public class ProductoCreate {
 
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+        private Long id;
+
+        private String codigo;
+
+        private String nombre;
+
+        private int stockMin;
+
+        private int stockMax;
+
+        private int stockActual;
+
+        private double precioVenta;
+
+        private double precioCosto;
+
+        private ArrayList<Integer> proveedores;
+
+        private ArrayList<Integer> tipos;
+
+
+
+        private ArrayList<Integer> modelos;
+=======
+>>>>>>> c331e9f (Nuevas features)
     private Long id;
 
     private String codigo;
@@ -26,6 +55,10 @@ public class ProductoCreate {
     private ArrayList<Integer> tipos;
 
     private ArrayList<Integer> modelos;
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 
     public ProductoCreate(Long id, String codigo, String nombre, int stockMin, int stockMax, int stockActual, double precioVenta, double precioCosto, ArrayList<Integer> proveedores, ArrayList<Integer> tipos, ArrayList<Integer> modelos) {
         this.id = id;
@@ -129,6 +162,11 @@ public class ProductoCreate {
     public void setModelos(ArrayList<Integer> modelos) {
         this.modelos = modelos;
     }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> c331e9f (Nuevas features)
 
     @Override
     public String toString() {
@@ -148,5 +186,9 @@ public class ProductoCreate {
 
 
     }
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 }
 

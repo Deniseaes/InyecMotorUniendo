@@ -1,4 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Campo para el código del producto -->
+    <EditText
+        android:id="@+id/etCodigo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Código"
+        android:inputType="text" />
+
+    <!-- Campo para el nombre del producto -->
+    <EditText
+        android:id="@+id/etNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre"
+        android:inputType="text" />
+
+    <!-- Campo para el precio costo -->
+    <EditText
+        android:id="@+id/etPrecioCosto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Precio Costo"
+        android:inputType="numberDecimal" />
+
+    <!-- Campo para el precio venta -->
+    <EditText
+        android:id="@+id/etPrecioVenta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Precio Venta"
+        android:inputType="numberDecimal" />
+
+    <!-- Spinner de tipos  -->
+   <Spinner
+        android:id="@+id/spinnerTipos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       android:hint="Seleccione Tipo de Producto"/>
+    <!-- Lista de tipos seleccionados -->
+    <LinearLayout
+        android:id="@+id/listaTipos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"/>
+
+    <!-- Selector múltiple para los proveedores -->
+    <Spinner
+        android:id="@+id/spinnerProveedores"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Seleccione Proveedores" />
+    <!-- Lista de proveedores seleccionados -->
+    <LinearLayout
+        android:id="@+id/listaProveedores"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"/>
+
+
+      <!-- Selector múltiple para los modelos -->
+    <MultiAutoCompleteTextView
+        android:id="@+id/actvModelos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Seleccione Modelos" />
+    <!-- Lista de modelos seleccionados -->
+    <LinearLayout
+        android:id="@+id/listaModelos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"/>
+
+
+    <!-- Campo para el stock actual con botones de incrementar y decrementar -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnDecrementStockActual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-" />
+
+        <EditText
+            android:id="@+id/etStockActual"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="Stock Actual"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/btnIncrementStockActual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+" />
+    </LinearLayout>
+
+    <!-- Campo para el stock máximo con botones de incrementar y decrementar -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnDecrementStockMax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-" />
+
+        <EditText
+            android:id="@+id/etStockMax"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="Stock Máximo"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/btnIncrementStockMax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+" />
+    </LinearLayout>
+
+    <!-- Campo para el stock mínimo con botones de incrementar y decrementar -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnDecrementStockMin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-" />
+
+        <EditText
+            android:id="@+id/etStockMin"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="Stock Mínimo"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/btnIncrementStockMin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+" />
+    </LinearLayout>
+
+    <!-- Botón para crear producto -->
+    <Button
+        android:id="@+id/btnCrearProducto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Crear Producto"
+        android:layout_marginTop="16dp"
+        style="@style/MyButtonCreateStyle" />
+
+    <!-- Botón para regresar a la pantalla anterior -->
+    <Button
+        android:id="@+id/btnRegresarCrearProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Atrás"
+        android:layout_gravity="bottom|start"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:onClick="atrasClick"
+        style="@style/MyButtonAtrasStyle" />
+
+</LinearLayout>
+=======
+>>>>>>> c331e9f (Nuevas features)
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -44,6 +231,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+<<<<<<< HEAD
             <!-- Todo el contenido desplazable se coloca aquí -->
             <TextView
                 android:layout_width="wrap_content"
@@ -51,6 +239,29 @@
                 android:text="Código: "
                 android:layout_gravity="center_vertical"/>
 
+=======
+            <!-- Tipo de Producto -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="* Tipo de Producto:"
+                android:layout_gravity="center_vertical"/>
+
+            <Spinner
+                android:id="@+id/spinnerTipos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Seleccione Tipo de Producto"/>
+
+            <!-- Código -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="* Código:"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="16dp"/>
+
+>>>>>>> c331e9f (Nuevas features)
             <EditText
                 android:id="@+id/etCodigo"
                 android:layout_width="match_parent"
@@ -58,10 +269,33 @@
                 android:hint="Código"
                 android:inputType="text" />
 
+<<<<<<< HEAD
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nombre: "
+=======
+            <!-- Marca -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="* Marca:"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="16dp"/>
+
+            <EditText
+                android:id="@+id/etMarca"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Marca"
+                android:inputType="text" />
+
+            <!-- Nombre -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="* Nombre:"
+>>>>>>> c331e9f (Nuevas features)
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="16dp"/>
 
@@ -75,7 +309,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:text="Precio Costo: "
+=======
+                android:text="* Precio Costo:"
+>>>>>>> c331e9f (Nuevas features)
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="16dp"/>
 
@@ -90,7 +328,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:text="Precio Venta: "
+=======
+                android:text="* Precio Venta:"
+>>>>>>> c331e9f (Nuevas features)
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="16dp"/>
 
@@ -104,6 +346,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:text="Tipo de Producto: "
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="16dp"/>
@@ -124,6 +367,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Seleccione Proveedor: "
+=======
+                android:text="* Seleccione Proveedor:"
+>>>>>>> c331e9f (Nuevas features)
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="20dp"/>
 
@@ -142,7 +388,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:text="Seleccione Modelos: "
+=======
+                android:text="* Seleccione Modelos:"
+>>>>>>> c331e9f (Nuevas features)
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="20dp"/>
 
@@ -166,8 +416,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+<<<<<<< HEAD
                     android:text="Stock Actual: "
                     android:layout_gravity="center_vertical"
+=======
+                    android:text="* Stock Actual:"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="15dp"
+>>>>>>> c331e9f (Nuevas features)
                     />
 
                 <Button
@@ -212,8 +468,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+<<<<<<< HEAD
                     android:text="Stock Máximo: "
                     android:layout_gravity="center_vertical"/>
+=======
+                    android:text="* Stock Máximo:"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"/>
+
+>>>>>>> c331e9f (Nuevas features)
 
                 <Button
                     android:id="@+id/btnDecrementStockMax"
@@ -257,8 +520,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+<<<<<<< HEAD
                     android:text="Stock Mínimo: "
                     android:layout_gravity="center_vertical"/>
+=======
+                    android:text="* Stock Mínimo:"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dp"/>
+>>>>>>> c331e9f (Nuevas features)
 
                 <Button
                     android:id="@+id/btnDecrementStockMin"
@@ -306,3 +575,7 @@
         </LinearLayout>
     </ScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)

@@ -6,7 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".productos.ProductosActivity">
 
+<<<<<<< HEAD
     <!-- Toolbar -->
+=======
+<<<<<<< HEAD
+=======
+    <!-- Toolbar -->
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -17,6 +24,11 @@
         app:navigationIcon="@drawable/ic_back_arrow"
         app:layout_constraintTop_toTopOf="parent" />
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> c331e9f (Nuevas features)
     <!-- Título para buscar por nombre -->
     <TextView
         android:id="@+id/tvBuscarPorNombre"
@@ -31,10 +43,27 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <!-- SearchView para buscar productos por nombre -->
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchViewProduct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        android:iconifiedByDefault="false"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="16dp"
+        android:queryHint="Buscar por nombre de producto"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+=======
+>>>>>>> c331e9f (Nuevas features)
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
         android:iconifiedByDefault="false"
@@ -57,10 +86,26 @@
         app:layout_constraintTop_toBottomOf="@id/searchViewProduct" />
 
     <!-- AutoCompleteTextView para buscar por modelo -->
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     <AutoCompleteTextView
         android:id="@+id/autoCompleteModelos"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        android:hint="Buscar por modelo"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/searchViewProduct"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+=======
+>>>>>>> c331e9f (Nuevas features)
         android:layout_marginHorizontal="16dp"
         android:hint="Buscar por modelo"
         app:layout_constraintTop_toBottomOf="@id/tvBuscarPorModelo"
@@ -81,20 +126,52 @@
         app:layout_constraintTop_toBottomOf="@id/autoCompleteModelos" />
 
     <!-- Spinner para seleccionar tipo de producto -->
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     <Spinner
         android:id="@+id/spinnerProductType"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/autoCompleteModelos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+=======
+>>>>>>> c331e9f (Nuevas features)
         android:layout_marginHorizontal="16dp"
         app:layout_constraintTop_toBottomOf="@id/tvBuscarPorTipo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- RecyclerView para mostrar productos -->
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/spinnerProductType"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        style="@style/MyButtonStyle"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+=======
+>>>>>>> c331e9f (Nuevas features)
         android:layout_marginTop="24dp"
         app:layout_constraintTop_toBottomOf="@id/spinnerProductType"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,3 +179,7 @@
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)

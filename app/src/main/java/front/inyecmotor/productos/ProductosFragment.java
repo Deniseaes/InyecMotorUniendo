@@ -7,7 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+<<<<<<< HEAD
 import android.widget.EditText;
+=======
+<<<<<<< HEAD
+=======
+import android.widget.EditText;
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,12 +37,24 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+<<<<<<< HEAD
 
 //se encarga de mostrar un par de botones para interactuar con productos.Estos botones permiten obtener una lista
 // de productos desde un servidor y crear un nuevo producto. Su layout XML es productos_fragment
 public class ProductosFragment extends Fragment {
 
     private static final String BASE_URL = "http://192.168.56.1:8080"; // Cambia esto según tu configuración
+=======
+<<<<<<< HEAD
+=======
+
+//se encarga de mostrar un par de botones para interactuar con productos.Estos botones permiten obtener una lista
+// de productos desde un servidor y crear un nuevo producto. Su layout XML es productos_fragment
+>>>>>>> 6c95963 (Features)
+public class ProductosFragment extends Fragment {
+
+    private static final String BASE_URL = "http://192.168.0.8:8080"; // Cambia esto según tu configuración
+>>>>>>> c331e9f (Nuevas features)
 
     @Nullable
     @Override
@@ -65,6 +84,12 @@ public class ProductosFragment extends Fragment {
             }
         });
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        return view;
+=======
+>>>>>>> c331e9f (Nuevas features)
         // Botón "Ver productos en faltante"
         Button btnVerProductosFaltante = view.findViewById(R.id.btnVerProductosFaltante);
         btnVerProductosFaltante.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +106,10 @@ public class ProductosFragment extends Fragment {
         return view;
 
 
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     }
 
     private void fetchProductos() {
@@ -129,6 +158,12 @@ public class ProductosFragment extends Fragment {
             }
         });
     }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+}
+=======
+>>>>>>> c331e9f (Nuevas features)
 
     private void fetchProductosFaltante() {
         // Obtener la contraseña hasheada desde SharedPreferences
@@ -178,4 +213,9 @@ public class ProductosFragment extends Fragment {
 
 
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)

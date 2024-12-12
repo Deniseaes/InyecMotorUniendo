@@ -6,13 +6,55 @@
     android:background="@color/white">
 
     <!-- Aquí puedes agregar tu "Hola Mundo" -->
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     <TextView
         android:id="@+id/hello_world_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Modelos"
         android:textSize="24sp"
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <Button
+        android:id="@+id/getModelos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:text="VER MODELOS"
+        app:layout_constraintTop_toBottomOf="@id/hello_world_textview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/MyButtonStyle"/>
+
+    <Button
+        android:id="@+id/CrearModelo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="32dp"
+        android:text="CREAR MODELO"
+        app:layout_constraintTop_toBottomOf="@id/hello_world_textview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/MyButtonStyle"/>
+=======
+>>>>>>> c331e9f (Nuevas features)
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,6 +88,10 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/hello_world_textview" />
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

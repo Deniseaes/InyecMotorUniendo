@@ -6,7 +6,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+<<<<<<< HEAD
 import androidx.appcompat.widget.Toolbar;
+=======
+<<<<<<< HEAD
+=======
+import androidx.appcompat.widget.Toolbar;
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,7 +30,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CrearProveedorActivity extends AppCompatActivity {
 
+<<<<<<< HEAD
     private static final String BASE_URL = "http://192.168.56.1:8080"; // Cambia esto según tu configuración
+=======
+    private static final String BASE_URL = "http://192.168.0.8:8080"; // Cambia esto según tu configuración
+>>>>>>> c331e9f (Nuevas features)
     private ApiService apiService;
 
     private EditText etNombre;
@@ -60,6 +71,11 @@ public class CrearProveedorActivity extends AppCompatActivity {
                 crearProveedor();
             }
         });
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> c331e9f (Nuevas features)
 
         // Configura el botón de "Volver" en la Toolbar
 
@@ -69,6 +85,10 @@ public class CrearProveedorActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     }
 
     private boolean validateInputs() {
@@ -92,8 +112,18 @@ public class CrearProveedorActivity extends AppCompatActivity {
         try {
             String nombre = etNombre.getText().toString();
             String direccion = etDireccion.getText().toString();
+<<<<<<< HEAD
             String cuit = etCuit.getText().toString().trim();
             String tel = etTel.getText().toString().trim();
+=======
+<<<<<<< HEAD
+            int cuit = Integer.parseInt(etCuit.getText().toString().trim());
+            int tel = Integer.parseInt(etTel.getText().toString().trim());
+=======
+            String cuit = etCuit.getText().toString().trim();
+            String tel = etTel.getText().toString().trim();
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
             String email = etEmail.getText().toString();
 
             Long id = Long.valueOf(99999);
@@ -129,10 +159,19 @@ public class CrearProveedorActivity extends AppCompatActivity {
         }
 
     }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> c331e9f (Nuevas features)
 
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 }

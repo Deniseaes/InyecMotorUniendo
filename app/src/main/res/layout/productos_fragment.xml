@@ -6,19 +6,39 @@
     android:background="@color/white">
 
     <!-- Aquí puedes agregar tu "Hola Mundo" -->
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     <TextView
         android:id="@+id/hello_world_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Productos"
         android:textSize="24sp"
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+=======
+>>>>>>> c331e9f (Nuevas features)
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.185" />
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 
     <Button
         android:id="@+id/getProductos"
@@ -46,6 +66,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         style="@style/MyButtonStyle"/>
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+=======
+>>>>>>> c331e9f (Nuevas features)
     <Button
         android:id="@+id/btnVerProductosFaltante"
         android:layout_width="wrap_content"
@@ -60,4 +87,9 @@
 
 
 
+<<<<<<< HEAD
 </androidx.constraintlayout.widget.ConstraintLayout>
+=======
+</androidx.constraintlayout.widget.ConstraintLayout>
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)

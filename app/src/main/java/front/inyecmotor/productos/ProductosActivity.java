@@ -28,7 +28,14 @@ import java.util.List;
 
 import front.inyecmotor.ApiService;
 import front.inyecmotor.R;
+<<<<<<< HEAD
 import front.inyecmotor.crearProducto.CrearProductoActivity;
+=======
+<<<<<<< HEAD
+=======
+import front.inyecmotor.crearProducto.CrearProductoActivity;
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 import front.inyecmotor.crearProducto.TipoDTO;
 import front.inyecmotor.login.LoginActivity;
 import front.inyecmotor.modelos.Modelo;
@@ -93,7 +100,11 @@ public class ProductosActivity extends AppCompatActivity {
     }
 
     private void setupRetrofit() {
+<<<<<<< HEAD
         String baseUrl = "http://192.168.56.1:8080"; // Asegúrate de que esta URL sea correcta
+=======
+        String baseUrl = "http://192.168.0.8:8080"; // Asegúrate de que esta URL sea correcta
+>>>>>>> c331e9f (Nuevas features)
         Log.d(TAG, "URL base: " + baseUrl);
         
         Retrofit retrofit = new Retrofit.Builder()
@@ -128,6 +139,15 @@ public class ProductosActivity extends AppCompatActivity {
             public void onResponse(Call<List<TipoDTO>> call, Response<List<TipoDTO>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<TipoDTO> tipos = response.body();
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+                    tipos.add(0, new TipoDTO(-1, "Todos los tipos", null));
+                    TipoSpinnerAdapter adapter = new TipoSpinnerAdapter(ProductosActivity.this, tipos);
+                    spinnerProductType.setAdapter(adapter);
+    
+=======
+>>>>>>> c331e9f (Nuevas features)
                     tipos.add(0, new TipoDTO(-1, "Todos los tipos", null)); // Opción para mostrar todos los productos
 
                     // Adaptador personalizado
@@ -150,12 +170,32 @@ public class ProductosActivity extends AppCompatActivity {
                     tiposAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinnerProductType.setAdapter(tiposAdapter);
 
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
                     spinnerProductType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                             TipoDTO selectedTipo = (TipoDTO) parent.getItemAtPosition(position);
                             filterProductsByType(selectedTipo.getId());
                         }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+                        }
+                    });
+                }
+            }
+    
+            @Override
+            public void onFailure(Call<List<TipoDTO>> call, Throwable t) {
+                Toast.makeText(ProductosActivity.this, "Error al cargar tipos de productos", Toast.LENGTH_SHORT).show();
+=======
+>>>>>>> c331e9f (Nuevas features)
 
                         @Override
                         public void onNothingSelected(AdapterView<?> parent) {
@@ -170,12 +210,24 @@ public class ProductosActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<TipoDTO>> call, Throwable t) {
                 Toast.makeText(ProductosActivity.this, "Error de conexión al cargar tipos de productos", Toast.LENGTH_SHORT).show();
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
             }
         });
     }
 
+<<<<<<< HEAD
 
 
+=======
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     private void filterProductsByName(String query) {
         List<Producto> filteredList = new ArrayList<>();
         for (Producto producto : allProductos) {
@@ -194,6 +246,20 @@ public class ProductosActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         } else {
             Log.d(TAG, "Filtrando productos por tipo: " + tipoId);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+            apiService.getProductosByTipo(authToken, tipoId).enqueue(new Callback<List<Producto>>() {
+                @Override
+                public void onResponse(Call<List<Producto>> call, Response<List<Producto>> response) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        handleSuccessfulResponse(response.body());
+                    } else if (response.code() == 302 && response.errorBody() != null) {
+                        handleRedirectResponse(response.errorBody());
+                    } else {
+                        handleErrorResponse(response);
+=======
+>>>>>>> c331e9f (Nuevas features)
 
             // Convertimos tipoId a Long antes de enviarlo a la API
             apiService.getProductosByTipo(authToken, (long) tipoId).enqueue(new Callback<List<Producto>>() {
@@ -207,19 +273,38 @@ public class ProductosActivity extends AppCompatActivity {
                     } else {
                         Log.e(TAG, "Error al filtrar productos, código: " + response.code());
                         Toast.makeText(ProductosActivity.this, "Error al filtrar productos", Toast.LENGTH_SHORT).show();
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
                     }
                 }
 
                 @Override
                 public void onFailure(Call<List<Producto>> call, Throwable t) {
                     Log.e(TAG, "Error de conexión al filtrar por tipo", t);
+<<<<<<< HEAD
                     Toast.makeText(ProductosActivity.this, "Error de conexión", Toast.LENGTH_LONG).show();
+=======
+<<<<<<< HEAD
+                    Toast.makeText(ProductosActivity.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+=======
+                    Toast.makeText(ProductosActivity.this, "Error de conexión", Toast.LENGTH_LONG).show();
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
                 }
             });
         }
     }
 
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     private void handleSuccessfulResponse(List<Producto> productos) {
         Log.d(TAG, "Productos filtrados recibidos: " + productos.size());
         adapter.setProductos(productos);

@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     xmlns:app="http://schemas.android.com/apk/res-auto"
+=======
+<<<<<<< HEAD
+=======
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -11,6 +18,11 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> c331e9f (Nuevas features)
         <TextView
             android:id="@+id/hello_world_textview"
             android:layout_width="wrap_content"
@@ -26,18 +38,40 @@
             />
 
         <!-- Campo de Nombre -->
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+<<<<<<< HEAD
             android:layout_marginBottom="8dp"
             android:layout_marginTop="25dp">
+=======
+<<<<<<< HEAD
+            android:layout_marginBottom="8dp">
+=======
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="25dp">
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nombre:"
+<<<<<<< HEAD
                 android:layout_marginEnd="8dp"
                 />
+=======
+<<<<<<< HEAD
+                android:layout_marginEnd="8dp"/>
+=======
+                android:layout_marginEnd="8dp"
+                />
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
             <EditText
                 android:id="@+id/etNombre"
                 android:layout_width="0dp"
@@ -46,13 +80,29 @@
                 android:hint="Nombre"/>
         </LinearLayout>
 
+<<<<<<< HEAD
         <!-- Campo de Año -->
+=======
+<<<<<<< HEAD
+=======
+        <!-- Campo de Año -->
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+<<<<<<< HEAD
             android:layout_marginBottom="8dp"
             android:layout_marginTop="25dp">
+=======
+<<<<<<< HEAD
+            android:layout_marginBottom="8dp">
+=======
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="25dp">
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -66,20 +116,39 @@
                 android:hint="Año"/>
         </LinearLayout>
 
+<<<<<<< HEAD
 
 
         <!-- Campo de Motor Litros (Spinner) -->
+=======
+<<<<<<< HEAD
+=======
+
+
+        <!-- Campo de Motor Litros (Spinner) -->
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+<<<<<<< HEAD
             android:layout_marginBottom="8dp"
             android:layout_marginTop="25dp">
+=======
+<<<<<<< HEAD
+            android:layout_marginBottom="8dp">
+=======
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="25dp">
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Motor (L):"
                 android:layout_marginEnd="8dp"/>
+<<<<<<< HEAD
             <Spinner
                 android:id="@+id/spinnerMotorLitros"
                 android:layout_width="0dp"
@@ -88,17 +157,57 @@
         </LinearLayout>
 
         <!-- Campo de Tipo de Motor (Spinner) -->
+=======
+            <EditText
+                android:id="@+id/etMotorLitros"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+<<<<<<< HEAD
+                android:hint="Motor (L)"/>
+        </LinearLayout>
+
+=======
+                android:inputType="numberDecimal"
+                android:hint="Ej: 1.6"/>
+        </LinearLayout>
+
+        <!-- Campo de Tipo de Motor (Spinner) -->
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+<<<<<<< HEAD
             android:layout_marginBottom="8dp"
             android:layout_marginTop="25dp">
+=======
+<<<<<<< HEAD
+            android:layout_marginBottom="8dp">
+=======
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="25dp">
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tipo de Motor:"
                 android:layout_marginEnd="8dp"/>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+            <EditText
+                android:id="@+id/etMotorTipo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Tipo de Motor"/>
+        </LinearLayout>
+
+=======
+>>>>>>> c331e9f (Nuevas features)
             <Spinner
                 android:id="@+id/spinnerMotorTipo"
                 android:layout_width="0dp"
@@ -119,5 +228,9 @@
             android:drawablePadding="8dp"
             android:padding="8dp"
             android:text=""/>
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     </LinearLayout>
 </ScrollView>

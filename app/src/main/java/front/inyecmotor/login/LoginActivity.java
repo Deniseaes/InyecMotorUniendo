@@ -33,7 +33,11 @@ import android.content.SharedPreferences;
 import android.content.Context;
 
 public class LoginActivity extends AppCompatActivity {
+<<<<<<< HEAD
     private static final String BASE_URL = "http://192.168.56.1:8080"; // Cambia a la URL de tu servidor
+=======
+    private static final String BASE_URL = "http://192.168.0.8:8080"; // Cambia a la URL de tu servidor
+>>>>>>> c331e9f (Nuevas features)
     private EditText etPassword;
     private Button btnLogin;
 
@@ -64,6 +68,10 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
     public static String hashPassword(String password) {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> c331e9f (Nuevas features)
         try {
 
             // Crear un objeto Mac para HMAC-SHA256
@@ -85,6 +93,13 @@ public class LoginActivity extends AppCompatActivity {
         } catch (Exception e) {
             throw new RuntimeException("Error al generar HMAC-SHA256", e);
         }
+<<<<<<< HEAD
+=======
+=======
+        // Temporalmente, solo devolver la contraseña sin hashear
+        return password;
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     }
 
     // Clase para gestionar las preferencias (SharedPreferences)
@@ -145,7 +160,15 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
 
                     System.out.println("Respuesta error login: "+ response.body());
+<<<<<<< HEAD
                     Toast.makeText(LoginActivity.this, "Login falló. Contraseña inválida.", Toast.LENGTH_SHORT).show();
+=======
+<<<<<<< HEAD
+                    Toast.makeText(LoginActivity.this, "Login falló", Toast.LENGTH_SHORT).show();
+=======
+                    Toast.makeText(LoginActivity.this, "Login falló. Contraseña inválida.", Toast.LENGTH_SHORT).show();
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 
                 }
             }

@@ -15,7 +15,15 @@
         android:elevation="4dp"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintTop_toTopOf="parent"
+<<<<<<< HEAD
         />
+=======
+<<<<<<< HEAD
+       />
+=======
+        />
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -27,4 +35,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+<<<<<<< HEAD
 </androidx.constraintlayout.widget.ConstraintLayout>
+=======
+<<<<<<< HEAD
+</androidx.constraintlayout.widget.ConstraintLayout>
+=======
+</androidx.constraintlayout.widget.ConstraintLayout>
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)

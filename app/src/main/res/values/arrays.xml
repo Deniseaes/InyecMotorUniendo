@@ -6,7 +6,15 @@
         <item>Productos</item>
         <item>Proveedores</item>
         <item>Modelos</item>
+<<<<<<< HEAD
         <item></item>
+=======
+<<<<<<< HEAD
+        <item>Cerrar sesión</item>
+=======
+        <item></item>
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 
     </string-array>
 

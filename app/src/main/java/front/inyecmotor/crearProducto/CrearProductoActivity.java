@@ -4,7 +4,14 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
+<<<<<<< HEAD
 import android.view.MenuItem;
+=======
+<<<<<<< HEAD
+=======
+import android.view.MenuItem;
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -18,7 +25,14 @@ import android.widget.Toast;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+<<<<<<< HEAD
 import androidx.appcompat.widget.Toolbar;
+=======
+<<<<<<< HEAD
+=======
+import androidx.appcompat.widget.Toolbar;
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,25 +55,56 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CrearProductoActivity extends AppCompatActivity {
     private EditText etCodigo, etNombre, etPrecioCosto, etPrecioVenta, etStockActual, etStockMax, etStockMin;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    private Button btnCrearProducto, btnRegresarCrearProduct;
+    private Button btnIncrementStockActual, btnDecrementStockActual, btnIncrementStockMax, btnDecrementStockMax, btnIncrementStockMin, btnDecrementStockMin;
+    private MultiAutoCompleteTextView actvModelos;
+    private Spinner spinnerTipos, spinnerProveedores;
+    private LinearLayout listaModelos, listaProveedores, listaTipos;
+=======
+>>>>>>> c331e9f (Nuevas features)
     private Button btnCrearProducto;
     private Button btnIncrementStockActual, btnDecrementStockActual, btnIncrementStockMax, btnDecrementStockMax, btnIncrementStockMin, btnDecrementStockMin;
     private MultiAutoCompleteTextView actvModelos;
     private Spinner spinnerTipos, spinnerProveedores;
     private LinearLayout listaModelos, listaProveedores ; //listaTipos
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 
     // Listas de datos
     private List<Tipo> tipos;
     private List<Proveedor> proveedores;
     private List<Modelo> modelos;
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    private List<String> selectedProveedores = new ArrayList<>();
+    private List<String> selectedTipos = new ArrayList<>();
+    private List<String> selectedModelos = new ArrayList<>();
+    private List<Tipo> selectedProductTipos;
+=======
+>>>>>>> c331e9f (Nuevas features)
     private List<Proveedor> selectedProveedores = new ArrayList<>();
     private List<String> selectedTipos = new ArrayList<>();
     private List<String> selectedModelos = new ArrayList<>();
     private List<Tipo> selectedProductTipos; //este
+<<<<<<< HEAD
     private List<Proveedor> selectedProductProveedores;
     private List<Modelo> selectedProductModelos;
 
     private static final String BASE_URL = "http://192.168.56.1:8080"; // Cambia esto según tu configuración
+=======
+>>>>>>> 6c95963 (Features)
+    private List<Proveedor> selectedProductProveedores;
+    private List<Modelo> selectedProductModelos;
+
+    private static final String BASE_URL = "http://192.168.0.8:8080"; // Cambia esto según tu configuración
+>>>>>>> c331e9f (Nuevas features)
     private ApiService apiService;
 
     @SuppressLint("MissingInflatedId")
@@ -84,9 +129,21 @@ public class CrearProductoActivity extends AppCompatActivity {
         btnDecrementStockMax = findViewById(R.id.btnDecrementStockMax);
         btnIncrementStockMin = findViewById(R.id.btnIncrementStockMin);
         btnDecrementStockMin = findViewById(R.id.btnDecrementStockMin);
+<<<<<<< HEAD
         // Botones de crear
         btnCrearProducto = findViewById(R.id.btnCrearProducto);
 
+=======
+<<<<<<< HEAD
+        // Botones de crear y regresar
+        btnCrearProducto = findViewById(R.id.btnCrearProducto);
+        btnRegresarCrearProduct = findViewById(R.id.btnRegresarCrearProduct);
+=======
+        // Botones de crear
+        btnCrearProducto = findViewById(R.id.btnCrearProducto);
+
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 
 
         // MultiAutoCompleteTextView y Spinner
@@ -100,15 +157,32 @@ public class CrearProductoActivity extends AppCompatActivity {
 
         listaModelos = findViewById(R.id.listaModelos);
         listaProveedores = findViewById(R.id.listaProveedores);
+<<<<<<< HEAD
         //listaTipos = findViewById(R.id.listaTipos);
+=======
+<<<<<<< HEAD
+        listaTipos = findViewById(R.id.listaTipos);
+=======
+        //listaTipos = findViewById(R.id.listaTipos);
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
         // Listas para las selecciones
         selectedProductTipos = new ArrayList<>();
         selectedProductProveedores = new ArrayList<>();
         selectedProductModelos = new ArrayList<>();
 
+<<<<<<< HEAD
 
 
 
+=======
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -118,7 +192,15 @@ public class CrearProductoActivity extends AppCompatActivity {
         // Obtener datos de la base de datos
         fetchProductTipos();
         fetchProductProveedores();
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+        fetchProductModelos("");
+=======
+
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 
         // Configuración de botones de incremento/decremento
         setupStockButtons();
@@ -127,6 +209,16 @@ public class CrearProductoActivity extends AppCompatActivity {
         setupMultiAutoCompleteTextView();
         setupSpinners();
         btnCrearProducto.setOnClickListener(v -> crearProducto());
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        btnRegresarCrearProduct.setOnClickListener(this::atrasClick);
+    }
+    // Método para manejar el clic del botón de regresar
+    public void atrasClick(View view) {
+        finish();
+=======
+>>>>>>> c331e9f (Nuevas features)
 
 
         // Configura el botón de "Volver" en la Toolbar
@@ -137,6 +229,10 @@ public class CrearProductoActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     }
 
     private void cargarTipos() {
@@ -145,7 +241,14 @@ public class CrearProductoActivity extends AppCompatActivity {
     }
 
 
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     private void crearProducto() {
         String codigo = etCodigo.getText().toString();
         String nombre = etNombre.getText().toString();
@@ -183,7 +286,15 @@ public class CrearProductoActivity extends AppCompatActivity {
 
         Long id = Long.valueOf(99999);
         ProductoCreate nuevoProducto = new ProductoCreate(id, codigo, nombre, stockMin, stockMax, stockActual, precioVenta, precioCosto, proveedoresIds, tipoIds, modelosIds);
+<<<<<<< HEAD
         System.out.println(nuevoProducto);
+=======
+<<<<<<< HEAD
+
+=======
+        System.out.println(nuevoProducto);
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 
         String hashedPassword = LoginActivity.PreferenceManager.getHashedPassword(CrearProductoActivity.this);
         if (hashedPassword == null) {
@@ -191,7 +302,14 @@ public class CrearProductoActivity extends AppCompatActivity {
             return;
         }
         String token = "Bearer " + hashedPassword;
+<<<<<<< HEAD
         Log.d("Token", token);
+=======
+<<<<<<< HEAD
+=======
+        Log.d("Token", token);
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 
         Call<ProductoCreate> call = apiService.crearProducto(token, nuevoProducto);
         call.enqueue(new Callback<ProductoCreate>() {
@@ -221,8 +339,16 @@ public class CrearProductoActivity extends AppCompatActivity {
                     finish();
                 } else {
                     Toast.makeText(CrearProductoActivity.this, "Error al crear el producto", Toast.LENGTH_LONG).show();
+<<<<<<< HEAD
                     Log.d("Error", "Código de error: " + response.code() + " - Mensaje: " + response.message());
                     Toast.makeText(CrearProductoActivity.this, "Error al crear el producto. Código: " + response.code(), Toast.LENGTH_LONG).show();
+=======
+<<<<<<< HEAD
+=======
+                    Log.d("Error", "Código de error: " + response.code() + " - Mensaje: " + response.message());
+                    Toast.makeText(CrearProductoActivity.this, "Error al crear el producto. Código: " + response.code(), Toast.LENGTH_LONG).show();
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
                 }
             }
 
@@ -461,6 +587,22 @@ public class CrearProductoActivity extends AppCompatActivity {
     }
 
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    private void agregarProveedorALista(String proveedor) {
+        // Verifica si el proveedor ya está en la lista antes de agregarlo
+        if (!selectedProveedores.contains(proveedor)) {
+            selectedProveedores.add(proveedor); // Agregar el proveedor a la lista
+
+            // Crear una nueva vista de texto para mostrar el proveedor seleccionado
+            TextView textView = new TextView(this);
+            textView.setText(proveedor);
+
+            // Agregar el TextView al contenedor (lista visual de proveedores)
+            listaProveedores.addView(textView);
+=======
+>>>>>>> c331e9f (Nuevas features)
     private void agregarProveedorALista(String proveedorSeleccionado) {
         // Buscar el proveedor correspondiente en la lista de objetos `Proveedor`
         for (Proveedor proveedor : proveedores) {
@@ -503,11 +645,38 @@ public class CrearProductoActivity extends AppCompatActivity {
                 }
                 break;
             }
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
         }
     }
 
 
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    private void agregarTipoALista(String tipo) {
+        if (!selectedTipos.contains(tipo)) {
+            selectedTipos.add(tipo);
+            TextView textView = new TextView(this);
+            textView.setText(tipo);
+            listaTipos.addView(textView);
+        }
+    }
+    private void agregarModeloALista(String modelo) {
+        if (!selectedModelos.contains(modelo)) {
+            selectedModelos.add(modelo);  // Agregar el modelo seleccionado a la lista
+
+            // Crear una nueva vista de texto para mostrar el modelo seleccionado
+            TextView textView = new TextView(this);
+            textView.setText(modelo);
+
+            // Agregar el TextView al contenedor visual de modelos seleccionados
+            listaModelos.addView(textView);
+=======
+>>>>>>> c331e9f (Nuevas features)
     private void agregarTipoALista(String tipoSeleccionado) {
         // Buscar el tipo correspondiente en la lista de objetos `Tipo`
         for (Tipo tipo : tipos) {
@@ -567,15 +736,28 @@ public class CrearProductoActivity extends AppCompatActivity {
                 }
                 break;
             }
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
         }
     }
 
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> c331e9f (Nuevas features)
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 
 
 

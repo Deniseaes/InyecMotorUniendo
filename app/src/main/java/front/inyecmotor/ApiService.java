@@ -19,15 +19,30 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+<<<<<<< HEAD
 import retrofit2.http.DELETE;
+=======
+<<<<<<< HEAD
+=======
+import retrofit2.http.DELETE;
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 import retrofit2.http.Header;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import okhttp3.ResponseBody;
 
 public interface ApiService {
+<<<<<<< HEAD
 
     //PRODUCTOS
+=======
+<<<<<<< HEAD
+=======
+
+    //PRODUCTOS
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     @GET("/producto/all") // La ruta de tu endpoint en el servidor Spring Boot
     Call<List<Producto>> getProductos(@Header("Authorization") String authToken);
 
@@ -37,6 +52,14 @@ public interface ApiService {
     @POST("/producto/crear")
     Call<ProductoCreate> crearProducto(@Header("Authorization") String authToken, @Body ProductoCreate nuevoProducto);
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    @GET("/tipo/all")
+    Call<List<TipoDTO>> getTipos(@Header("Authorization") String authToken);
+
+=======
+>>>>>>> c331e9f (Nuevas features)
 
     @GET("/producto/get-by-modelo/{idModelo}")
     Call<List<Producto>> getProductosByModelo(@Header("Authorization") String token, @Path("idModelo") String idModelo);
@@ -56,6 +79,10 @@ public interface ApiService {
 
     //MODELOS
 
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     /* para ver las marcas*/
     @GET("/modelo/get-by-name")
     Call<List<ModeloDTO>> getModeloByName(
@@ -75,12 +102,21 @@ public interface ApiService {
     @PATCH("/modelo/editar")
     Call<Modelo> editarModelo(@Header("Authorization") String authToken, @Body Modelo modelo);
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> c331e9f (Nuevas features)
     @DELETE("/modelo/eliminar/{id}")
     Call<Void>eliminarModelo(@Header("Authorization") String authorization, @Path("id") int id);
 
 
     //PROVEEDOR
 
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     @GET("/proveedor/all")
     Call<List<Proveedor>> getProveedores(@Header("Authorization") String authToken);
 
@@ -93,11 +129,20 @@ public interface ApiService {
     @PATCH("/proveedor/editar")
     Call<Proveedor> editarProveedor(@Header("Authorization") String authToken, @Body Proveedor proveedor);
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> c331e9f (Nuevas features)
     @DELETE("/proveedor/eliminar/{id}")
     Call<Void>eliminarProveedor(@Header("Authorization") String authorization, @Path("id") int id);
 
     //AUTH
 
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     @POST("/auth")
     Call<Boolean> auth(@Body AuthDTO auth);
 

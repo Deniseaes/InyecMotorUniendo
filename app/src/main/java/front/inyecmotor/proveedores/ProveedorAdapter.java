@@ -29,7 +29,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ProveedorAdapter extends RecyclerView.Adapter<ProveedorAdapter.ProveedorViewHolder> {
     private List<Proveedor> proveedores;
     private Context context;
+<<<<<<< HEAD
     private static final String BASE_URL = "http://192.168.56.1:8080";
+=======
+<<<<<<< HEAD
+    private static final String BASE_URL = "http://192.168.0.8:8080"; // Cambia esto según tu configuración
+=======
+    private static final String BASE_URL = "http://192.168.0.8:8080";
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     private static final String TAG = "ProveedorAdapter";
 
     public ProveedorAdapter(List<Proveedor> proveedores, Context context) {
@@ -107,6 +115,15 @@ public class ProveedorAdapter extends RecyclerView.Adapter<ProveedorAdapter.Prov
 
             notifyDataSetChanged();
         });
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+        builder.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+
+        builder.show();
+=======
+>>>>>>> c331e9f (Nuevas features)
         builder.setNegativeButton("Cancelar", (dialogInterface, which) -> {
             dialogInterface.cancel();
         });
@@ -130,6 +147,10 @@ public class ProveedorAdapter extends RecyclerView.Adapter<ProveedorAdapter.Prov
                     .show();
         });
 
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
     }
 
     private void actualizarProveedor(Proveedor proveedor) {
@@ -172,6 +193,11 @@ public class ProveedorAdapter extends RecyclerView.Adapter<ProveedorAdapter.Prov
             }
         });
     }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> c331e9f (Nuevas features)
 
     private void eliminarProveedor(int proveedorId) {
         // Obtener el token desde SharedPreferences
@@ -214,4 +240,8 @@ public class ProveedorAdapter extends RecyclerView.Adapter<ProveedorAdapter.Prov
         });
     }
 
+<<<<<<< HEAD
+=======
+>>>>>>> 6c95963 (Features)
+>>>>>>> c331e9f (Nuevas features)
 }
