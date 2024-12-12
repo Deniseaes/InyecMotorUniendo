@@ -1,0 +1,87 @@
+<resources>
+    <string name="app_name">InyecMotor</string>
+
+    <string-array name="marcas_array">
+<<<<<<< HEAD
+        <item>Seleccione Marca</item>
+        <item>Chevrolet</item>
+        <item>Citroën</item>
+        <item>Fiat</item>
+        <item>Ford</item>
+        <item>Jeep</item>
+        <item>Mercedes-Benz</item>
+        <item>Nissan</item>
+        <item>Peugeot</item>
+        <item>Renault</item>
+        <item>Toyota</item>
+        <item>Volkswagen</item>
+    </string-array>
+
+    <string-array name="motor_litros_array">
+        <item>Seleccione Motor Litros</item>
+        <item>1.0</item>
+        <item>1.2</item>
+        <item>1.4</item>
+        <item>1.6</item>
+        <item>1.8</item>
+        <item>2.0</item>
+        <item>2.2</item>
+        <item>2.4</item>
+        <item>2.8</item>
+        <item>3.0</item>
+        <item>3.2</item>
+        <item>3.5</item>
+        <item>4.0</item>
+    </string-array>
+
+    <string-array name="motor_tipo_array">
+        <item>Seleccione Tipo de Motor</item>
+        <item>Diesel</item>
+        <item>Gasolero</item>
+        <item>Naftero</item>
+=======
+     <item>Seleccione Marca</item>
+    <item>Alfa Romeo</item>
+    <item>Audi</item>
+    <item>BMW</item>
+    <item>Chery</item>
+    <item>Chevrolet</item>
+    <item>Chrysler</item>
+    <item>Citroën</item>
+    <item>Dodge</item>
+    <item>Fiat</item>
+    <item>Ford</item>
+    <item>Geely</item>
+    <item>Honda</item>
+    <item>Hyundai</item>
+    <item>Isuzu</item>
+    <item>Iveco</item>
+    <item>Jeep</item>
+    <item>Kia</item>
+    <item>Land Rover</item>
+    <item>Lifan</item>
+    <item>Mercedes-Benz</item>
+    <item>Mini</item>
+    <item>Mitsubishi</item>
+    <item>Nissan</item>
+    <item>Peugeot</item>
+    <item>Porsche</item>
+    <item>Renault</item>
+    <item>Subaru</item>
+    <item>Suzuki</item>
+    <item>Toyota</item>
+    <item>Volkswagen</item>
+    <item>Volvo</item>
+</string-array>
+
+
+    <string-array name="motor_tipo_array">
+        <item>Seleccione Tipo de Motor</item>
+        <item>Naftero</item>
+        <item>Híbrido</item>
+        <item>Diesel</item>
+        <item>Eléctrico</item>
+>>>>>>> 6c95963 (Features)
+    </string-array>
+
+</resources>

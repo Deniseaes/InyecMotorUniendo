@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".productos.ProductosActivity">
+
+<<<<<<< HEAD
+=======
+    <!-- Toolbar -->
+>>>>>>> 6c95963 (Features)
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/blue_color"
+        android:elevation="4dp"
+        android:theme="?attr/actionBarTheme"
+        app:navigationIcon="@drawable/ic_back_arrow"
+        app:layout_constraintTop_toTopOf="parent" />
+
+<<<<<<< HEAD
+=======
+    <!-- Título para buscar por nombre -->
+    <TextView
+        android:id="@+id/tvBuscarPorNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="16dp"
+        android:text="Buscar por nombre"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <!-- SearchView para buscar productos por nombre -->
+>>>>>>> 6c95963 (Features)
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchViewProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+<<<<<<< HEAD
+        android:iconifiedByDefault="false"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="16dp"
+        android:queryHint="Buscar por nombre de producto"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+=======
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="Buscar por nombre de producto"
+        app:layout_constraintTop_toBottomOf="@id/tvBuscarPorNombre"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Título para buscar por modelo -->
+    <TextView
+        android:id="@+id/tvBuscarPorModelo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:text="Buscar por modelo"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchViewProduct" />
+
+    <!-- AutoCompleteTextView para buscar por modelo -->
+>>>>>>> 6c95963 (Features)
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteModelos"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+<<<<<<< HEAD
+        android:hint="Buscar por modelo"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/searchViewProduct"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+=======
+        android:layout_marginHorizontal="16dp"
+        android:hint="Buscar por modelo"
+        app:layout_constraintTop_toBottomOf="@id/tvBuscarPorModelo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Título para buscar por tipo -->
+    <TextView
+        android:id="@+id/tvBuscarPorTipo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:text="Buscar por Tipo"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/autoCompleteModelos" />
+
+    <!-- Spinner para seleccionar tipo de producto -->
+>>>>>>> 6c95963 (Features)
+    <Spinner
+        android:id="@+id/spinnerProductType"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+<<<<<<< HEAD
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/autoCompleteModelos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+=======
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tvBuscarPorTipo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- RecyclerView para mostrar productos -->
+>>>>>>> 6c95963 (Features)
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+<<<<<<< HEAD
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/spinnerProductType"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        style="@style/MyButtonStyle"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+=======
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@id/spinnerProductType"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+>>>>>>> 6c95963 (Features)

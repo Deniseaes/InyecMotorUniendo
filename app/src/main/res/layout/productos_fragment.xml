@@ -1,0 +1,78 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <!-- Aquí puedes agregar tu "Hola Mundo" -->
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6c95963 (Features)
+    <TextView
+        android:id="@+id/hello_world_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Productos"
+        android:textSize="24sp"
+<<<<<<< HEAD
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+=======
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.185" />
+>>>>>>> 6c95963 (Features)
+
+    <Button
+        android:id="@+id/getProductos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:text="VER PRODUCTOS"
+        app:layout_constraintTop_toBottomOf="@id/hello_world_textview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/MyButtonStyle"/>
+
+    <Button
+        android:id="@+id/btnCrearProducto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:text="CREAR PRODUCTO"
+        app:layout_constraintTop_toBottomOf="@id/getProductos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/MyButtonStyle"/>
+
+<<<<<<< HEAD
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+=======
+    <Button
+        android:id="@+id/btnVerProductosFaltante"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ver productos en faltante"
+        app:layout_constraintTop_toBottomOf="@id/btnCrearProducto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        style="@style/MyButtonStyle"/>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+>>>>>>> 6c95963 (Features)

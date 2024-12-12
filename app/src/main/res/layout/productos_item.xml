@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvProductoNombre"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Nombre del Producto"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ivStockStatus" />
+
+    <TextView
+        android:id="@+id/tvProductoPrecio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Precio: $0.00"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvProductoNombre"
+        app:layout_constraintEnd_toStartOf="@+id/ivStockStatus" />
+
+    <TextView
+        android:id="@+id/tvProductoStock"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Stock: 0"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvProductoPrecio"
+        app:layout_constraintEnd_toStartOf="@+id/ivStockStatus" />
+
+    <ImageView
+        android:id="@+id/ivStockStatus"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/btnVerDetalle"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="8dp"/>
+
+    <Button
+        android:id="@+id/btnVerDetalle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ver detalle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        style="@style/MyButtonStyle"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
