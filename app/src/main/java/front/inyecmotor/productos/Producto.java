@@ -45,7 +45,7 @@ public class Producto implements Parcelable {
     }
 
     // Getters y setters para todos los campos
-    public int getId() {
+    public long getId() {
         return id;
     }
 

@@ -1,4 +1,5 @@
 package front.inyecmotor.productos;
+import front.inyecmotor.BuildConfig;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -93,7 +94,7 @@ public class ProductosActivity extends AppCompatActivity {
     }
 
     private void setupRetrofit() {
-        String baseUrl = "http://192.168.56.1:8080"; // Asegúrate de que esta URL sea correcta
+        String baseUrl = BuildConfig.BASE_URL; // Asegúrate de que esta URL sea correcta
         Log.d(TAG, "URL base: " + baseUrl);
         
         Retrofit retrofit = new Retrofit.Builder()

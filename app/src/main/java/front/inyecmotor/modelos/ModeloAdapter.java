@@ -1,4 +1,6 @@
 package front.inyecmotor.modelos;
+import front.inyecmotor.BuildConfig;
+
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import java.io.IOException;
 import java.util.List;
 
@@ -28,10 +31,11 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+
 public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloViewHolder> {
     private List<Modelo> modelos;
     private Context context;
-    private static final String BASE_URL = "http://192.168.56.1:8080"; // Cambia a la URL de tu servidor
+    private static final String BASE_URL = BuildConfig.BASE_URL;
     private static final String TAG = "ModeloAdapter"; // Tag para los logs
 
     public ModeloAdapter(List<Modelo> modelos, Context context) {
@@ -45,15 +49,15 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.modelos_item, parent, false);
         return new ModeloViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull ModeloViewHolder holder, int position) {
         Modelo modelo = modelos.get(position);
         holder.tvModeloNombre.setText(modelo.getNombre());
         holder.tvModeloAnio.setText("Año: " + modelo.getAnio());
         holder.tvModeloMotor.setText("Motor: " + modelo.getMotorLitros() + "L");
-
+        holder.tvModeloMotorTipo.setText("Tipo de Motor: " + modelo.getMotorTipo());
         holder.btnVerDetalle.setOnClickListener(v -> mostrarDialogoDetalle(modelo));
+        System.out.println(modelo.toFullString());
     }
 
     @Override
@@ -65,6 +69,7 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
         TextView tvModeloNombre;
         TextView tvModeloAnio;
         TextView tvModeloMotor;
+        TextView tvModeloMotorTipo;
         Button btnVerDetalle;
 
         public ModeloViewHolder(@NonNull View itemView) {
@@ -72,6 +77,7 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
             tvModeloNombre = itemView.findViewById(R.id.tvModeloNombre);
             tvModeloAnio = itemView.findViewById(R.id.tvModeloAnio);
             tvModeloMotor = itemView.findViewById(R.id.tvModeloMotor);
+            tvModeloMotorTipo = itemView.findViewById(R.id.tvModeloMotorTipo);
             btnVerDetalle = itemView.findViewById(R.id.btnVerDetalle);
         }
     }
@@ -105,6 +111,7 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
         motorTipoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMotorTipo.setAdapter(motorTipoAdapter);
 
+        System.out.println(modelo.getMotorTipo());
         // Seleccionar los valores actuales del modelo en los spinners
         setSpinnerValue(spinnerMotorLitros, String.valueOf(modelo.getMotorLitros()));
         setSpinnerValue(spinnerMotorTipo, modelo.getMotorTipo());

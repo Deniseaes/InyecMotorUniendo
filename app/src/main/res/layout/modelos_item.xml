@@ -36,6 +36,18 @@
         app:layout_constraintTop_toBottomOf="@id/tvModeloAnio"
         app:layout_constraintEnd_toStartOf="@+id/btnVerDetalle" />
 
+    <TextView
+        android:id="@+id/tvModeloMotorTipo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Motor Tipo: "
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvModeloMotor"
+        app:layout_constraintEnd_toStartOf="@+id/btnVerDetalle" />
+
+
+
     <Button
         android:id="@+id/btnVerDetalle"
         android:layout_width="wrap_content"

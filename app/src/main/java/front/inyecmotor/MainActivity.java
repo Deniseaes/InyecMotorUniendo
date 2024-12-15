@@ -27,6 +27,7 @@ import front.inyecmotor.expandirBarrita.SpaceItem;
 import front.inyecmotor.modelos.ModelosFragment;
 import front.inyecmotor.productos.ProductosFragment;
 import front.inyecmotor.proveedores.ProveedoresFragment;
+import front.inyecmotor.ordenes.OrdenFragment;
 
 public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnItemSelectedListener {
 
@@ -34,7 +35,9 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     private static final int POS_PRODUCTOS = 1;
     private static final int POS_PROVEEDORES = 2;
     private static final int POS_MODELOS = 3;
-    private static final int POS_LOGOUT = 4;
+    private static final int POS_ORDENES = 4;
+
+
 
     private String[] screenTitles;
     private Drawable[] screenIcons;
@@ -74,9 +77,10 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
                 createItemFor(POS_PRODUCTOS).setChecked(true),
                 createItemFor(POS_PROVEEDORES),
                 createItemFor(POS_MODELOS),
+                createItemFor(POS_ORDENES),
 
-                new SpaceItem(260),
-                createItemFor(POS_LOGOUT)
+                new SpaceItem(260)
+
         ));
         adapter.setListener(this);
 
@@ -144,10 +148,12 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
                 ModelosFragment modelosFragment = new ModelosFragment();
                 transaction.replace(R.id.container, modelosFragment);
                 break;
-            case POS_LOGOUT:
+            case POS_ORDENES:
+                OrdenFragment ordenFragment = new OrdenFragment();
+                transaction.replace(R.id.container, ordenFragment);
+                break;
+
                 // Implementar lógica de cierre de sesión aquí
-                finish();
-                return;
         }
 
         slidingRootNav.closeMenu();

@@ -1,4 +1,5 @@
 package front.inyecmotor.login;
+import front.inyecmotor.BuildConfig;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -32,8 +33,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import android.content.SharedPreferences;
 import android.content.Context;
 
+
+
 public class LoginActivity extends AppCompatActivity {
-    private static final String BASE_URL = "http://192.168.56.1:8080"; // Cambia a la URL de tu servidor
+    private static final String BASE_URL = BuildConfig.BASE_URL;; // Cambia a la URL de tu servidor
     private EditText etPassword;
     private Button btnLogin;
 

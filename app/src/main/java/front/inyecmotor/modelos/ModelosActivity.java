@@ -1,4 +1,6 @@
 package front.inyecmotor.modelos;
+import front.inyecmotor.BuildConfig;
+
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -31,7 +33,7 @@ public class ModelosActivity extends AppCompatActivity {
     private List<Modelo> modelos = new ArrayList<>();
     private List<Modelo> modelosFiltrados = new ArrayList<>();
     private MultiAutoCompleteTextView actvModelos;
-    private static final String BASE_URL = "http://192.168.56.1:8080";
+    private static final String BASE_URL = BuildConfig.BASE_URL;;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +106,7 @@ public class ModelosActivity extends AppCompatActivity {
                         modelo.setNombre(modeloDTO.getNombre());
                         modelo.setAnio(modeloDTO.getAnio());
                         modelo.setMotorLitros(modeloDTO.getMotorLitros());
+                        modelo.setMotorTipo(modeloDTO.getMotorTipo());
                         modelos.add(modelo);
                     }
                     // Actualiza la lista filtrada para mostrar todos
@@ -149,6 +152,7 @@ public class ModelosActivity extends AppCompatActivity {
                         modelo.setNombre(modeloDTO.getNombre());
                         modelo.setAnio(modeloDTO.getAnio()); // Asegúrate de que estos métodos existan en Modelo
                         modelo.setMotorLitros(modeloDTO.getMotorLitros());
+                        modelo.setMotorTipo(modeloDTO.getMotorTipo());
                         modelos.add(modelo);
                     }
                     adapter.notifyDataSetChanged();

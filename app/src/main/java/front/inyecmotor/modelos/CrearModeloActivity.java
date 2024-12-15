@@ -1,4 +1,5 @@
 package front.inyecmotor.modelos;
+import front.inyecmotor.BuildConfig;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,9 +26,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+
 public class CrearModeloActivity extends AppCompatActivity {
 
-    private static final String BASE_URL = "http://192.168.56.1:8080"; // Cambia esto según tu configuración
+    private static final String BASE_URL = BuildConfig.BASE_URL;; // Cambia esto según tu configuración
     private ApiService apiService;
 
     private EditText etNombre;

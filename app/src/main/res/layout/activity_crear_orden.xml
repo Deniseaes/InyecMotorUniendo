@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- AppBarLayout para la Toolbar fija -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/blue_color"
+            android:elevation="4dp"
+            android:theme="?attr/actionBarTheme"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:navigationIcon="@drawable/ic_back_arrow" />
+
+        <TextView
+            android:id="@+id/hello_world_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="Crear Producto"
+            android:textSize="24sp"
+            android:gravity="center_vertical"
+            android:background="@color/white"
+            android:textColor="@color/black" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Contenedor para el contenido desplazable -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Todo el contenido desplazable se coloca aquí -->
+            <!-- Nombre del cliente -->
+            <EditText
+                android:id="@+id/etnombreCompleto"
+                android:hint="Nombre completo del cliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Patente -->
+            <EditText
+                android:id="@+id/etPatente"
+                android:hint="Patente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Selección del modelo -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seleccione Modelo: "
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="20dp"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/actvModelo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Escriba el Modelo" />
+
+            <!-- Selección de productos -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Productos: "
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="20dp"/>
+
+            <Spinner
+                android:id="@+id/spinnerProductos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Seleccione Productos:" />
+
+            <LinearLayout
+                android:id="@+id/listaProductos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
+
+            <!-- Descripción -->
+            <EditText
+                android:id="@+id/etDescripcionOtros"
+                android:hint="Descripción de la orden"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Precio de mano de obra -->
+            <EditText
+                android:id="@+id/etManoDeObra"
+                android:hint="Precio mano de obra"
+                android:inputType="numberDecimal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/etOtros"
+                android:hint="Otros"
+                android:inputType="numberDecimal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Total -->
+            <TextView
+                android:id="@+id/tvTotal"
+                android:text="Total: $0.0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Botón para crear la orden -->
+            <Button
+                android:id="@+id/btnCrearOrden"
+                android:text="Crear Orden"
+                style="@style/MyButtonCreateStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp" />
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

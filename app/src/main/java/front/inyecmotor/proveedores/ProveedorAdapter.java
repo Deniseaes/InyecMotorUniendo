@@ -1,4 +1,6 @@
 package front.inyecmotor.proveedores;
+import front.inyecmotor.BuildConfig;
+
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -29,7 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ProveedorAdapter extends RecyclerView.Adapter<ProveedorAdapter.ProveedorViewHolder> {
     private List<Proveedor> proveedores;
     private Context context;
-    private static final String BASE_URL = "http://192.168.56.1:8080";
+    private static final String BASE_URL = BuildConfig.BASE_URL;;
     private static final String TAG = "ProveedorAdapter";
 
     public ProveedorAdapter(List<Proveedor> proveedores, Context context) {
