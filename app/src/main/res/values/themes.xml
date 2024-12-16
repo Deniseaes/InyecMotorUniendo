@@ -1,0 +1,16 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.InyecMotor" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <!-- Personaliza tu tema aquí -->
+        <item name="buttonStyle" tools:ignore="DuplicateDefinition">@style/MyButtonStyle</item>
+        <item name="buttonStyle" tools:ignore="DuplicateDefinition">@style/MyButtonCreateStyle</item>
+        <item name="buttonStyle" tools:ignore="DuplicateDefinition">@style/MyButtonAtrasStyle</item>
+
+
+    </style>
+
+    <style name="Theme.InyecMotor" parent="Base.Theme.InyecMotor" />
+</resources>
