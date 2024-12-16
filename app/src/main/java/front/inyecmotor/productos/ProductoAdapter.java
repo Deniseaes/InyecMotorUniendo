@@ -1,4 +1,5 @@
 package front.inyecmotor.productos;
+import front.inyecmotor.BuildConfig;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -32,7 +33,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder> {
     private List<Producto> productos;
     private Context context;
-    private static final String BASE_URL = "http://192.168.0.8:8080"; // Cambia esto según tu configuración
+    private static final String BASE_URL = BuildConfig.BASE_URL;; // Cambia esto según tu configuración
     private static final String TAG = "ProductoAdapter"; // Tag para los logs
 
     public ProductoAdapter(List<Producto> productos, Context context) {

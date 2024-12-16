@@ -1,4 +1,6 @@
 package front.inyecmotor.modelos;
+import front.inyecmotor.BuildConfig;
+
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -28,10 +30,11 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+
 public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloViewHolder> {
     private List<Modelo> modelos;
     private Context context;
-    private static final String BASE_URL = "http://192.168.0.8:8080"; // Cambia a la URL de tu servidor
+    private static final String BASE_URL = BuildConfig.BASE_URL;
     private static final String TAG = "ModeloAdapter"; // Tag para los logs
 
     public ModeloAdapter(List<Modelo> modelos, Context context) {
@@ -45,15 +48,15 @@ public class ModeloAdapter extends RecyclerView.Adapter<ModeloAdapter.ModeloView
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.modelos_item, parent, false);
         return new ModeloViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull ModeloViewHolder holder, int position) {
         Modelo modelo = modelos.get(position);
         holder.tvModeloNombre.setText(modelo.getNombre());
         holder.tvModeloAnio.setText("Año: " + modelo.getAnio());
         holder.tvModeloMotor.setText("Motor: " + modelo.getMotorLitros() + "L");
-
+        holder.tvModeloMotorTipo.setText("Tipo de Motor: " + modelo.getMotorTipo());
         holder.btnVerDetalle.setOnClickListener(v -> mostrarDialogoDetalle(modelo));
+        System.out.println(modelo.toFullString());
     }
 
     @Override

@@ -1,4 +1,5 @@
 package front.inyecmotor.login;
+import front.inyecmotor.BuildConfig;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -32,8 +33,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import android.content.SharedPreferences;
 import android.content.Context;
 
+
+
 public class LoginActivity extends AppCompatActivity {
-    private static final String BASE_URL = "http://192.168.0.8:8080"; // Cambia a la URL de tu servidor
+    private static final String BASE_URL = BuildConfig.BASE_URL;; // Cambia a la URL de tu servidor
     private EditText etPassword;
     private Button btnLogin;
 
@@ -64,8 +67,27 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
     public static String hashPassword(String password) {
-        // Temporalmente, solo devolver la contraseña sin hashear
-        return password;
+        try {
+
+            // Crear un objeto Mac para HMAC-SHA256
+            Mac mac = Mac.getInstance("HmacSHA256");
+
+            String keyHard = "UkJWgRxkAR79OlSf";
+
+            // Crear una clave secreta a partir de la cadena de la clave
+            SecretKeySpec secretKeySpec = new SecretKeySpec(keyHard.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
+
+            // Inicializar el objeto Mac con la clave secreta
+            mac.init(secretKeySpec);
+
+            // Generar el HMAC
+            byte[] hmacBytes = mac.doFinal(password.getBytes(StandardCharsets.UTF_8));
+
+            // Convertir el HMAC a una cadena Base64 para facilitar el almacenamiento y visualización
+            return android.util.Base64.encodeToString(hmacBytes, android.util.Base64.NO_WRAP);
+        } catch (Exception e) {
+            throw new RuntimeException("Error al generar HMAC-SHA256", e);
+        }
     }
 
     // Clase para gestionar las preferencias (SharedPreferences)

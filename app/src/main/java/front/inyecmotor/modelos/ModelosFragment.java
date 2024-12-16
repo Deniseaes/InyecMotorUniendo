@@ -1,4 +1,5 @@
 package front.inyecmotor.modelos;
+import front.inyecmotor.BuildConfig;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ModelosFragment extends Fragment {
 
-    private static final String BASE_URL = "http://192.168.0.8:8080"; // Cambia esto según tu configuración
+    private static final String BASE_URL = BuildConfig.BASE_URL; // Cambia esto según tu configuración
     private static final String TAG = "ModelosFragment"; // Tag para los logs
     @Nullable
     @Override

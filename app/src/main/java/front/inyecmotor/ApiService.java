@@ -10,6 +10,9 @@ import front.inyecmotor.crearProducto.TipoDTO;
 import front.inyecmotor.login.AuthDTO;
 import front.inyecmotor.modelos.Modelo;
 import front.inyecmotor.modelos.ModeloCreate;
+import front.inyecmotor.ordenes.DTOOrdenView;
+import front.inyecmotor.ordenes.Orden;
+import front.inyecmotor.ordenes.OrdenCreate;
 import front.inyecmotor.productos.Producto;
 import front.inyecmotor.productos.TipoProducto;
 import front.inyecmotor.proveedores.Proveedor;
@@ -38,8 +41,8 @@ public interface ApiService {
     Call<ProductoCreate> crearProducto(@Header("Authorization") String authToken, @Body ProductoCreate nuevoProducto);
 
 
-    @GET("/producto/get-by-modelo/{idModelo}")
-    Call<List<Producto>> getProductosByModelo(@Header("Authorization") String token, @Path("idModelo") String idModelo);
+    //@GET("/producto/get-by-modelo/{idModelo}")
+    //Call<ResponseBody> getProductosByModelo(@Header("Authorization") String token, @Path("idModelo") int idModelo);//Este usa order
 
     @GET("/producto/get-by-tipo/{idTipo}")
     Call<List<Producto>> getProductosByTipo(@Header("Authorization") String token, @Path("idTipo") Long tipo);
@@ -125,5 +128,27 @@ Call<List<Modelo>> getAllModelos(@Header("Authorization") String authToken);
 
 @GET("producto/get-by-modelo/{id}")
 Call<ResponseBody> getProductosByModelo(@Header("Authorization") String authToken, @Path("id") int modeloId);
+
+
+//OREDENES
+
+    @GET("orden/all")
+    Call<List<Orden>> getOrdenes(@Header("Authorization") String token);
+
+    @POST("orden/crear")
+    Call<OrdenCreate> crearOrden(@Header("Authorization") String token, @Body OrdenCreate orden);
+
+    @DELETE("orden/eliminar/{id}")
+    Call<Void> eliminarOrden(@Header("Authorization") String token, @Path("id") Long id);
+    @GET("/orden/get-by-patente")
+    Call<List<DTOOrdenView>> getOrdenByPatente(@Header("Authorization") String authorizationHeader,
+                                               @Query("patente") String patente);
+
+    @PATCH("orden/editar")
+    Call<Orden> editarOrden(@Header("Authorization") String token, @Body Orden orden);
+
+
+
+    Call<List<Modelo>> getModeloByName(String query);
 }
 

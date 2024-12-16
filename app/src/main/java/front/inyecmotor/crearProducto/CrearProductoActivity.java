@@ -1,4 +1,5 @@
 package front.inyecmotor.crearProducto;
+import front.inyecmotor.BuildConfig;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -56,10 +57,10 @@ public class CrearProductoActivity extends AppCompatActivity {
     private List<String> selectedTipos = new ArrayList<>();
     private List<String> selectedModelos = new ArrayList<>();
     private List<Tipo> selectedProductTipos; //este
-    private List<Proveedor> selectedProductProveedores;
+    private List<Proveedor> selectedProductProveedores; //Este agrega a la lista de seleccionados visible debajo del selector
     private List<Modelo> selectedProductModelos;
 
-    private static final String BASE_URL = "http://192.168.0.8:8080"; // Cambia esto según tu configuración
+    private static final String BASE_URL = BuildConfig.BASE_URL; // Cambia esto según tu configuración
     private ApiService apiService;
 
     @SuppressLint("MissingInflatedId")

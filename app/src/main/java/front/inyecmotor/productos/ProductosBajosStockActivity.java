@@ -1,4 +1,5 @@
 package front.inyecmotor.productos;
+import front.inyecmotor.BuildConfig;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +21,7 @@ public class ProductosBajosStockActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ProductoAdapter adapter;
-    private static final String BASE_URL = "http://192.168.0.8:8080";  // Cambia a la URL de tu servidor
+    private static final String BASE_URL = BuildConfig.BASE_URL;  // Cambia a la URL de tu servidor
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

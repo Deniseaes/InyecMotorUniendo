@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="18dp">
+
+    <TextView
+        android:id="@+id/tvPatente"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Patente"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvModelo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Modelo"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvPatente" />
+
+    <TextView
+        android:id="@+id/tvNombreCompleto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Nombre Cliente"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvModelo" />
+
+    <TextView
+        android:id="@+id/tvDescripcionOtros"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:text="Descripción de la orden"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNombreCompleto"
+        tools:text="Texto descriptivo sobre esta orden, ajustable según la información." />
+
+    <TextView
+        android:id="@+id/tvPrecioTotal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Total:"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDescripcionOtros" />
+
+    <Button
+        android:id="@+id/btnEliminarOrden"
+        android:layout_width="59dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:background="?attr/selectableItemBackground"
+        android:contentDescription="Eliminar Orden"
+        android:drawableLeft="@android:drawable/ic_menu_delete"
+        android:drawablePadding="8dp"
+        android:padding="8dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

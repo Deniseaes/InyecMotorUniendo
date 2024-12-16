@@ -96,7 +96,7 @@ public class Modelo implements Parcelable {
 
     @Override
     public String toString() {
-        return nombre + " - " + marca + " " + motorLitros + "L " + motorTipo + " (" + anio + ")";
+        return nombre;
     }
 
     // Nuevo método para obtener una representación completa del objeto
